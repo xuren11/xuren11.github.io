@@ -452,16 +452,38 @@
     </div>
 	<div><div>
 
+    <br>
+    <br>
     <div style="text-align:left;color: #ccc;font-size:14px;">
 	---本文结束<i class="fa fa-paw"></i>感谢您的阅读---
 	<br>
 	作者：Xuren
 	<br>
-	来源：${page.permalink}	<br>
-	<%- url_for(path) %>
-
+	<span>发布时间:</span>2019年05月29日 - 16:22:49
+	<br>
+	<span>最后更新:</span>2019年05月30日 - 16:26:44
+	<br>
+	本文链接：<a href="/2019/05/29/hello-world/" title="Hello World">http://yoursite.com/2019/05/29/hello-world/</a>
+    <br>
+	<!--<span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/05/29/hello-world/"  aria-label="复制成功！"></i></span>
+    -->
 	版权声明：本文为博主原创文章，转载请附上博文链接！
-	</%-></div>
+	</div>
+	
+	<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+    </script>
 
 </div>
 </div>
