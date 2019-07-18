@@ -92,7 +92,7 @@
 <meta property="og:description" content="​    参考文档的本部分涵盖了Spring框架中不可或缺的所有技术。 ​    其中最重要的是Spring框架的控制反转(IoC)容器。对Spring框架的IoC容器进行彻底的处理之后，紧接着是对Spring面向切面编程(AOP)技术的全方位学习。Spring框架有自己的AOP框架，它在概念上很容易理解，并且成功地解决了Java企业编程中AOP需求的80%的需求点。 ​    还包含了Sprin">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://xuren11.github.io/2019/07/18/Spring核心技术/SpringIoC%E5%AE%B9%E5%99%A8.png">
-<meta property="og:updated_time" content="2019-07-18T12:30:36.625Z">
+<meta property="og:updated_time" content="2019-07-18T16:08:15.988Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring核心技术">
 <meta name="twitter:description" content="​    参考文档的本部分涵盖了Spring框架中不可或缺的所有技术。 ​    其中最重要的是Spring框架的控制反转(IoC)容器。对Spring框架的IoC容器进行彻底的处理之后，紧接着是对Spring面向切面编程(AOP)技术的全方位学习。Spring框架有自己的AOP框架，它在概念上很容易理解，并且成功地解决了Java企业编程中AOP需求的80%的需求点。 ​    还包含了Sprin">
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  2k
                 </span>
               
 
@@ -415,7 +415,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  8
                 </span>
               
             </div>
@@ -455,6 +455,29 @@
 <p>​    在大多数应用程序场景中，不需要明显的用户代码来实例化Spring IoC容器的一个或多个实例。例如，在web应用程序场景中，web.XML文件中使用8行左右的简单样例来描述XML就足够了(请参阅 <a href="https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/core.html#context-create" target="_blank" rel="noopener">web应用程序方便的ApplicationContext实例化</a>)。如果使用<a href="https://spring.io/tools/sts" target="_blank" rel="noopener">Spring工具套件</a> (一个eclipse支持的开发环境)，只需单击几下鼠标或按键，就可以轻松创建这个样板配置。</p>
 <p>​    下图显示了Spring如何工作的高级视图。你的应用程序类与配置元数据相结合，这样，在创建并初始化<strong><em>ApplicationContext</em></strong>之后，你就拥有了一个完全配置的可执行系统或应用程序。</p>
 <p><img src="/2019/07/18/Spring核心技术/SpringIoC%E5%AE%B9%E5%99%A8.png" alt="Spring IoC容器"></p>
+<h3 id="1-2-1配置元数据"><a href="#1-2-1配置元数据" class="headerlink" title="1.2.1配置元数据"></a>1.2.1配置元数据</h3><p>​    正如上述图片所示，Spring IoC容器使用配置元数据的形式。此配置元数据表示作为应用程序开发人员，你告诉Spring容器如何去实例化、配置和组装应用程序中的对象。</p>
+<p>​    配置元数据通常以简单直观的XML格式呈现，本章的大部分内容都使用这种格式来表达Spring IoC容器的关键概念和特性。</p>
+<p>​    基于xml的元数据不是惟一允许的配置元数据形式。Spring IoC容器本身与配置元数据的格式完全解耦。现在，许多开发人员为他们的Spring应用程序选择<strong>基于java</strong>的配置。</p>
+<p>​    有关在Spring容器中使用其他形式的元数据的信息，请参见:</p>
+<ul>
+<li>基于注解的配置：从Spring2.5开始引入</li>
+<li>基于Java的配置：从Spring3.0开始引入，Spring JavaConfig项目提供的许多特性成为Spring核心框架的一部分。因此，您可以使用Java而不是XML文件来定义应用程序类外部的bean。要使用这些新特性，请参见 <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Configuration.html" target="_blank" rel="noopener"><code>@Configuration</code></a>, <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Bean.html" target="_blank" rel="noopener"><code>@Bean</code></a>, <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Import.html" target="_blank" rel="noopener"><code>@Import</code></a>, 和<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/DependsOn.html" target="_blank" rel="noopener">@DependsOn</a>注解。</li>
+</ul>
+<p>Spring配置包含至少一个bean定义，并且通常包含多个bean，这些Bean容器必须要管理。基于xml的配置元数据将这些bean配置为顶级标签<beans>中的<bean>标签的元素。Java配置通常在<strong><em>@Configuration</em></strong>类中使用<strong><em>@ Bean</em></strong>注解的方法。</bean></beans></p>
+<p>​    这些bean定义对应于组成应用程序的实际对象。通常，你定义服务层对象、数据访问对象(DAOs)、表示对象(如Struts动作实例)、基础设施对象(如Hibernate的SessionFactories)、JMS队列等等。通常，不会在容器中配置<strong>细粒度的域对象</strong>(有点疑问？不是很懂这个概念)，因为通常由DAOs和业务逻辑负责创建和加载域对象。不过，您可以使用Spring与AspectJ的集成来配置在IoC容器控制之外创建的对象。参考 <a href="https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/core.html#aop-atconfigurable" target="_blank" rel="noopener">Using AspectJ to dependency-inject domain objects with Spring</a>.(在Spring中使用AspectJ来注入域对象)</p>
+<p>基于XML的配置元数据的例子 如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance   xsi:schemaLocation="</span><span class="attr">http:</span>//<span class="attr">www.springframework.org</span>/<span class="attr">schema</span>/<span class="attr">beans</span></span></span><br><span class="line"><span class="tag"><span class="attr">https:</span>//<span class="attr">www.springframework.org</span>/<span class="attr">schema</span>/<span class="attr">beans</span>/<span class="attr">spring-beans.xsd</span>"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"..."</span> <span class="attr">class</span>=<span class="string">"..."</span>&gt;</span> </span><br><span class="line">        <span class="comment">&lt;!-- collaborators and configuration for this bean go here --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--id属性，是一个字符串，用于识别单个Bean定义 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--class属性定义了Bean的类型，通常为完整的合格的类名 --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"..."</span> <span class="attr">class</span>=<span class="string">"..."</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- collaborators and configuration for this bean go here --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- more bean definitions go here --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span></span></span><br></pre></td></tr></table></figure>
+
+<p>id属性的值引用了对象。本例中没有显示用于引用协作对象的XML。</p>
+<h3 id="1-2-2初始化容器"><a href="#1-2-2初始化容器" class="headerlink" title="1.2.2初始化容器"></a>1.2.2初始化容器</h3><p>提供给ApplicationContext构造函数的位置路径(可以有多个)是资源字符串，允许容器从各种外部资源(如本地文件系统、Java类路径等)加载配置元数据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"services.xml"</span>, <span class="string">"daos.xml"</span>);</span><br><span class="line"><span class="comment">//多个之间用 英文逗号 隔开即可</span></span><br></pre></td></tr></table></figure>
+
+<p>下面的示例显示了服务层对象(services.xml)配置文件:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- services --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"petStore"</span> <span class="attr">class</span>=<span class="string">"org.springframework.samples.jpetstore.services.PetStoreServiceImpl"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"accountDao"</span> <span class="attr">ref</span>=<span class="string">"accountDao"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"itemDao"</span> <span class="attr">ref</span>=<span class="string">"itemDao"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- additional collaborators and configuration for this bean go here --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- more bean definitions for services go here --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>下面的示例显示了数据获取对象daos.xml文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountDao"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">class</span>=<span class="string">"org.springframework.samples.jpetstore.dao.jpa.JpaAccountDao"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- additional collaborators and configuration for this bean go here --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"itemDao"</span> <span class="attr">class</span>=<span class="string">"org.springframework.samples.jpetstore.dao.jpa.JpaItemDao"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- additional collaborators and configuration for this bean go here --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- more bean definitions for data access objects go here --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -469,7 +492,7 @@
 	<br>
 	<span>发布时间:</span>2019年07月18日 - 16:31:35
 	<br>
-	<span>最后更新:</span>2019年07月18日 - 20:30:36
+	<span>最后更新:</span>2019年07月19日 - 00:08:15
 	<br>
 	本文链接：<a href="/2019/07/18/Spring核心技术/" title="Spring核心技术">http://xuren11.github.io/2019/07/18/Spring核心技术/</a>
     <br>
@@ -532,6 +555,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/18/Java线程安全的单例模式实现/" rel="prev" title="Java线程安全的单例模式实现">
+                Java线程安全的单例模式实现 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -643,7 +670,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -665,7 +692,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -714,7 +741,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-IOC容器"><span class="nav-number">1.</span> <span class="nav-text">1.IOC容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1Spring-IoC容器与Bean的介绍"><span class="nav-number">1.1.</span> <span class="nav-text">1.1Spring IoC容器与Bean的介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-容器概述"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 容器概述</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-IOC容器"><span class="nav-number">1.</span> <span class="nav-text">1.IOC容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1Spring-IoC容器与Bean的介绍"><span class="nav-number">1.1.</span> <span class="nav-text">1.1Spring IoC容器与Bean的介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-容器概述"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 容器概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1配置元数据"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1配置元数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2初始化容器"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2初始化容器</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -755,7 +782,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">2.7k</span>
+    <span title="Site words total count">4.3k</span>
   
 </div>
 
