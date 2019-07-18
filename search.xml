@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F05%2F29%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    <title><![CDATA[Spring框架概览]]></title>
+    <url>%2F2019%2F07%2F18%2FSpring%E6%A1%86%E6%9E%B6%E6%A6%82%E8%A7%88%2F</url>
+    <content type="text"><![CDATA[Spring框架概览​ Spring让创建Java企业级应用变得更简单.它提供了任何你在企业级环境中使用Java进行开发所需要的东西。同时也支持其他能在JVM上运行的语言，例如Groovy和Kotlin。通知也可很灵活创建任何需求所需要的架构。对于Spring框架5.1来说，SPring需要JDK8及其以上的支持，同时也提供对JDK11的开箱即用的长期支持。 ​ Spring支持很多种应用类型场景。在一个大企业里面，应用通常会存在很长一段时间，这些应用必须运行在JDK以及应用服务器上，他们的更新周期可能会脱离开发者的控制。其他的可能是以一个单独 jar包在内置的服务器上，也可能是在云端运行。现今仍然有许多应用是独立应用，比如批处理等，这些应用不需要运行在服务器上。 1.Spring对我们来说意味着什么？​ 专业术语“Spring”在不同的环境下有不同的意义。它可以被用来指定Spring框架本身，这也是它最开的意义。随着时间过去，其他的Spring项目在Spring框架的基础上建立起来。本参考文档聚焦于基础：即Spring框架本身。 ​ Spring框架被拆分为了许多模块。应用可以自主选择它需要的模块。Spring的核心模块为 核心容器(core container),包括 配置模块 和 依赖注入机制。除此之外，Spring对不同的应用架构提供了许多基础支持，包括 消息，事务数据和持久化 以及web。同时它也包含基于Servlet的SpringMVC web框架，也有平行的 Spring WebFlux反应式的web框架。 ​ (还有一段，用到了JDK9的新概念，暂时不知道是在说啥，有机会再补翻译) 2.Spring与一系列Spring相关框架的历史​ Spring在2003年被提出，作为对早期J2EE规范中的复杂性的响应。虽然有些人认为Java EE和Spring是竞争对手，但Spring实际上是Java EE的补充。Spring编程模型不包含Java EE平台规范;相反，它集成了从EE体系中精心选择的各个规范： Servlet API (JSR 340) WebSocket API (JSR 356) Concurrency Utilities (JSR 236) JSON Binding API (JSR 367) Bean Validation (JSR 303) JPA (JSR 338) JMS (JSR 914) 必要的，也支持 协调事务的JTA/JCA设置 Spring框架同时也支持DI(JSR 330),常用注解(JSR 250)规范。开发者可选择使用上述的而非Spring框架提供的Spring特定机制。 ​ 对于Spring5.0来说，Spring要求至少JavaEE7(Servlet3.1以上，JPA2.1以上)。同时提供开箱即用的集成了更新的API，在Java EE 8(Servlet 4.0, JSON绑定API)运行环境中。这使得Spring与Tomcat 8和Tomcat 9、WebSphere 9和JBoss EAP 7完全兼容。 ​ 随着时间的推移，Java EE在应用程序开发中的角色已经发生了变化。在Java EE和Spring的早期，创建应用程序是为了部署到应用服务器。今天，在Spring Boot的帮助下，应用程序以一种devops和云友好的方式创建，在内嵌的Servlet容器，并且改动也很少。从Spring Framework 5开始，WebFlux应用程序甚至不直接使用Servlet API，并且可以运行在非Servlet容器的服务器上(比如Netty)。 ​ Spring仍让在继续改进与创新。除了Spring框架之外，还有其他项目，比如Spring Boot、Spring Security、Spring Data、Spring Cloud、Spring Batch等等。重要的是，每个项目都有自己的源代码存储库、问题跟踪和发布节奏。可在Spring.io上查看Spring项目的完整列表 3.Spring的设计思想​ 当你学习一个框架时，重要的是不仅要知道它做什么，还要知道它遵循什么原则。以下是Spring框架的指导原则: 在项目应用开发的每个层次上都提供选择。Spring允许你尽可能推迟设计决策。例如，您可以通过配置切换持久性提供者，而无需更改代码。对于许多其他基础设施问题以及与第三方api的集成也是如此。 容纳不同的观点。Spring信奉灵活，并且不对事情应该怎样做发表人任何意见。它在各种不同的层面上支持各种不同的应用 保持强大的向后兼容性。Spring的发展已经被精心的规划管理，以在版本之间强制进行很少的破坏性更改。Spring支持精心选择的JDK版本和第三方库，以方便维护依赖于Spring的应用程序和库。 关心API设计。Spring团队投入了大量的想法和时间来使api更加直观，并将该观点保持在许多本版上。 为代码质量设定高标准。Spring框架非常强调有意义的、及时的和准确的java参考文档。它是极少数可以声明代码结构干净且包之间没有循环依赖关系的项目之一。 4.反馈与贡献​ 对于怎样做之类的问题(questions page )、诊断或调试问题，我们建议使用StackOverflow，并且我们有一个问题页面，列出了说明建议怎样使用。如果你非常确定Spring框架中存在问题，或者想建议一个特性，请使用GitHub Issues。 ​ 如果您心中有一个解决方案或建议的修复，您可以在 Github上提交一个pull request。但是，请记住，除了琐碎的问题外，我们希望在问题跟踪器中归档，您可以在那里进行讨论，并留下记录供将来参考。 ​ 更多详细信息，请参阅在 CONTRIBUTING中提供的指导方针。 5.快速开始​ 如果你刚刚开始使用Spring，你可以通过创建一个基于Spring Boot的应用程序来开始使用Spring框架。Spring Boot提供了一种快速的方法来创建基于Spring的可生产应用程序。它基于Spring框架，支持约定而不是配置，旨在让您尽可能快地启动和运行应用。 ​ 您可以使用start.spring.io生成一个基本项目或遵循 “快速开始” 指南中任意项目，例如 开始构建RESTful Web服务。这些指南不仅更容易理解，而且更专注于任务，其中大多数都是基于Spring Boot的。它们还涵盖了Spring 文件夹中的其他项目，你在解决特定问题时可能需要用到这些项目。]]></content>
       <categories>
-        <category>Diary</category>
+        <category>Spring</category>
       </categories>
       <tags>
-        <tag>Testing</tag>
+        <tag>Spring官方文档学习-基于5.1</tag>
       </tags>
   </entry>
 </search>
