@@ -87,11 +87,11 @@
 <meta name="keywords" content="Java杂记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java线程安全的单例模式实现">
-<meta property="og:url" content="http://xuren11.github.io/2019/07/18/Java线程安全的单例模式实现/index.html">
+<meta property="og:url" content="http://xuren.tech/2019/07/18/Java线程安全的单例模式实现/index.html">
 <meta property="og:site_name" content="Xuren&#39;s Blogs">
 <meta property="og:description" content="结论对象的创建有两种模式，　一为饿汉式，二为懒汉式 饿汉式：在实例化该对象的同时，该对象就同时new一个自己。通俗的讲，就是　自己是自己的成员变量，且默认直接给自己new出来！需要使用时，自己直接将自己拿出来就好。所以，必然不会存在线程安全问题！ 缺点：类加载即初始化实例，加入实例变量比较多的话，会占用较多的内存。 懒汉式：在需要使用一个对象时，才创建该对象。因此，多线程下就显得不安全了，可能不同">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-18T16:08:06.998Z">
+<meta property="og:updated_time" content="2019-07-18T16:10:37.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java线程安全的单例模式实现">
 <meta name="twitter:description" content="结论对象的创建有两种模式，　一为饿汉式，二为懒汉式 饿汉式：在实例化该对象的同时，该对象就同时new一个自己。通俗的讲，就是　自己是自己的成员变量，且默认直接给自己new出来！需要使用时，自己直接将自己拿出来就好。所以，必然不会存在线程安全问题！ 缺点：类加载即初始化实例，加入实例变量比较多的话，会占用较多的内存。 懒汉式：在需要使用一个对象时，才创建该对象。因此，多线程下就显得不安全了，可能不同">
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://xuren11.github.io/2019/07/18/Java线程安全的单例模式实现/">
+  <link rel="canonical" href="http://xuren.tech/2019/07/18/Java线程安全的单例模式实现/">
 
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xuren11.github.io/2019/07/18/Java线程安全的单例模式实现/">
+    <link itemprop="mainEntityOfPage" href="http://xuren.tech/2019/07/18/Java线程安全的单例模式实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xuren">
@@ -348,6 +348,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java杂记/" itemprop="url" rel="index">
+                    <span itemprop="name">Java杂记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -442,11 +464,11 @@
 	<br>
 	<span>发布时间:</span>2019年07月18日 - 22:12:30
 	<br>
-	<span>最后更新:</span>2019年07月19日 - 00:08:06
+	<span>最后更新:</span>2019年07月19日 - 00:10:37
 	<br>
-	本文链接：<a href="/2019/07/18/Java线程安全的单例模式实现/" title="Java线程安全的单例模式实现">http://xuren11.github.io/2019/07/18/Java线程安全的单例模式实现/</a>
+	本文链接：<a href="/2019/07/18/Java线程安全的单例模式实现/" title="Java线程安全的单例模式实现">http://xuren.tech/2019/07/18/Java线程安全的单例模式实现/</a>
     <br>
-	<!--<span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren11.github.io/2019/07/18/Java线程安全的单例模式实现/"  aria-label="复制成功！"></i></span>
+	<!--<span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/07/18/Java线程安全的单例模式实现/"  aria-label="复制成功！"></i></span>
     -->
 	版权声明：本文为博主原创文章，转载请附上博文链接！
 	</div>
@@ -472,6 +494,13 @@
     
     
     
+	<!-- 新加代码 -->
+	<div>
+    
+        
+
+    
+    </div>
 
     
 
@@ -505,6 +534,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/20/MyBatis官网学习-介绍/" rel="prev" title="MyBatis官网学习-介绍">
+                MyBatis官网学习-介绍 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -616,7 +649,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -627,7 +660,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -638,7 +671,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -728,7 +761,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">4.3k</span>
+    <span title="Site words total count">28.9k</span>
   
 </div>
 

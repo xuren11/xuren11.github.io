@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/freedom.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/freedom.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+  <meta name="keywords" content="MySQL文档中常见专业英语短语,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="MySQ技术文档中 常见的 计算机类英文单词语与短语。 单词与短语access controls（访问控制）    mistakes，preventing（错误，防止）    overview（概述）    user accounts（用户账号）Administrators (管理)advantages of MySQL（MySQL的优点）AFTER versus BEFORE（AFTER与BEF">
+<meta name="keywords" content="MySQL文档中常见专业英语短语">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机英文学习">
+<meta property="og:url" content="http://xuren.tech/2019/07/27/计算机英文学习/index.html">
+<meta property="og:site_name" content="Xuren&#39;s Blogs">
+<meta property="og:description" content="MySQ技术文档中 常见的 计算机类英文单词语与短语。 单词与短语access controls（访问控制）    mistakes，preventing（错误，防止）    overview（概述）    user accounts（用户账号）Administrators (管理)advantages of MySQL（MySQL的优点）AFTER versus BEFORE（AFTER与BEF">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-27T08:12:41.222Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机英文学习">
+<meta name="twitter:description" content="MySQ技术文档中 常见的 计算机类英文单词语与短语。 单词与短语access controls（访问控制）    mistakes，preventing（错误，防止）    overview（概述）    user accounts（用户账号）Administrators (管理)advantages of MySQL（MySQL的优点）AFTER versus BEFORE（AFTER与BEF">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xuren.tech/2019/07/27/计算机英文学习/">
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/099563b3.js","daovoice")
+  daovoice('init', {
+      app_id: "099563b3"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+  <title>计算机英文学习 | Xuren's Blogs</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xuren's Blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xuren.tech/2019/07/27/计算机英文学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuren">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/freedom.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xuren's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机英文学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-27T10:39:04+08:00">
+                2019-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/英语/" itemprop="url" rel="index">
+                    <span itemprop="name">英语</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>MySQ技术文档中 常见的 计算机类英文单词语与短语。</p>
+<h1 id="单词与短语"><a href="#单词与短语" class="headerlink" title="单词与短语"></a>单词与短语</h1><p>access controls（访问控制）<br>    mistakes，preventing（错误，防止）<br>    overview（概述）<br>    user accounts（用户账号）<br>Administrators (管理)<br>advantages of MySQL（MySQL的优点）<br>AFTER versus BEFORE（AFTER与BEFORE）<br>Against()<br>aggregate functions （ 聚集函数）<br>    individual functions<br>    combining（组合）<br>    joins，utilizing（联结，利用）<br>    overview（概述）<br>aliases（别名）<br>alternative uses（替换使用）<br>concatenating fields（拼接字段）<br>naming（命名）<br>table names（表名）<br>ALL arguments（所有参数）<br>ALTER TABLE statements（ALTER TABLE语句）<br>ANALYZE TABLE<br>anchors (regular expressions)（定位（正则表达式））<br>AND operators（AND操作符）<br>application filtering（应用过滤）<br>AS keyword（AS关键字）<br>ASC 升序<br>asterisk wildcards（星号通配符）<br>AUTO INCREMENT 自动增长<br>auto increment（自动增量）<br>autocommit flags（自动提交标志）<br>AVG() 平均函数</p>
+<p>backing up data（备份数据）<br>basic character matching（基本字符匹配）<br>BEFORE versus AFTER（BEFORE与AFTER）<br>BETWEEN，49-50<br>binary datatypes（二进制数据类型），304<br>Boolean mode（布尔方式），170-175</p>
+<p>calculated fields（计算字段）<br>concatenating fields（拼接字段）<br>mathematical calculations（数学运算）<br>overview（概述）<br>subqueries as（子查询作为计算字段）<br>Cartesian products（笛卡儿积）<br>case sensitivity（区分大小写）<br>expression matching（表达式匹配）<br>full-text searches（全文本搜索）<br>sort orders（排序顺序）<br>searches（搜索）<br>statements（语句）<br>character classes (regular expressions)<br>matching（字符类（正则表达式），匹配）<br>character matching（字符匹配）<br>见matches (regular expressions)<br>characters sets（字符集）<br>overview（概述）<br>working with（使用）<br>CHECK TABLE<br>clauses（子句）<br>individual clauses<br>client-based results formatting（基于客户机的结果格式化）<br>client-server software（客户机—服务器软件）<br>collation sequences（校对顺序）<br>overview（概述）<br>working with（使用）<br>column aliases（列别名）<br>columns（列）<br>commas between names（名字之间的逗号）<br>definition of（定义）<br>derived（推导出的）<br>fully qualified names（完全限定名）<br>INSERT statements（INSERT语句）<br>padded spaces（填补空格）<br>primary keys（主键）<br>retrieving with SELECT（用SELECT检索）all（所有列）<br>individual（单个列）<br>multiple（多个列）<br>separating correctly（正确分隔）<br>sorting by multiple（按多个列排序）<br>subquery result restrictions（子查询结果约束）<br>combined queries，creating（组合查询，创建）<br>command-line (mysql)（命令行（mysql））<br>command-line utilities（命令行实用程序）<br>commands （ 命令）<br>individual<br>commands<br>commas between column names（列名之间的逗号）<br>COMMENT keywords（COMMENT关键字）<br>commits（提交）<br>committing（提交）<br>complex joins（复杂联结）<br>compound queries（复合查询）<br>creating（创建）<br>overview（概述）<br>rows ， eliminating/including duplicates（行，删除/包括复制））<br>rules of（规则）<br>sorting results（排序结果）<br>WHERE clause combinations（WHERE子句组合）<br>concatenating（拼接）<br>column aliases（列别名）<br>definition of（定义）<br>fields（字段）<br>mathematical calculations（数学计算）<br>COUNT()<br>COUNT() functions（COUNT()函数）<br>DISTINCT arguments（DISTINCT参数）<br>joins（联结）<br>performing through subqueries（通过子查<br>询执行）<br>CREATE<br>CREATE TABLE<br>engines（引擎）<br>statements（语句）<br>cross joins（叉联结）<br>currency numbers，storing（货币数，排序），<br>cursors（游标）<br>creating（创建）<br>FETCH statements（FETCH语句）<br>opening/closing（打开/关闭）<br>utilizing（利用）<br>customers table（customers表）</p>
+<p>database client-server software interactions（数据库客户机—服务器软件的相互作用）<br>databases（数据库）<br>backing up（备份）<br>compared to Database ManagementSystems(DBMSs)（与DBMS的比较）<br>compared to schema（与模式的比较<br>definition of（定义）<br>maintenance   performing（维护，执行）<br>selecting with USE（用USE选择）<br>datatypes（数据类型）<br>binary datatypes（二进制数据类型）<br>date and time datatypes（日期和时间数据<br>类型）<br>definition of（定义）<br>numeric datatypes（数值数据类型）<br>overview（概述）<br>string datatypes（串数据类型）<br>date and time manipulation functions（日期和时间处理函数）<br>DBMSs (Database Management Systems)（数据库管理系统）<br>compared to databases（与数据库比较）<br>performance，improving（性能，改进）<br>DECLARE statements（DECLARE语句）<br>DEFAULT 缺省值<br>DELAYED keywords（DELAYED关键字）<br>DELETE statements（DELETE语句）<br>DELETE triggers（DELETE触发器）<br>delimiters（分隔符）<br>derived columns（推导出的列）<br>DESC 降序<br>DESCRIBE 描述<br>DISTINCT arguments（DISTINCT参数）<br>retrieving distinct rows（检索不同的行）<br>downloading MySQL（下载MySQL）<br>DROP PROCEDURE<br>DROP TABLE statement （DROP TABLE语句）<br>DROP USER</p>
+<p>encoding（编码）<br>engines（引擎）<br>error codes（错误代码）<br>expression matching（表达式匹配）<br>matches (regular expressions) 匹配(有规律的表达式)</p>
+<p>FETCH statements（FETCH语句）<br>fields (calculated)（字段（计算））<br>columns 列(复数)<br>concatenating fields（拼接字段）<br>mathematical calculations（数学计算）<br>FLUSH LOGS statements（FLUSH LOGS语句）<br>FLUSH TABLES statements（FLUSH TABLES语句）<br>foreign keys（外键）<br>formatting（格式化）<br>full-text searches（全文本搜索）<br>Boolean mode（布尔方式）<br>case sensitivity（区分大小写）<br>enabling（启用）<br>engine support（引擎支持）<br>multiple search terms，ranking（多个搜索项，等级）<br>overview（概述）<br>performing（执行）<br>query expansion（查询扩展）<br>FULLTEXT clauses（FULLTEXT子句）<br>fully qualified table names（完全限定的表名）<br>functions（函数）<br>date and time manipulation functions（日期和时间处理函数）<br>numeric manipulation functions（数值处理函数），97数）<br>GRANT statements（GRANT语句）<br>simplifying multiple statements（简化多条语句）<br>user accounts，creating（用户账号，创建）<br>user rights（用户权限）<br>GROUP BY 分组<br>compared to ORDER BY（与ORDER BY比较）<br>creating groups with（创建组）<br>filtering groups with（过滤组）</p>
+<p>HAVING clauses（HAVING子句）<br>IF NOT EXISTS<br>IF statements（IF语句）<br>IGNORE 忽略<br>implicit commits（隐含提交）<br>definition of（定义）<br>utilizing in WHERE clauses（在WHERE子句中使用）<br>IN BOOLEAN MODE，另见Boolean mode<br>inner joins（内部联结）<br>InnoDB 一个引擎名<br>description of（描述）<br>full-text searching suppor（ 全文本搜索支持）<br>INSERT SELECT statement（INSERT SELECT语句）<br>INSERT statement（INSERT语句）<br>complete rows，inserting（完整行，插入）<br>multiple rows，inserting（多个行，插入）<br>overview（概述）<br>performance of，improving（性能，改善）<br>retrieved data，inserting（检索数据，插入）<br>security privileges（安全权限）<br>INSERT triggers（INSERT触发器）<br>installing MySQL（安装MySQL）</p>
+<p>joins（联结）<br>aggregate functions interaction（聚集函数相互作用）<br>as system drags（使系统缓慢）<br>Cartesian products（笛卡儿积）<br>column names，qualifying（列名，限定）<br>creating（创建）<br>cross joins（叉联结）<br>general guidelines（通用指南）<br>inner joins（内部联结）<br>multiple table joins（多表联结）<br>natural joins（自然联结）<br>outer joins（外部联结）<br>overview（概述）<br>purpose of（用途）<br>referential integrity，maintaining（引用完整性，维护）<br>self joins（自联结）<br>views，simplifying with（视图，简化）<br>WHERE clause importance（WHERE子句的重要性）</p>
+<p>keywords（关键字）</p>
+<p>left outer joins（左外部联结）<br>LIKE operators（LIKE操作符）<br>compared to REGEXP（与REGEXP比较）<br>limitations of（限制）<br>utilizing REGEXP like（使REGEXP类似于LIKE）<br>LIMIT<br>highest/lowest values，finding（最高/最低值，查找）<br>retrieving rows（检索行）<br>local servers，advantages of（本地服务器，优点）<br>log files，reviewing（日志文件，查看）<br>logical operators （ 逻辑操作符）<br>logins (MySQL)（登录（MySQL））<br>LOOP statements versus REPEAT statements（LOOP语句与REPEAT语句）<br>LTRIM() function（LTRIM()函数）</p>
+<p>Match()，164-168<br>matches (regular expressions)（匹配（正则表达式））<br>[utilizing（使用）<br>anchors（定位符，锚）<br>character classes，matching（字符类，匹配）<br>OR matches（OR匹配）<br>repetition metacharacters（重复元字符），<br>set matches（集合匹配）<br>special characters，matching（特殊字符，匹配）<br>mathematical calculations，performing（数学计算，执行）<br>mathematical operators（数学操作符）<br>MAX()<br>MEMORY<br>MIN()，<br>MyISAM<br>MySQL Administrators<br>MySQL command-line（MySQL命令行）<br>MySQL Query Browser<br>MySQL software（MySQL软件）</p>
+<p>names (fully qualified table names)（名字（完全限定表名））<br>natural joins（自然联结）<br>nested groups（嵌套组）<br>non-numeric data（非数值数据）<br>nonmatches（不匹配）<br>NOT<br>NULL<br>checking for with WHERE clauses（用WHERE子句检查）<br>compared to nonmatches（不匹配比较）<br>function interactions（函数相互作用）<br>tables（表）<br>versus empty strings（NULL与空串）<br>wildcard searches（通配符搜索）<br>numeric datatypes（数值数据类型）<br>numeric manipulation functions（数值处理函数）</p>
+<p>operators（操作符）<br>definition of（定义）<br>full-text Boolean mode（全文本布尔方式）<br>HAVING clause（HAVING子句）<br>mathematical（数学）<br>WHERE clauses（WHERE子句）<br>OPTIMIZE TABLE<br>OR<br>matches（匹配）<br>overview（概述）<br>ORDER BY<br>case sensitivity in sort（排序中区分大小写）<br>compared to GROUP BY clause（与GROUP BY子句比较）<br>descending order（降序）<br>highest/lowest values，finding（最高/最低值，查找）<br>utilizing（利用）<br>orders table（orders表）<br>outer joins（外部连接）</p>
+<p>parameters（参数）<br>parentheses（圆括号）<br>grouping related operators（分组相关的操作符）<br>IN<br>passwords（口令）<br>percent signs (wildcards)（百分号（通配符））<br>portability (INSERT statements)（可移植性（INSERT语句））<br>portable code（可移植代码）<br>primary keys（主键）<br>definition of（定义）<br>tables（表）<br>productnotes table（productnotes表）<br>products table（products表）</p>
+<p>queries（查询），另见subqueries（子查询）<br>building incrementally（增量地建立）<br>calculated fields（计算字段）<br>concatenating fields（拼接字段）<br>mathematical calculations（数学计算）<br>overview（概述）<br>combining（组合）<br>compound queries（复合查询）<br>creating（创建）<br>rows ， eliminating/including duplicates<br>（行，删除/包括复制）<br>rules of（规则）<br>sorting results（排序结果）<br>definition of（定义）<br>formatting effectively（有效地格式化）<br>WHERE clauses，combining with（WHERE子句，组合）<br>Query Browser (MySQL)<br>query expansion (full-text searches)（查询扩展（全文本搜索））<br>quotes（引号）<br>numeric datatypes（数值数据类型）<br>string datatypes（串数据类型)<br>utilizing in WHERE clauses（在WHERE子句中使用）</p>
+<p>range values，checking（范围值，检查）<br>records compared to rows（记录与行比较）<br>referential integrity，maintaining（引用完整性，维护）<br>REGEXP<br>regular expressions（正则表达式）<br>basic character matching（基本字符匹配）<br>limitations of（限制）<br>matches（匹配），参见matches (regularexpressions)<br>overview（概述）<br>ranges，defining（范围，定义）<br>testing（测试）<br>whitespace metacharacters （ 空白元字符）<br>relational tables（关系表）<br>RENAME TABLE<br>REPAIR TABLE<br>REPEAT statements（REPEAT语句）<br>repetition metacharacters (regular expressions)（重复元字符（正则表达式））<br>reserved words（保留字）<br>REVOKE statements（REVOKE语句）<br>right outer joins（右外部联结）<br>rollbacks（回退）<br>ROLLUP<br>root dangers（root的危险）<br>rows（行）<br>complete rows，inserting（完整行，插入）<br>definition of（定义）<br>duplicates，eliminating/including（复制,删除/包含））<br>limiting retrieve results（限制检索结果）<br>multiple rows，inserting（多行，插入）<br>retrieving（检索）<br>RTRIM() function（RTRIM()函数）</p>
+<p>savepoints（保留点）<br>scalability（可伸缩性）<br>schema（模式）<br>scripts，executing（脚本，执行）<br>searches（搜索）<br>SELECT（查询）<br>AS keyword（AS关键字）<br>columns，retrieving（列，检索）<br>all（全部列）<br>individual（单个列）<br>multiple（多个列）<br>concatenating fields（拼接字段）<br>purpose of（用途）<br>sequencing（排序）<br>self joins（自连接）<br>semicolons（分号）<br>server software（服务器软件）<br>server-based results formatting（基于服务器<br>的结果格式化）<br>SET PASSWORD statements（SET PASSWORD语<br>句）<br>sets，matching regular expressions（集合，<br>匹配正则表达式）<br>SHOW sql关键字<br>SHOW PROCEDURE STATUS<br>sign values（符号值）<br>signed datatypes（有符号的数据类型）<br>sorting data（排序数据）<br>by multiple columns（按多个列）<br>case sensitivity（区分大小写）<br>in descending order（以降序）<br>overview（概述）<br>SOUNDEX() function（SOUNDEX()函数）<br>spaces，removing（空格，删除）<br>special characters (regular expressions)（特殊字符（正则表达式））<br>startup problems，diagnosing（启动问题，诊断)<br>statement syntax（语句语法）<br>statements（语句），另见individual statements<br>formatting（格式化）<br>overview（概述）<br>stopwords（非用词）<br>stored procedures（存储过程）<br>creating（创建）<br>cursors（游标）<br>disadvantages of（缺点）<br>dropping（删除）<br>executing（执行）<br>inspecting（检查）<br>intelligent stored procedures，building（智能存储过程，建立）<br>overview（概述）<br>parameters（参数）<br>uses for（使用）<br>string datatypes（串数据类型）<br>subqueries（子查询），另见WHERE clausesas calculated fields（作为计算字段），<br>combining queries with（查询与子查询组合）<br>definition of（定义）<br>filtering by（用子查询过滤）<br>formatting effectively（有效地格式化<br>order of process（处理次序）<br>self joins（自联结）<br>UPDATE statements（UPDATE语句）<br>SUM()<br>syntax（语法）<br>joins（联结）<br>statements（语句）</p>
+<p>tables（表）<br>aliasing（起别名）<br>AUTO INCREMENT<br>calculated fields（计算字段）<br>concatenating fields（拼接字段）<br>mathematical calculations （ 数学计算）<br>overview（概述）<br>Cartesian products（笛卡儿积）<br>character sets，specifying（字符集，说明）<br>creating（创建）<br>customers table（customers表）<br>default values，specifying（默认值，说明）<br>DELETE statements（DELETE语句）<br>deleting（删除）<br>joins（联结）<br>multiple tables，joining（多个表，联结）<br>NULL values（NULL值）<br>orderitems table（orderitems表）<br>orders table（orders表）<br>overview（概述）<br>overwriting（覆盖）<br>primary keys（主键）<br>productnotes table（productnotes表）<br>products table（products表）<br>relational tables（关系表）<br>renaming（重命名）<br>updating（更新）<br>vendors table（vendors表）<br>views（视图）<br>text（文本）<br>text-manipulation functions（ 文本处理函数）<br>time datatypes（时间数据类型）<br>trailing space dangers in wildcards（通配符中尾空格的危险）<br>transactions（事务处理）<br>controlling（控制）<br>engine support（引擎支持）<br>overview（概述）<br>triggers（触发器）<br>BEFORE versus AFTER（BEFORE与AFTER）<br>creating（创建）<br>DELETE triggers（DELETE触发器）<br>dropping（删除）<br>failure of（故障）<br>guidelines（指南）<br>INSERT triggers（INSERT触发器）<br>multi-statement triggers（多语句触发器）<br>overview（概述）<br>UPDATE triggers（UPDATE触发器）<br>TRIM()<br>trimming padded spaces（去头尾空格）<br>TRUNCATE TABLE</p>
+<p>underscores (wildcards)（下划线（通配符））<br>UNION operators（UNION操作符）<br>compound queries 混合查询<br>UNSIGNED keywords（UNSIGNED关键字）<br>UPDATE statements（UPDATE语句）<br>UPDATE triggers（UPDATE触发器）<br>user accounts（用户账号）<br>access rights，setting（访问权限，设置）<br>creating（创建）<br>deleting（删除）<br>managing（管理）<br>passwords，changing（口令，更改）<br>renaming（重命名）</p>
+<p>VALUES<br>variables（变量）<br>vendors table（vendors表）<br>versions of MySQL（MySQL版本）<br>views（视图）<br>calculated fields（计算字段）<br>common uses for（普通使用）<br>complex joins，simplifying（复杂联结，简化）<br>data，reformatting（数据，重新格式化）<br>overview（概述）<br>performance issues（性能问题）<br>reusable views（可重用视图）<br>creating（创建）<br>rules and restrictions（规则和约束）<br>unwanted data，filtering（不需要的数据，过滤）<br>updating（更新）<br>utilizing（利用）</p>
+<p>WHERE clauses（WHERE子句）<br>checking against single values（检查单个值）<br>checking for nonmatches（不匹配检查）<br>combining（组合）<br>combining AND/OR（组合AND/OR）<br>combining queries（组合查询），<br>compared to UNION（与UNION比较）<br>dates，filtering by（日期，过滤）<br>filtering groups（过滤组）<br>importance of in joins（在联结中的重要性）<br>IN<br>NOT<br>NULL values（NULL值）<br>operators（操作符）<br>parentheses（圆括号）<br>quotes，utilizing（引号，利用）<br>range values，checking（范围值，检查）<br>whitespace metacharacters（空白元字符）<br>regular expressions（正则表达式）<br>statements（语句）<br>wildcards（通配符）<br>guidelines for（指南）<br>LIKE operator compared to REGEXP（LIKE<br>操作符与REGEXP的比较）<br>overview（概述）<br>limitations of（限制）<br>NULL interaction（与NULL的相互作用）<br>overview（概述）<br>trailing spaces，dangers of（尾空格，危险）<br>WITH ROLLUP</p>
+
+      
+    </div>
+	<div><div>
+
+    <br>
+    <br>
+    <div style="text-align:left;color: #ccc;font-size:14px;">
+	---本文结束<i class="fa fa-paw"></i>感谢您的阅读---
+	<br>
+	作者：Xuren
+	<br>
+	<span>发布时间:</span>2019年07月27日 - 10:39:04
+	<br>
+	<span>最后更新:</span>2019年07月27日 - 16:12:41
+	<br>
+	本文链接：<a href="/2019/07/27/计算机英文学习/" title="计算机英文学习">http://xuren.tech/2019/07/27/计算机英文学习/</a>
+    <br>
+	<!--<span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/07/27/计算机英文学习/"  aria-label="复制成功！"></i></span>
+    -->
+	版权声明：本文为博主原创文章，转载请附上博文链接！
+	</div>
+	
+	<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+    </script>
+
+</div>
+</div>
+
+    
+    
+    
+	<!-- 新加代码 -->
+	<div>
+    
+        
+
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>计算机英文学习</p>
+  <p><span>文章作者:</span>Xuren</p>
+  <p><span>发布时间:</span>2019年07月27日 - 10:39:04</p>
+  <p><span>最后更新:</span>2019年07月27日 - 16:12:41</p>
+  <p><span>原始链接:</span><a href="/2019/07/27/计算机英文学习/" title="计算机英文学习">http://xuren.tech/2019/07/27/计算机英文学习/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/07/27/计算机英文学习/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL文档中常见专业英语短语/" rel="tag"><i class="fa fa-tag"></i> MySQL文档中常见专业英语短语</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/27/MySQL数据类型/" rel="next" title="MySQL数据类型">
+                <i class="fa fa-chevron-left"></i> MySQL数据类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<!--//bdimg.share.baidu.com-->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NDQ3MS8yMTAwMw"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/freedom.png" alt="Xuren">
+            
+              <p class="site-author-name" itemprop="name">Xuren</p>
+              <p class="site-description motion-element" itemprop="description">做一条最咸的咸鱼!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xuren11" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:296685262@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#单词与短语"><span class="nav-number">1.</span> <span class="nav-text">单词与短语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xuren</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">28.9k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+<!--  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+-->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
