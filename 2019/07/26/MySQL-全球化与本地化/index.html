@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Xuren&#39;s Blogs">
 <meta property="og:description" content="字符集和校对顺序数据库表被用来存储和检索数据。不同的语言和字符集需要以不同的方式存储和检索。因此，MySQL需要适应不同的字符集（不同的字母和符），适应不同的排序和检索数据的方法。 一些术语: 字符集为字母和符号的集合； 编码为某个字符集成员的内部表示； 校对为规定字符如何比较的指令。 普通SQL语句操作不用担心字符集的困扰。使用何种字符集和校对的决定在服务器、数据库和表级进行。 12SHO">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-27T08:26:02.849Z">
+<meta property="og:updated_time" content="2019-07-27T10:10:19.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL-全球化与本地化">
 <meta name="twitter:description" content="字符集和校对顺序数据库表被用来存储和检索数据。不同的语言和字符集需要以不同的方式存储和检索。因此，MySQL需要适应不同的字符集（不同的字母和符），适应不同的排序和检索数据的方法。 一些术语: 字符集为字母和符号的集合； 编码为某个字符集成员的内部表示； 校对为规定字符如何比较的指令。 普通SQL语句操作不用担心字符集的困扰。使用何种字符集和校对的决定在服务器、数据库和表级进行。 12SHO">
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  446
+                  450
                 </span>
               
 
@@ -437,13 +437,13 @@
         <h1 id="字符集和校对顺序"><a href="#字符集和校对顺序" class="headerlink" title="字符集和校对顺序"></a>字符集和校对顺序</h1><p>数据库表被用来存储和检索数据。<strong>不同的语言和字符集</strong>需要以<strong>不同的方式存储和检索</strong>。因此，MySQL需要适应不同的字符集（不同的字母和符），适应不同的排序和检索数据的方法。</p>
 <p>一些术语:<br> <strong>字符集</strong>为字母和符号的集合；<br> <strong>编码</strong>为某个字符集成员的内部表示；<br> 校对为规定字符如何比较的指令。</p>
 <p>普通SQL语句操作不用担心字符集的困扰。使用何种字符集和校对的决定在服务器、数据库和表级进行。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>;  <span class="comment">--展示 MySQL支持的字符集</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">COLLATION</span>; <span class="comment">-- 展示更为完整的信息</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SHOW CHARACTER SET;  --展示 MySQL支持的字符集</span><br><span class="line">SHOW COLLATION; -- 展示更为完整的信息</span><br></pre></td></tr></table></figure>
 
 <p>通常<strong>系统管理在安装时定义一个默认的字符集和校对</strong>。此外，也可以<strong>在创建数据库时，指定默认的字符集和校对</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLE</span> <span class="keyword">LIKE</span> <span class="string">'character%'</span>;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLE</span> <span class="keyword">LIKE</span> <span class="string">'character%'</span>;   <span class="comment">-- 查询 当前库，表所使用的字符集</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SHOW VARIABLE LIKE &apos;character%&apos;;</span><br><span class="line">SHOW VARIABLE LIKE &apos;character%&apos;;   -- 查询 当前库，表所使用的字符集</span><br></pre></td></tr></table></figure>
 
 <p>实际上，字符集很少是服务器范围（甚至数据库范围）的设置。不同的表，甚至不同的列都可能需要不同的字符集，而且两者都可以在创建表时指定：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> table_name(....);ENGING=InnoDB CHARACTER=utf8</span><br><span class="line"><span class="comment">-- 卒后CHARACTER指定使用 utf8  不指定 则是使用数据库默认的字符集</span></span><br><span class="line">column_name  ... .... CHARACTER <span class="keyword">SET</span> utf8; <span class="comment">-- 对某一列指定 字符集 </span></span><br><span class="line">ORDER BY column_name COLLATE utf8;<span class="comment">--在排序时 指定用什么字符集排序 使用 COLLATE</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE table_name(....);ENGING=InnoDB CHARACTER=utf8</span><br><span class="line">-- 卒后CHARACTER指定使用 utf8  不指定 则是使用数据库默认的字符集</span><br><span class="line">column_name  ... .... CHARACTER SET utf8; -- 对某一列指定 字符集 </span><br><span class="line">ORDER BY column_name COLLATE utf8;--在排序时 指定用什么字符集排序 使用 COLLATE</span><br></pre></td></tr></table></figure>
 
 <p>SELECT的其他COLLATE子句: 除了这里看到的在ORDER BY子句中使用以外，COLLATE还可以用于GROUP BY、HAVING、聚集函数、别名等。</p>
 <p>如果绝对需要，串可以在<strong>字符集之间进行转换</strong>。为此，使用<strong>Cast()</strong>或<strong>Convert()</strong>函数。</p>
@@ -461,7 +461,7 @@
 	<br>
 	<span>发布时间:</span>2019年07月26日 - 16:19:18
 	<br>
-	<span>最后更新:</span>2019年07月27日 - 16:26:02
+	<span>最后更新:</span>2019年07月27日 - 18:10:19
 	<br>
 	本文链接：<a href="/2019/07/26/MySQL-全球化与本地化/" title="MySQL-全球化与本地化">http://xuren.tech/2019/07/26/MySQL-全球化与本地化/</a>
     <br>
@@ -646,7 +646,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -758,7 +758,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">28.9k</span>
+    <span title="Site words total count">31.4k</span>
   
 </div>
 

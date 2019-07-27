@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="分组数据从上一章可知，SQL聚集函数可用来汇总数据。这使我们能够对行进行计数，计算和与平均数，获得最大和最小值而不用检索所有数据。 分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。(从此句话可以看出，在逻辑上， 分组在前， 对数据进行其他计算在后) ##　创建分组 GROUP BY分组是在SELECT语句的GROUP BY子句中建立的。 使用GROUP BY的一些注意事项 GROUP">
+<meta name="description" content="分组数据从上一章可知，SQL聚集函数可用来汇总数据。这使我们能够对行进行计数，计算和与平均数，获得最大和最小值而不用检索所有数据。 分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。(从此句话可以看出，在逻辑上， 分组在前， 对数据进行其他计算在后) 创建分组GROUP BY分组是在SELECT语句的GROUP BY子句中建立的。 使用GROUP BY的一些注意事项 GROUP BY子句">
 <meta name="keywords" content="MySQL必知必会学习-复习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL数据分组">
 <meta property="og:url" content="http://xuren.tech/2019/07/22/MySQL数据分组-GROUP BY/index.html">
 <meta property="og:site_name" content="Xuren&#39;s Blogs">
-<meta property="og:description" content="分组数据从上一章可知，SQL聚集函数可用来汇总数据。这使我们能够对行进行计数，计算和与平均数，获得最大和最小值而不用检索所有数据。 分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。(从此句话可以看出，在逻辑上， 分组在前， 对数据进行其他计算在后) ##　创建分组 GROUP BY分组是在SELECT语句的GROUP BY子句中建立的。 使用GROUP BY的一些注意事项 GROUP">
+<meta property="og:description" content="分组数据从上一章可知，SQL聚集函数可用来汇总数据。这使我们能够对行进行计数，计算和与平均数，获得最大和最小值而不用检索所有数据。 分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。(从此句话可以看出，在逻辑上， 分组在前， 对数据进行其他计算在后) 创建分组GROUP BY分组是在SELECT语句的GROUP BY子句中建立的。 使用GROUP BY的一些注意事项 GROUP BY子句">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-24T09:49:53.699Z">
+<meta property="og:updated_time" content="2019-07-27T09:34:12.028Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据分组">
-<meta name="twitter:description" content="分组数据从上一章可知，SQL聚集函数可用来汇总数据。这使我们能够对行进行计数，计算和与平均数，获得最大和最小值而不用检索所有数据。 分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。(从此句话可以看出，在逻辑上， 分组在前， 对数据进行其他计算在后) ##　创建分组 GROUP BY分组是在SELECT语句的GROUP BY子句中建立的。 使用GROUP BY的一些注意事项 GROUP">
+<meta name="twitter:description" content="分组数据从上一章可知，SQL聚集函数可用来汇总数据。这使我们能够对行进行计数，计算和与平均数，获得最大和最小值而不用检索所有数据。 分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。(从此句话可以看出，在逻辑上， 分组在前， 对数据进行其他计算在后) 创建分组GROUP BY分组是在SELECT语句的GROUP BY子句中建立的。 使用GROUP BY的一些注意事项 GROUP BY子句">
 
 
 
@@ -436,8 +436,7 @@
       
         <h1 id="分组数据"><a href="#分组数据" class="headerlink" title="分组数据"></a>分组数据</h1><p>从上一章可知，SQL聚集函数可用来汇总数据。这使我们能够对行进行计数，计算和与平均数，获得最大和最小值而不用检索所有数据。</p>
 <p>分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。(从此句话可以看出，在逻辑上， <strong>分组在前</strong>， 对数据进行其他<strong>计算在后</strong>)</p>
-<p>##　创建分组</p>
-<h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><p>分组是<strong>在SELECT语句的GROUP BY子句中建立</strong>的。</p>
+<h2 id="创建分组"><a href="#创建分组" class="headerlink" title="创建分组"></a>创建分组</h2><h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><p>分组是<strong>在SELECT语句的GROUP BY子句中建立</strong>的。</p>
 <p>使用GROUP BY的一些注意事项 <strong>GROUP BY子句可以包含任意数目的列</strong>。这使得能对分组进行嵌套，为数据分组提供更细致的控制。<br> 如果在GROUP BY子句中<strong>嵌套了分组</strong>，数据将<strong>在最后规定的分组上</strong><br><strong>进行汇总</strong>。换句话说，在建立分组时，指定的所有列都一起计算（所以不能从个别的列取回数据）。<br> GROUP BY子句中列出的每个列都必须是检索列或有效的表达式（但不能是聚集函数）。如果在SELECT中使用表达式，则必须在GROUP BY子句中指定相同的表达式。不能使用别名。<br> <strong>除聚集计算语句外，SELECT语句中的每个列都必须在GROUP BY子句中给出</strong>。(有点没懂意思)<br> 如果分组列中具有<strong>NULL值</strong>，则<strong>NULL将作为一个分组返回</strong>。如果列中有多行NULL值，它们将分为一组。<br> GROUP BY子句必须出现在WHERE子句之后，ORDER BY子句之前。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span>  ..... <span class="keyword">WHERE</span>  ... <span class="keyword">GROUP</span> <span class="keyword">BY</span> .....ORDER <span class="keyword">BY</span> ...;</span><br><span class="line"><span class="comment">#根据顺序可以看出， GROUP BY是对WHERE删选过后的结果再次继续分组</span></span><br></pre></td></tr></table></figure>
 
@@ -516,7 +515,7 @@
 	<br>
 	<span>发布时间:</span>2019年07月22日 - 10:28:16
 	<br>
-	<span>最后更新:</span>2019年07月24日 - 17:49:53
+	<span>最后更新:</span>2019年07月27日 - 17:34:12
 	<br>
 	本文链接：<a href="/2019/07/22/MySQL数据分组-GROUP BY/" title="MySQL数据分组">http://xuren.tech/2019/07/22/MySQL数据分组-GROUP BY/</a>
     <br>
@@ -587,7 +586,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/22/MySQL关联查询-JOIN/" rel="prev" title="MySQL关联查询">
+              <a href="/2019/07/22/MySQL关联查询JOIN/" rel="prev" title="MySQL关联查询">
                 MySQL关联查询 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -701,7 +700,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -772,7 +771,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分组数据"><span class="nav-number">1.</span> <span class="nav-text">分组数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GROUP-BY"><span class="nav-number">1.0.1.</span> <span class="nav-text">GROUP BY</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一道SQL面试题"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">一道SQL面试题:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HAVING"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">HAVING</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GROUP-BY-与-ORDER-BY"><span class="nav-number">1.0.2.</span> <span class="nav-text">GROUP BY 与 ORDER BY</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#SELECT各子句的顺序"><span class="nav-number">2.</span> <span class="nav-text">SELECT各子句的顺序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用子查询"><span class="nav-number">3.</span> <span class="nav-text">使用子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是子查询"><span class="nav-number">3.1.</span> <span class="nav-text">什么是子查询</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分组数据"><span class="nav-number">1.</span> <span class="nav-text">分组数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建分组"><span class="nav-number">1.1.</span> <span class="nav-text">创建分组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GROUP-BY"><span class="nav-number">1.1.1.</span> <span class="nav-text">GROUP BY</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一道SQL面试题"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">一道SQL面试题:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HAVING"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">HAVING</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GROUP-BY-与-ORDER-BY"><span class="nav-number">1.1.2.</span> <span class="nav-text">GROUP BY 与 ORDER BY</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SELECT各子句的顺序"><span class="nav-number">2.</span> <span class="nav-text">SELECT各子句的顺序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用子查询"><span class="nav-number">3.</span> <span class="nav-text">使用子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是子查询"><span class="nav-number">3.1.</span> <span class="nav-text">什么是子查询</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -813,7 +812,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">28.9k</span>
+    <span title="Site words total count">31.4k</span>
   
 </div>
 

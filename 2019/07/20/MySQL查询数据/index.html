@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="查询数据SQL语句是由简单的英语单词构成的。这些单词称为关键字，每个SQL语句都是由一个或多个关键字构成的。最经常使用的SQL语句就是SELECT语句。它的用途是从一个或多个表中检索信息。 SELECT使用SELECT语句，至少要提供两条信息—–想获取什么信息，以及从什么地方获取信息。 语法：*SELECT  column_name,………[  表示所有列] FROM　table_name； **">
+<meta name="description" content="查询数据SQL语句是由简单的英语单词构成的。这些单词称为关键字，每个SQL语句都是由一个或多个关键字构成的。最经常使用的SQL语句就是SELECT语句。它的用途是从一个或多个表中检索信息。 SELECT使用SELECT语句，至少要提供两条信息—–想获取什么信息，以及从什么地方获取信息。 语法：*SELECT  column_name,………[表示所有列] FROM　table_name； *#多列">
 <meta name="keywords" content="MySQL必知必会学习-复习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL查询数据">
 <meta property="og:url" content="http://xuren.tech/2019/07/20/MySQL查询数据/index.html">
 <meta property="og:site_name" content="Xuren&#39;s Blogs">
-<meta property="og:description" content="查询数据SQL语句是由简单的英语单词构成的。这些单词称为关键字，每个SQL语句都是由一个或多个关键字构成的。最经常使用的SQL语句就是SELECT语句。它的用途是从一个或多个表中检索信息。 SELECT使用SELECT语句，至少要提供两条信息—–想获取什么信息，以及从什么地方获取信息。 语法：*SELECT  column_name,………[  表示所有列] FROM　table_name； **">
+<meta property="og:description" content="查询数据SQL语句是由简单的英语单词构成的。这些单词称为关键字，每个SQL语句都是由一个或多个关键字构成的。最经常使用的SQL语句就是SELECT语句。它的用途是从一个或多个表中检索信息。 SELECT使用SELECT语句，至少要提供两条信息—–想获取什么信息，以及从什么地方获取信息。 语法：*SELECT  column_name,………[表示所有列] FROM　table_name； *#多列">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-24T14:11:29.209Z">
+<meta property="og:updated_time" content="2019-07-27T09:30:12.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL查询数据">
-<meta name="twitter:description" content="查询数据SQL语句是由简单的英语单词构成的。这些单词称为关键字，每个SQL语句都是由一个或多个关键字构成的。最经常使用的SQL语句就是SELECT语句。它的用途是从一个或多个表中检索信息。 SELECT使用SELECT语句，至少要提供两条信息—–想获取什么信息，以及从什么地方获取信息。 语法：*SELECT  column_name,………[  表示所有列] FROM　table_name； **">
+<meta name="twitter:description" content="查询数据SQL语句是由简单的英语单词构成的。这些单词称为关键字，每个SQL语句都是由一个或多个关键字构成的。最经常使用的SQL语句就是SELECT语句。它的用途是从一个或多个表中检索信息。 SELECT使用SELECT语句，至少要提供两条信息—–想获取什么信息，以及从什么地方获取信息。 语法：*SELECT  column_name,………[表示所有列] FROM　table_name； *#多列">
 
 
 
@@ -436,7 +436,7 @@
       
         <h1 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h1><p>SQL语句是由简单的英语单词构成的。这些单词称为关键字，每个SQL语句都是由一个或多个关键字构成的。最经常使用的SQL语句就是SELECT语句。它的用途是<strong>从一个或多个表中检索信息</strong>。</p>
 <h2 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a><strong>SELECT</strong></h2><p>使用SELECT语句，至少要提供两条信息—–想获取什么信息，以及从什么地方获取信息。</p>
-<p><strong>语法</strong>：<em>*SELECT  column_name,………[</em>  表示所有列] FROM　table_name； **#多列之间用逗号(,) 隔开，最后一个列名后不需要加逗号</p>
+<p><strong>语法</strong>：*<em>SELECT  column_name,………[表示所有列] FROM　table_name； *</em>#多列之间用逗号(,) 隔开，最后一个列名后不需要加逗号</p>
 <p><strong>注意</strong>:如果<strong>没有明确排序查询结果</strong>，则<strong>返回的数据的顺序没有特殊意义</strong>。返回数据的顺序<strong>可能是数据被添加到表中的顺序</strong>，<strong>也可能不是</strong>。只要返回相同数目的行，就是正常的。</p>
 <h2 id="DISTINCT"><a href="#DISTINCT" class="headerlink" title="DISTINCT"></a>DISTINCT</h2><p>用于检索不同行， 查询结果为 指定列 的内容值只出现一次。 次关键字指示 MySQL值返回不同的值。</p>
 <p>输入：SELECT DISTINCT column_name,………  FORM  table_name;<br>分析:SELECT DISTINCT column_name  告诉MySQL只返回不同（唯一）的column_name  行. </p>
@@ -470,7 +470,7 @@
 	<br>
 	<span>发布时间:</span>2019年07月20日 - 23:04:59
 	<br>
-	<span>最后更新:</span>2019年07月24日 - 22:11:29
+	<span>最后更新:</span>2019年07月27日 - 17:30:12
 	<br>
 	本文链接：<a href="/2019/07/20/MySQL查询数据/" title="MySQL查询数据">http://xuren.tech/2019/07/20/MySQL查询数据/</a>
     <br>
@@ -655,7 +655,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -767,7 +767,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">28.9k</span>
+    <span title="Site words total count">31.4k</span>
   
 </div>
 

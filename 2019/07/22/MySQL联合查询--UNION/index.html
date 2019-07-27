@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Xuren&#39;s Blogs">
 <meta property="og:description" content="联合查询何利用UNION操作符将多条SELECT语句组合成一个结果集。 多数SQL查询都只包含从一个或多个表中返回数据的单条SELECT语句。MySQL也允许执行多个查询（多条SELECT语句），并将结果作为单个查询结果集返回。这些组合查询通常称为并（union）或复合查询（compound query）。 组合查询和多个WHERE条件: 多数情况下，组合相同表的两个查询完成的工作与具有多个WHE">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-22T12:47:51.429Z">
+<meta property="og:updated_time" content="2019-07-27T09:39:52.087Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL联合查询——UNION">
 <meta name="twitter:description" content="联合查询何利用UNION操作符将多条SELECT语句组合成一个结果集。 多数SQL查询都只包含从一个或多个表中返回数据的单条SELECT语句。MySQL也允许执行多个查询（多条SELECT语句），并将结果作为单个查询结果集返回。这些组合查询通常称为并（union）或复合查询（compound query）。 组合查询和多个WHERE条件: 多数情况下，组合相同表的两个查询完成的工作与具有多个WHE">
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  770
+                  757
                 </span>
               
 
@@ -436,17 +436,17 @@
       
         <h1 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h1><p>何利用UNION操作符将多条SELECT语句组合成一个结果集。</p>
 <p>多数SQL查询都只包含从一个或多个表中返回数据的单条SELECT语句。<strong>MySQL也允许执行多个查询（多条SELECT语句）</strong>，<strong>并将结果作为单个查询结果集返回</strong>。这些组合查询通常称为并（union）或复合查询（compound query）。</p>
-<p><strong>组合查询和多个WHERE条件</strong>: 多数情况下，组合相同表的两个查询完成的工作与具有多个WHERE子句条件的单条查询完成的工作相同。换句话说，任何具有<strong>多个WHERE子句的SELECT语句</strong>都可以作为<strong>一个组合查询</strong>给出，在以下段落中可以看到这一点。这两种技术在不同的查询中性能也不同。因此，应该试一下这两种技术，以确定对特定的查询哪一种性能更好。</p>
+<p><strong>组合查询和多个WHERE条件</strong>: 多数情况下，组合相同表的两个查询完成的工作与具有多个WHERE子句条件的单条查询完成的工作相同。换句话说，任何具有<strong>多个WHERE子句的SELECT语句</strong>都可以作为<strong>一个组合查询</strong>给出。<strong>这两种技术在不同的查询中性能也不同</strong>。因此，应该试一下这两种技术，以确定对特定的查询哪一种性能更好。</p>
 <h2 id="创建组合查询"><a href="#创建组合查询" class="headerlink" title="创建组合查询"></a>创建组合查询</h2><p>可用UNION操作符来组合数条SQL查询。利用UNION，可给出多条SELECT语句，将它们的结果组合成单个结果集。</p>
 <p><strong>使用UNION</strong>：UNION的使用很简单。所需做的只是给出每条SELECT语句，<strong>在各条语句之间放上关键字UNION</strong>。结果集就是将 两条SQL的查询结果组合起来 即可。</p>
-<p><strong>UNION规则:</strong><br> UNION必须由两条或两条以上的SELECT语句组成，语句之间用关<br>键字UNION分隔（因此，如果组合4条SELECT语句，将要使用3个<br>UNION关键字）。<br> <strong>UNION中的每个查询必须包含相同的列、表达式或聚集函数</strong>（不过各个列不需要以相同的次序列出）。<br> <strong>列数据类型必须兼容</strong>：类型不必完全相同，但必须是DBMS可以<br>隐含地转换的类型（例如，不同的数值类型或不同的日期类型）。</p>
-<p><strong>UNION从查询结果集中自动去除了重复的行</strong>（换句话说，它的行为与<br>单条SELECT语句中使用多个WHERE子句条件一样）</p>
+<p><strong>UNION规则:</strong><br> UNION必须由两条或两条以上的SELECT语句组成，语句之间用关键字UNION分隔（因此，如果组合4条SELECT语句，将要使用3个UNION关键字）。<br> <strong>UNION中的每个查询必须包含相同的列、表达式或聚集函数</strong>（不过各个列不需要以相同的次序列出）。<br> <strong>列数据类型必须兼容</strong>：类型不必完全相同，但必须是DBMS可以<br>隐含地转换的类型（例如，不同的数值类型或不同的日期类型）。</p>
+<p><strong>UNION从查询结果集中自动去除了重复的行</strong>（换句话说，它的行为与单条SELECT语句中使用多个WHERE子句条件一样）</p>
 <p>去除重复行是UNION的默认行为，如果你想要留下所有的匹配行(不去重)，可使用<strong>UNION ALL</strong>;</p>
 <h2 id="UNION-与-多WHERE"><a href="#UNION-与-多WHERE" class="headerlink" title="UNION  与 多WHERE"></a>UNION  与 多WHERE</h2><p>UNION几乎总是完成与多个WHERE条件相同的工作。UNION ALL为UNION的一种形式，它完成WHERE子句完成不了的工作。如果确实需要每个条件的匹配行全部出现（包括重复行），则必须使用UNION ALL而不是WHERE。</p>
 <p><strong>UNION  == 多个WHERE</strong>!</p>
-<h2 id="对组合查询结果排序"><a href="#对组合查询结果排序" class="headerlink" title="对组合查询结果排序"></a>对组合查询结果排序</h2><p>SELECT语句的输出用ORDER BY子句排序。在用UNION组合查询时，<strong>只</strong><br><strong>能使用一条ORDER BY子句</strong>，它必须出现<strong>在最后一条SELECT语句之后</strong>。但是整个UNION结果集都起作用.</p>
-<p>对于结果集，不存在用一种方式排序一部分，而又用另一种方式排序另一<br>部分的情况，因此不允许使用多条ORDER BY子句。</p>
-<p><strong>使用UNION可极大地简化复杂的WHERE子句</strong>，简化从多个表中<br>检索数据的工作。</p>
+<h2 id="对组合查询结果排序"><a href="#对组合查询结果排序" class="headerlink" title="对组合查询结果排序"></a>对组合查询结果排序</h2><p>SELECT语句的输出用ORDER BY子句排序。在用UNION组合查询时，<strong>只能使用一条ORDER BY子句</strong>，它必须出现<strong>在最后一条SELECT语句之后</strong>。但是整个UNION结果集都起作用.</p>
+<p>对于结果集，不存在用一种方式排序一部分，而又用另一种方式排序另一部分的情况，因此不允许使用多条ORDER BY子句。</p>
+<p><strong>使用UNION可极大地简化复杂的WHERE子句</strong>，简化从多个表中检索数据的工作。</p>
 
       
     </div>
@@ -461,7 +461,7 @@
 	<br>
 	<span>发布时间:</span>2019年07月22日 - 17:14:02
 	<br>
-	<span>最后更新:</span>2019年07月22日 - 20:47:51
+	<span>最后更新:</span>2019年07月27日 - 17:39:52
 	<br>
 	本文链接：<a href="/2019/07/22/MySQL联合查询--UNION/" title="MySQL联合查询——UNION">http://xuren.tech/2019/07/22/MySQL联合查询--UNION/</a>
     <br>
@@ -496,38 +496,6 @@
     
         
 
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
-  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
-
-  <p><span>本文标题:</span>MySQL联合查询——UNION</p>
-  <p><span>文章作者:</span>Xuren</p>
-  <p><span>发布时间:</span>2019年07月22日 - 17:14:02</p>
-  <p><span>最后更新:</span>2019年07月22日 - 20:47:51</p>
-  <p><span>原始链接:</span><a href="/2019/07/22/MySQL联合查询--UNION/" title="MySQL联合查询——UNION">http://xuren.tech/2019/07/22/MySQL联合查询--UNION/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/07/22/MySQL联合查询--UNION/" aria-label="复制成功！"></i></span>
-  </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
-</div>
-<script> 
-    var clipboard = new Clipboard('.fa-clipboard');
-    clipboard.on('success', $(function(){
-      $(".fa-clipboard").click(function(){
-        swal({   
-          title: "",   
-          text: '复制成功',   
-          html: false,
-          timer: 500,   
-          showConfirmButton: false
-        });
-      });
-    }));  
-</script>
-
     
     </div>
 
@@ -554,7 +522,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/22/MySQL关联查询-JOIN/" rel="next" title="MySQL关联查询">
+              <a href="/2019/07/22/MySQL关联查询JOIN/" rel="next" title="MySQL关联查询">
                 <i class="fa fa-chevron-left"></i> MySQL关联查询
               </a>
             
@@ -678,7 +646,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -790,7 +758,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">28.9k</span>
+    <span title="Site words total count">31.4k</span>
   
 </div>
 

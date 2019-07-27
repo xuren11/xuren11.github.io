@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Xuren&#39;s Blogs">
 <meta property="og:description" content="视图View自MySQL5.0开始，MySQL添加对视图的支持。 视图是虚拟的表。与包含数据的表不一样，视图只包含使用时动态检索数据的查询。它本身并不存储数据，它只是相当于将别的SELECT语句查询出来的内容放在一个虚拟的表里。你可以将这个虚拟表看做一个实际的表，并从中取数据。 视图仅仅是用来查看存储在别处的数据的一种设施。视图本身不包含数据，因为它们返回的数据是从其他表中检索出来的。在添加或更改">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-26T02:15:22.568Z">
+<meta property="og:updated_time" content="2019-07-27T10:09:26.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL视图与存储过程">
 <meta name="twitter:description" content="视图View自MySQL5.0开始，MySQL添加对视图的支持。 视图是虚拟的表。与包含数据的表不一样，视图只包含使用时动态检索数据的查询。它本身并不存储数据，它只是相当于将别的SELECT语句查询出来的内容放在一个虚拟的表里。你可以将这个虚拟表看做一个实际的表，并从中取数据。 视图仅仅是用来查看存储在别处的数据的一种设施。视图本身不包含数据，因为它们返回的数据是从其他表中检索出来的。在添加或更改">
@@ -437,12 +437,12 @@
         <h1 id="视图View"><a href="#视图View" class="headerlink" title="视图View"></a>视图View</h1><p>自MySQL5.0开始，MySQL添加对视图的支持。</p>
 <p><strong>视图是虚拟的表</strong>。与包含数据的表不一样，视图只包含使用时动态检索数据的查询。它本身并不存储数据，它只是相当于将别的SELECT语句查询出来的内容放在一个虚拟的表里。你可以将这个虚拟表看做一个实际的表，并从中取数据。</p>
 <p><strong>视图仅仅是用来查看存储在别处的数据的一种设施</strong>。视图本身不包含数据，因为它们返回的数据是从其他表中检索出来的。在添加或更改这些表中的数据时，视图将返回改变过的数据。</p>
-<h2 id="视图的应用"><a href="#视图的应用" class="headerlink" title="视图的应用"></a>视图的应用</h2><p>视图的常见应用:<br> 重用SQL语句。<br> 简化复杂的SQL操作。在编写查询后，可以方便地重用它而不必<br>知道它的基本查询细节。<br> 使用表的组成部分而不是整个表。<br> 保护数据。可以给用户授予表的特定部分的访问权限而不是整个<br>表的访问权限。<br> 更改数据格式和表示。视图可返回与底层表的表示和格式不同的<br>数据。</p>
+<h2 id="视图的应用"><a href="#视图的应用" class="headerlink" title="视图的应用"></a>视图的应用</h2><p>视图的常见应用:<br> 重用SQL语句。<br> 简化复杂的SQL操作。在编写查询后，可以方便地重用它而不必知道它的基本查询细节。<br> 使用表的组成部分而不是整个表。<br> 保护数据。可以给用户授予表的特定部分的访问权限而不是整个表的访问权限。<br> 更改数据格式和表示。视图可返回与底层表的表示和格式不同的数据。</p>
 <p>在视图创建之后，可以用与表基本相同的方式利用它们。可以对视图执行SELECT操作，过滤和排序数据，将视图联结到其他视图或表，甚至能添加和更新数据。</p>
 <p>性能问题: 因为视图不包含数据，所以每次使用视图时，都必须处理查询执行时所需的任一个检索。如果你用多个联结和过滤创建了复杂的视图或者嵌套了视图，可能会发现性能下降得很厉害。因此，在部署使用了大量视图的应用前，应该进行测试。(在实际工作中，视图基本不用，所以本节只做了解即可)</p>
-<p>视图的规则和限制:<br> 与表一样，<strong>视图必须唯一命名</strong>（不能给视图取与别的视图或表相<br>同的名字）。<br> 对于可以创建的视图数目没有限制。<br> 为了创建视图，必须具有足够的访问权限。这些限制通常由数据<br>库管理人员授予。<br> <strong>视图可以嵌套</strong>，即可以利用从其他视图中检索数据的查询来构造<br>一个视图。<br> ORDER BY可以用在视图中，但如果从该视图检索数据SELECT中也<br>含有ORDER BY，那么该视图中的ORDER BY将被覆盖。<br> <strong>视图不能索引</strong>，也不能有关联的触发器或默认值。<br> <strong>视图可以和表一起使用</strong>。例如，编写一条联结表和视图的SELECT<br>语句。</p>
+<p>视图的规则和限制:<br> 与表一样，<strong>视图必须唯一命名</strong>（不能给视图取与别的视图或表相同的名字）。<br> 对于可以创建的视图数目没有限制。<br> 为了创建视图，必须具有足够的访问权限。这些限制通常由数据库管理人员授予。<br> <strong>视图可以嵌套</strong>，即可以利用从其他视图中检索数据的查询来构造一个视图。<br> ORDER BY可以用在视图中，但如果从该视图检索数据SELECT中也含有ORDER BY，那么该视图中的ORDER BY将被覆盖。<br> <strong>视图不能索引</strong>，也不能有关联的触发器或默认值。<br> <strong>视图可以和表一起使用</strong>。例如，编写一条联结表和视图的SELECT语句。</p>
 <h2 id="使用视图"><a href="#使用视图" class="headerlink" title="使用视图"></a>使用视图</h2><p>视图的基本语法:<br> 视图用<strong>CREATE VIEW</strong>语句来创建。<br> 使用<strong>SHOW CREATE VIEW viewname</strong>；来查看创建视图的语句。<br> 用DROP删除视图，其语法为<strong>DROP VIEW viewname;</strong>。
- 更新视图时，可以先用DROP再用CREATE，也可以直接用CREATE OR REPLACE VIEW。如果要更新的视图不存在，则第2条更新语句会创<br>建一个视图；新视图会替换原来已经存在的视图。</p>
+ 更新视图时，可以先用DROP再用CREATE，也可以直接用CREATE OR REPLACE VIEW。如果要更新的视图不存在，则第2条更新语句会创建一个视图；新视图会替换原来已经存在的视图。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CTEATE VIEW view_name AS <span class="keyword">SELECT</span>子句;</span><br><span class="line"><span class="comment">#创建了一个名为view_name的视图。</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">FROM</span> view_name <span class="keyword">WHERE</span> condition;</span><br><span class="line"><span class="comment">#像使用一个表一样使用视图</span></span><br></pre></td></tr></table></figure>
 
 <p>视图极大地简化了复杂SQL语句(SELECT 子句可能比较复杂)的使用。利用视图，可一次性编写基础的SQL，然后根据需要多次使用。</p>
@@ -460,12 +460,12 @@
  <strong>简化对变动的管理</strong>。如果表名、列名或业务逻辑（或别的内容）有变化，只需要更改存储过程的代码。使用它的人员甚至不需要知道这些变化。这一点的延伸就是<strong>安全</strong>性。通过<strong>存储过程限制对基础数据的访问减</strong><br><strong>少了数据讹误</strong>（无意识的或别的原因所导致的数据讹误）的机会。<br> <strong>提高性能</strong>。因为使用存储过程比使用单独的SQL语句要快。<br> 存在一些只能用在单个请求中的MySQL元素和特性，存储过程可以使用它们来编写功能更强更灵活的代码。</p>
 <p>存储过程的一些缺陷:<br> 存储过程的<strong>编写比基本SQL语句复杂</strong>，编写存储过程需要更高的技能，更丰富的经验。</p>
 <h2 id="使用存储过程"><a href="#使用存储过程" class="headerlink" title="使用存储过程"></a>使用存储过程</h2><p>MySQL称存储过程的执行为调用，因此MySQL执行存储过程的语句为<strong>CALL</strong>。CALL接受<strong>存储过程的名字</strong>以及需要<strong>传递给它的任意参数</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CALL</span>  procedure_name ([proc_parameter[,...])</span><br><span class="line"><span class="keyword">CALL</span> procedure_name (); <span class="comment">#无参的存储过程，但是 () 任然要带上 ()</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CALL  procedure_name ([proc_parameter[,...])</span><br><span class="line">CALL procedure_name (); #无参的存储过程，但是 () 任然要带上 ()</span><br></pre></td></tr></table></figure>
 
-<h2 id="创建存储过程"><a href="#创建存储过程" class="headerlink" title="创建存储过程"></a>创建存储过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE</span><br><span class="line">    [DEFINER = user]</span><br><span class="line">    PROCEDURE sp_name ([proc_parameter[,...]])#参数可选</span><br><span class="line">    [COMMENT &quot;remark&quot;]  # 备注可选 将在SHOW PROCEDURE STATUS时给出</span><br><span class="line">    BEGIB</span><br><span class="line">    sql_statement;</span><br><span class="line">    (-- 利用--可添加注释</span><br><span class="line">    DECALRE variable type;  #定以变量</span><br><span class="line">    IF | ELSEIF variable THEN sql; #条件语句 使用条件语句使存储过程变得更加智能)</span><br><span class="line">    END</span><br><span class="line"> #注意：在mysql命令行客户机创建存储过程时,需要先使用  DELIMITER // 将命令结束符变为 // (临时更改)，这样，存储过程体内的;仍然保持不动，并且正确地传递给数据库引擎。最后，为恢复为原来的语句分隔符，可使用DELIMITER ;。除\符号外，任何字符都可以用作语句分隔符。</span><br></pre></td></tr></table></figure>
+<h2 id="创建存储过程"><a href="#创建存储过程" class="headerlink" title="创建存储过程"></a>创建存储过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE</span><br><span class="line">    [DEFINER = user]</span><br><span class="line">    PROCEDURE sp_name ([proc_parameter[,...]])#参数可选</span><br><span class="line">    [COMMENT &quot;remark&quot;]  # 备注可选 将在SHOW PROCEDURE STATUS时给出</span><br><span class="line">    BEGIB</span><br><span class="line">    sql_statement;</span><br><span class="line">    (-- 利用--可添加注释</span><br><span class="line">    DECALRE variable type;  #定以变量</span><br><span class="line">    IF | ELSEIF variable THEN sql; #条件语句 使用条件语句使存储过程变得更加智能)</span><br><span class="line">    END</span><br><span class="line">  #注意：在mysql命令行客户机创建存储过程时,需要先使用  DELIMITER // 将命令结束符变为 // (临时更 改)，这样，存储过程体内的;仍然保持不动，并且正确地传递给数据库引擎。最后，为恢复为原来的语句分隔 符，可使用DELIMITER ;。除\符号外，任何字符都可以用作语句分隔符。</span><br></pre></td></tr></table></figure>
 
 <p>注意：在MySQL客户端 用命令行时，注意要先暂时 改变命令分隔符(结束符)</p>
-<h2 id="删除存储过程"><a href="#删除存储过程" class="headerlink" title="删除存储过程"></a>删除存储过程</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> procedure_name;</span><br><span class="line"><span class="comment">#该语句仅 当存储过程存在时能正确删除。否则将会报错. 安全期间可使用如下:</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span>;</span><br><span class="line"><span class="comment"># 多数删除之类的语句(表级操作)，都一般会带上 IF EXISTS，更加保险</span></span><br></pre></td></tr></table></figure>
+<h2 id="删除存储过程"><a href="#删除存储过程" class="headerlink" title="删除存储过程"></a>删除存储过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DROP PROCEDURE procedure_name;</span><br><span class="line">#该语句仅 当存储过程存在时能正确删除。否则将会报错. 安全期间可使用如下:</span><br><span class="line">DROP PROCEDURE IF EXISTS;</span><br><span class="line"># 多数删除之类的语句(表级操作)，都一般会带上 IF EXISTS，更加保险</span><br></pre></td></tr></table></figure>
 
 <h2 id="使用参数"><a href="#使用参数" class="headerlink" title="使用参数"></a>使用参数</h2><p>存储过程可以接受参数(变量)， 也可以返回处理结果(变量)。 处理结果并不会直接显示，而是 将结果返回给你指定的变量。</p>
 <p><strong>变量（variable）</strong>内存中一个特定的位置，用来临时存储数据。</p>
@@ -474,12 +474,12 @@
 <p>参数的数据类型:存储过程的参数允许的数据类型与能在表中使用的数据类型相同</p>
 <p><strong>变量名：</strong> 所有MySQL变量都必须<strong>以@开始</strong>。</p>
 <p>存储过程执行后， 它<strong>并不会直接返回结果</strong>，而是<strong>将结果返回到你指定的OUT，INOUT参数中。</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> @out_pqaram; <span class="comment">#跟在存储过程语句后面，即 获取存储过程的执行结果</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT @out_pqaram; #跟在存储过程语句后面，即 获取存储过程的执行结果</span><br></pre></td></tr></table></figure>
 
-<h2 id="检查存储过程"><a href="#检查存储过程" class="headerlink" title="检查存储过程"></a>检查存储过程</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> PROCEDORE procedure_name;</span><br><span class="line"><span class="comment"># 为了获得包括何时、由谁创建等详细信息的存储过程列表，可使用如下SHOW PROCEDURE STATUS;</span></span><br></pre></td></tr></table></figure>
+<h2 id="检查存储过程"><a href="#检查存储过程" class="headerlink" title="检查存储过程"></a>检查存储过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SHOW CREATE PROCEDORE procedure_name;</span><br><span class="line"># 为了获得包括何时、由谁创建等详细信息的存储过程列表，可使用如下SHOW PROCEDURE STATUS;</span><br></pre></td></tr></table></figure>
 
 <p>限制过程状态结果 SHOW PROCEDURE STATUS列出所有存储过程。为限制其输出，可使用LIKE指定一个过滤模式:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">PROCEDURE</span> <span class="keyword">STATUS</span> <span class="keyword">LIKE</span>　＇procedure_name＇;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW PROCEDURE STATUS LIKE　＇procedure_name＇;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -495,7 +495,7 @@
 	<br>
 	<span>发布时间:</span>2019年07月23日 - 17:22:21
 	<br>
-	<span>最后更新:</span>2019年07月26日 - 10:15:22
+	<span>最后更新:</span>2019年07月27日 - 18:09:26
 	<br>
 	本文链接：<a href="/2019/07/23/MySQL视图与存储过程/" title="MySQL视图与存储过程">http://xuren.tech/2019/07/23/MySQL视图与存储过程/</a>
     <br>
@@ -530,38 +530,6 @@
     
         
 
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
-  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
-
-  <p><span>本文标题:</span>MySQL视图与存储过程</p>
-  <p><span>文章作者:</span>Xuren</p>
-  <p><span>发布时间:</span>2019年07月23日 - 17:22:21</p>
-  <p><span>最后更新:</span>2019年07月26日 - 10:15:22</p>
-  <p><span>原始链接:</span><a href="/2019/07/23/MySQL视图与存储过程/" title="MySQL视图与存储过程">http://xuren.tech/2019/07/23/MySQL视图与存储过程/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/07/23/MySQL视图与存储过程/" aria-label="复制成功！"></i></span>
-  </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
-</div>
-<script> 
-    var clipboard = new Clipboard('.fa-clipboard');
-    clipboard.on('success', $(function(){
-      $(".fa-clipboard").click(function(){
-        swal({   
-          title: "",   
-          text: '复制成功',   
-          html: false,
-          timer: 500,   
-          showConfirmButton: false
-        });
-      });
-    }));  
-</script>
-
     
     </div>
 
@@ -588,7 +556,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/23/MySQL数操作表-table/" rel="next" title="MySQL数操作表-table">
+              <a href="/2019/07/23/MySQL操作表-table/" rel="next" title="MySQL数操作表-table">
                 <i class="fa fa-chevron-left"></i> MySQL数操作表-table
               </a>
             
@@ -712,7 +680,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -824,7 +792,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">28.9k</span>
+    <span title="Site words total count">31.4k</span>
   
 </div>
 

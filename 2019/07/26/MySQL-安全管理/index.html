@@ -93,7 +93,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://xuren.tech/2019/07/26/MySQL-安全管理/%E6%9D%83%E9%99%901.png">
 <meta property="og:image" content="http://xuren.tech/2019/07/26/MySQL-安全管理/%E6%9D%83%E9%99%902.png">
-<meta property="og:updated_time" content="2019-07-26T16:03:01.921Z">
+<meta property="og:updated_time" content="2019-07-27T10:11:02.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL-安全管理">
 <meta name="twitter:description" content="访问控制MySQL的安全基础：用户应该对他们需要的数据具有适当的访问权，既不能多也不能少。 需要给用户提供他们所需的访问权，且仅提供他们所需的访问权。这就是所谓的访问控制，管理访问控制需要创建和管理用户账号。 管理用户MySQL用户账号和信息存储在名为mysql的MySQL数据库中。 12USE mysql;  -- 名为mysql的库SELECT user FROM user; -- 获取系统所">
@@ -440,7 +440,7 @@
         <h1 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h1><p><strong>MySQL的安全基础</strong>：用户应该对他们需要的数据具有适当的访问权，既不能多也不能少。</p>
 <p>需要给用户提供他们所需的访问权，且<strong>仅提供他们所需的访问权</strong>。这就是所谓的访问控制，管理访问控制需要<strong>创建和管理用户账号</strong>。</p>
 <h2 id="管理用户"><a href="#管理用户" class="headerlink" title="管理用户"></a>管理用户</h2><p>MySQL用户账号和信息存储在名为mysql的MySQL数据库中。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> mysql;  <span class="comment">-- 名为mysql的库</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">user</span> <span class="keyword">FROM</span> <span class="keyword">user</span>; <span class="comment">-- 获取系统所有用户</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE mysql;  -- 名为mysql的库</span><br><span class="line">SELECT user FROM user; -- 获取系统所有用户</span><br></pre></td></tr></table></figure>
 
 <p>创建用户账号:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER user_name IDENTIFIED BY　&apos;password&apos;;</span><br><span class="line">-- INDENTIFIED BY 指定的为纯文本， 但是保存到USER表中时，会对其进行加密</span><br></pre></td></tr></table></figure>
@@ -487,7 +487,7 @@
 	<br>
 	<span>发布时间:</span>2019年07月26日 - 16:19:36
 	<br>
-	<span>最后更新:</span>2019年07月27日 - 00:03:01
+	<span>最后更新:</span>2019年07月27日 - 18:11:02
 	<br>
 	本文链接：<a href="/2019/07/26/MySQL-安全管理/" title="MySQL-安全管理">http://xuren.tech/2019/07/26/MySQL-安全管理/</a>
     <br>
@@ -521,38 +521,6 @@
 	<div>
     
         
-
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
-  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
-
-  <p><span>本文标题:</span>MySQL-安全管理</p>
-  <p><span>文章作者:</span>Xuren</p>
-  <p><span>发布时间:</span>2019年07月26日 - 16:19:36</p>
-  <p><span>最后更新:</span>2019年07月27日 - 00:03:01</p>
-  <p><span>原始链接:</span><a href="/2019/07/26/MySQL-安全管理/" title="MySQL-安全管理">http://xuren.tech/2019/07/26/MySQL-安全管理/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/07/26/MySQL-安全管理/" aria-label="复制成功！"></i></span>
-  </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
-</div>
-<script> 
-    var clipboard = new Clipboard('.fa-clipboard');
-    clipboard.on('success', $(function(){
-      $(".fa-clipboard").click(function(){
-        swal({   
-          title: "",   
-          text: '复制成功',   
-          html: false,
-          timer: 500,   
-          showConfirmButton: false
-        });
-      });
-    }));  
-</script>
 
     
     </div>
@@ -704,7 +672,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -816,7 +784,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">28.9k</span>
+    <span title="Site words total count">31.4k</span>
   
 </div>
 

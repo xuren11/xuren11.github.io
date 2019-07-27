@@ -83,20 +83,20 @@
 
 
 
-<meta name="description" content="全文本搜索##　理解全文本搜索 并非所有引擎都支持全文本搜索。 MySQL支持几种基本的数据库引擎。并非所有的引擎都支持本书所描述的全文本搜索。两个最常使用的引擎为MyISAM和InnoDB，前者(MyISAM)支持全文本搜索，而后者(InnoDB)不支持。 已经学习过的“文本搜索”有:  LIKE关键字，它利用通配操作符匹配文本（和部分文本）。使用LIKE，能够查找包含特殊值或部分值的行（不管这">
+<meta name="description" content="全文本搜索理解全文本搜索并非所有引擎都支持全文本搜索。 MySQL支持几种基本的数据库引擎。并非所有的引擎都支持本书所描述的全文本搜索。两个最常使用的引擎为MyISAM和InnoDB，前者(MyISAM)支持全文本搜索，而后者(InnoDB)不支持。 已经学习过的“文本搜索”有:  LIKE关键字，它利用通配操作符匹配文本（和部分文本）。使用LIKE，能够查找包含特殊值或部分值的行（不管这些值位于">
 <meta name="keywords" content="MySQL必知必会学习-复习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL全文本搜索">
 <meta property="og:url" content="http://xuren.tech/2019/07/22/MySQL全文本搜索/index.html">
 <meta property="og:site_name" content="Xuren&#39;s Blogs">
-<meta property="og:description" content="全文本搜索##　理解全文本搜索 并非所有引擎都支持全文本搜索。 MySQL支持几种基本的数据库引擎。并非所有的引擎都支持本书所描述的全文本搜索。两个最常使用的引擎为MyISAM和InnoDB，前者(MyISAM)支持全文本搜索，而后者(InnoDB)不支持。 已经学习过的“文本搜索”有:  LIKE关键字，它利用通配操作符匹配文本（和部分文本）。使用LIKE，能够查找包含特殊值或部分值的行（不管这">
+<meta property="og:description" content="全文本搜索理解全文本搜索并非所有引擎都支持全文本搜索。 MySQL支持几种基本的数据库引擎。并非所有的引擎都支持本书所描述的全文本搜索。两个最常使用的引擎为MyISAM和InnoDB，前者(MyISAM)支持全文本搜索，而后者(InnoDB)不支持。 已经学习过的“文本搜索”有:  LIKE关键字，它利用通配操作符匹配文本（和部分文本）。使用LIKE，能够查找包含特殊值或部分值的行（不管这些值位于">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://xuren.tech/2019/07/22/MySQL全文本搜索/%E5%85%A8%E6%96%87%E6%9C%AC%E5%B8%83%E5%B0%94%E6%93%8D%E4%BD%9C%E7%AC%A6.png">
 <meta property="og:image" content="http://xuren.tech/2019/07/22/MySQL全文本搜索/%E5%B8%83%E5%B0%94%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%AE%9E%E4%BE%8B.png">
-<meta property="og:updated_time" content="2019-07-22T14:07:23.816Z">
+<meta property="og:updated_time" content="2019-07-27T09:53:12.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL全文本搜索">
-<meta name="twitter:description" content="全文本搜索##　理解全文本搜索 并非所有引擎都支持全文本搜索。 MySQL支持几种基本的数据库引擎。并非所有的引擎都支持本书所描述的全文本搜索。两个最常使用的引擎为MyISAM和InnoDB，前者(MyISAM)支持全文本搜索，而后者(InnoDB)不支持。 已经学习过的“文本搜索”有:  LIKE关键字，它利用通配操作符匹配文本（和部分文本）。使用LIKE，能够查找包含特殊值或部分值的行（不管这">
+<meta name="twitter:description" content="全文本搜索理解全文本搜索并非所有引擎都支持全文本搜索。 MySQL支持几种基本的数据库引擎。并非所有的引擎都支持本书所描述的全文本搜索。两个最常使用的引擎为MyISAM和InnoDB，前者(MyISAM)支持全文本搜索，而后者(InnoDB)不支持。 已经学习过的“文本搜索”有:  LIKE关键字，它利用通配操作符匹配文本（和部分文本）。使用LIKE，能够查找包含特殊值或部分值的行（不管这些值位于">
 <meta name="twitter:image" content="http://xuren.tech/2019/07/22/MySQL全文本搜索/%E5%85%A8%E6%96%87%E6%9C%AC%E5%B8%83%E5%B0%94%E6%93%8D%E4%BD%9C%E7%AC%A6.png">
 
 
@@ -437,8 +437,7 @@
       
 
       
-        <h1 id="全文本搜索"><a href="#全文本搜索" class="headerlink" title="全文本搜索"></a>全文本搜索</h1><p>##　理解全文本搜索</p>
-<p>并非所有引擎都支持全文本搜索。</p>
+        <h1 id="全文本搜索"><a href="#全文本搜索" class="headerlink" title="全文本搜索"></a>全文本搜索</h1><h2 id="理解全文本搜索"><a href="#理解全文本搜索" class="headerlink" title="理解全文本搜索"></a>理解全文本搜索</h2><p>并非所有引擎都支持全文本搜索。</p>
 <p>MySQL支持几种基本的数据库引擎。并非所有的引擎都支持本书所描述的全文本搜索。两个最常使用的引擎为MyISAM和InnoDB，前者(MyISAM)支持全文本搜索，而后者(InnoDB)不支持。</p>
 <p>已经学习过的“文本搜索”有:</p>
 <ol>
@@ -449,27 +448,27 @@
 <h2 id="使用全文本搜索"><a href="#使用全文本搜索" class="headerlink" title="使用全文本搜索"></a>使用全文本搜索</h2><p>进行全<strong>文本搜索</strong>，<strong>必须索引被搜索的列</strong>，而且要随着数据的改变不断地重新索引。在对表列进行适当设计后，MySQL会自动进行所有的索引和重新索引。</p>
 <p>在索引之后，<strong>SELECT</strong>可与<strong>Match()</strong>和<strong>Against()</strong>一起使用以实际执行搜索。</p>
 <h3 id="启用全文本搜索支持"><a href="#启用全文本搜索支持" class="headerlink" title="启用全文本搜索支持"></a>启用全文本搜索支持</h3><p>在创建表时，启用FULLTEXT。如下</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name(</span><br><span class="line">column_name  <span class="keyword">type</span>  ......,</span><br><span class="line">............,</span><br><span class="line">FULLTEXT(column_name|需要文本搜索的列)  <span class="comment">#对该列开启文本搜索，如果需要也可以指定多个列</span></span><br><span class="line">)<span class="keyword">ENGINE</span>=MyISAM;   <span class="comment"># InnoDB不支持文本搜索</span></span><br><span class="line"><span class="comment"># 在定义之后，MySQL自动维护该索引。在增加、更新或删除行时，</span></span><br><span class="line">索引随之自动更新。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">column_name  type  ......,</span><br><span class="line">............,</span><br><span class="line">FULLTEXT(column_name|需要文本搜索的列)  #对该列开启文本搜索，如果需要也可以指定多个列</span><br><span class="line">)ENGINE=MyISAM;   # InnoDB不支持文本搜索</span><br><span class="line"># 在定义之后，MySQL自动维护该索引。在增加、更新或删除行时，</span><br><span class="line">索引随之自动更新。</span><br></pre></td></tr></table></figure>
 
 <p><strong>不要在导入数据时使用FULLTEXT</strong> ：更新索引要花时间，虽然不是很多，但毕竟要花时间。如果正在导入数据到一个新表，此时不应该启用FULLTEXT索引。应该首先导入所有数据，然后再修改表，定义FULLTEXT。这样有助于更快地导入数据。</p>
 <h3 id="进行全文本搜索"><a href="#进行全文本搜索" class="headerlink" title="进行全文本搜索"></a>进行全文本搜索</h3><p><strong>两个函数 Match() Against():</strong>在索引之后，使用两个函数Match()和Against()执行全文本搜索，其中<strong>Match()指定被搜索的列</strong>，<strong>Against()指定要使用的搜索表达式。</strong>可用在WHERE子句中</p>
 <p><strong>Match()使用说明</strong>:传递给<strong>Match() 的值必须与FULLTEXT()定义中的相同</strong>。如果指定<strong>多个列</strong>，则<strong>必须列出它们</strong>（而且<strong>次序正确</strong>）。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Match(column_name) Aganst('要搜索的文本内容')</span><br><span class="line"><span class="comment"># 该搜索是有返回值的，返回值 包含全文本搜索计算出的等级值。等级由MySQL根据行中词的数目、唯一词的数目、整个索引中词的总数以及包含该词的行的数目计算出来</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Match(column_name) Against(&apos;要搜索的文本内容&apos;)</span><br><span class="line"># 该搜索是有返回值的，返回值 包含全文本搜索计算出的等级值。等级由MySQL根据行中词的数目、唯一词的数目、整个索引中词的总数以及包含该词的行的数目计算出来</span><br></pre></td></tr></table></figure>
 
 <p><strong>搜索不区分大小写</strong>： <strong>除非使用BINARY</strong>方式（本章中没有介绍），否则全文本搜索不区分大小写</p>
 <p>全文搜索对搜索的结果自动排序:全文本搜索的一个重要部分就是对结果排序。具有<strong>较高等级</strong>(你想要搜索的词在文本的更前面)的行先返回（因为这些行很可能是你真正想要的行），按等级以降序排序。</p>
 <p>(有个 查询扩展，但暂时没懂意思)</p>
-<h3 id="布尔文本搜索-–更细致的查找"><a href="#布尔文本搜索-–更细致的查找" class="headerlink" title="布尔文本搜索 –更细致的查找"></a>布尔文本搜索 –更细致的查找</h3><p>MySQL支持全文本搜索的另外一种形式，称为布尔方式（boolean<br>mode）。以布尔方式，需要提供关于如下内容的细节:<br> 要匹配的词；<br> 要排斥的词（如果某行包含这个词，则不返回该行，即使它包含<br>其他指定的词也是如此）；<br> 排列提示（指定某些词比其他词更重要，更重要的词等级更高）；<br> 表达式分组；<br> 另外一些内容。</p>
+<h3 id="布尔文本搜索-–更细致的查找"><a href="#布尔文本搜索-–更细致的查找" class="headerlink" title="布尔文本搜索 –更细致的查找"></a>布尔文本搜索 –更细致的查找</h3><p>MySQL支持全文本搜索的另外一种形式，称为布尔方式（boolean mode）。以布尔方式，需要提供关于如下内容的细节:<br> 要匹配的词；<br> 要排斥的词（如果某行包含这个词，则不返回该行，即使它包含<br>其他指定的词也是如此）；<br> 排列提示（指定某些词比其他词更重要，更重要的词等级更高）；<br> 表达式分组；<br> 另外一些内容。</p>
 <p>即是没有FULLTEXT也可以使用。但这是一种非常缓慢的操作（其性能将随着数据量的增加而降低）。</p>
 <p>语法:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Match(column_name) Aganst('要搜索的文本内容' IN　BOOLEAN MODE);  <span class="comment">#没有指定布尔操作符，因此，其结果与没有指定布尔方式的结果相同。</span></span><br><span class="line">Match(column_name) Aganst('text  -test*' IN　BOOLEAN MODE); </span><br><span class="line"><span class="comment"># 搜索含有text的数据，但是不要有 repo 的行</span></span><br><span class="line"><span class="comment"># -排除一个词，而*是截断操作符（可想象为用于词尾的一个通配符</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Match(column_name) Against(&apos;要搜索的文本内容&apos; IN　BOOLEAN MODE);  #没有指定布尔操作符，因此，其结果与没有指定布尔方式的结果相同。</span><br><span class="line">Match(column_name) Against(&apos;text  -test*&apos; IN　BOOLEAN MODE); </span><br><span class="line"># 搜索含有text的数据，但是不要有 repo 的行</span><br><span class="line"># -排除一个词，而*是截断操作符（可想象为用于词尾的一个通配符</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/07/22/MySQL全文本搜索/%E5%85%A8%E6%96%87%E6%9C%AC%E5%B8%83%E5%B0%94%E6%93%8D%E4%BD%9C%E7%AC%A6.png" alt="布尔操作符"> </p>
-<p>重要的:   +: 包含，必须存在   -：必须不存在   * :词尾通配符    “ “:以整个短语匹配</p>
+<p>重要的:   <strong>+: 包含</strong>，必须存在   <strong>-：必须不存在</strong>   <strong>* :词尾通配符</strong>    <strong>“ “:以整个短语匹配</strong></p>
 <p><img src="/2019/07/22/MySQL全文本搜索/%E5%B8%83%E5%B0%94%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%AE%9E%E4%BE%8B.png" alt="布尔操作符实例"></p>
 <p>排列而不排序: 在布尔方式中，不按等级值降序排序返回的行。即返回的结果是无序的.</p>
 <p>##　全文本搜索的使用说明</p>
-<p>关于全文本搜索的某些重要的说明。<br> 在索引全文本数据时，<strong>短词</strong>被忽略且从索引中排除。短词定义为那些具有3个或3个以下字符的词（如果需要，这个数目可以更改）。<br> MySQL带有一个<strong>内建的非用词（stopword）列表</strong>，这些词在索引全文本数据时总是被忽略　　　　　　　　　　　　　　　　　　　　　　　 <strong>许多词出现的频率很高</strong>，搜索它们没有用处（返回太多的结果）。因此，<strong>MySQL规定了一条50%规则，如果一个词出现在50%以上的行中，则将它作为一个非用词忽略</strong>。50%规则不用于IN BOOLEANMODE。<br> 如果表中的行数少于3行，则全文本搜索不返回结果（因为每个词或者不出现，或者至少出现在50%的行中）。<br> 忽略词中的单引号。例如，don’t索引为dont。<br> <strong>不具有词分隔符（包括日语和汉语）</strong>的语言不能恰当地返回全文本搜索结果。<br> 如前所述，仅在<strong>MyISAM</strong>数据库引擎中支持全文本搜索。</p>
+<p>关于全文本搜索的某些重要的说明。<br> 在索引全文本数据时，<strong>短词</strong>被忽略且从索引中排除。短词定义为那些具有3个或3个以下字符的词（如果需要，这个数目可以更改）。　　　　　　　　　　　　　　　　　　　　　<br> <strong>许多词出现的频率很高</strong>，搜索它们没有用处（返回太多的结果）。因此，<strong>MySQL规定了一条50%规则，如果一个词出现在50%以上的行中，则将它作为一个非用词忽略</strong>。50%规则不用于IN BOOLEAN MODE。<br> 如果表中的行数少于3行，则全文本搜索不返回结果（因为每个词或者不出现，或者至少出现在50%的行中）。<br> 忽略词中的单引号。例如，don’t索引为dont。<br> <strong>不具有词分隔符（包括日语和汉语）</strong>的语言不能恰当地返回全文本搜索结果。<br> 如前所述，仅在<strong>MyISAM</strong>数据库引擎中支持全文本搜索。<br> MySQL带有一个<strong>内建的非用词(stopword)列表</strong>，这些次在索引全文本数据时总是被忽略</p>
 
       
     </div>
@@ -484,7 +483,7 @@
 	<br>
 	<span>发布时间:</span>2019年07月22日 - 20:47:27
 	<br>
-	<span>最后更新:</span>2019年07月22日 - 22:07:23
+	<span>最后更新:</span>2019年07月27日 - 17:53:12
 	<br>
 	本文链接：<a href="/2019/07/22/MySQL全文本搜索/" title="MySQL全文本搜索">http://xuren.tech/2019/07/22/MySQL全文本搜索/</a>
     <br>
@@ -518,38 +517,6 @@
 	<div>
     
         
-
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
-  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
-
-  <p><span>本文标题:</span>MySQL全文本搜索</p>
-  <p><span>文章作者:</span>Xuren</p>
-  <p><span>发布时间:</span>2019年07月22日 - 20:47:27</p>
-  <p><span>最后更新:</span>2019年07月22日 - 22:07:23</p>
-  <p><span>原始链接:</span><a href="/2019/07/22/MySQL全文本搜索/" title="MySQL全文本搜索">http://xuren.tech/2019/07/22/MySQL全文本搜索/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/07/22/MySQL全文本搜索/" aria-label="复制成功！"></i></span>
-  </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
-</div>
-<script> 
-    var clipboard = new Clipboard('.fa-clipboard');
-    clipboard.on('success', $(function(){
-      $(".fa-clipboard").click(function(){
-        swal({   
-          title: "",   
-          text: '复制成功',   
-          html: false,
-          timer: 500,   
-          showConfirmButton: false
-        });
-      });
-    }));  
-</script>
 
     
     </div>
@@ -701,7 +668,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -772,7 +739,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#全文本搜索"><span class="nav-number">1.</span> <span class="nav-text">全文本搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用全文本搜索"><span class="nav-number">1.1.</span> <span class="nav-text">使用全文本搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启用全文本搜索支持"><span class="nav-number">1.1.1.</span> <span class="nav-text">启用全文本搜索支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进行全文本搜索"><span class="nav-number">1.1.2.</span> <span class="nav-text">进行全文本搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔文本搜索-–更细致的查找"><span class="nav-number">1.1.3.</span> <span class="nav-text">布尔文本搜索 –更细致的查找</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#全文本搜索"><span class="nav-number">1.</span> <span class="nav-text">全文本搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解全文本搜索"><span class="nav-number">1.1.</span> <span class="nav-text">理解全文本搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用全文本搜索"><span class="nav-number">1.2.</span> <span class="nav-text">使用全文本搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启用全文本搜索支持"><span class="nav-number">1.2.1.</span> <span class="nav-text">启用全文本搜索支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进行全文本搜索"><span class="nav-number">1.2.2.</span> <span class="nav-text">进行全文本搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔文本搜索-–更细致的查找"><span class="nav-number">1.2.3.</span> <span class="nav-text">布尔文本搜索 –更细致的查找</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -813,7 +780,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">28.9k</span>
+    <span title="Site words total count">31.4k</span>
   
 </div>
 

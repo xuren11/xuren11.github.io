@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="前言​    东西都忘的差不多了，要捡起来了！该系列作为一个简单的复习回顾，以及本人的总结。如有错误，还请留言指出！共同交流进步。 英语好的同学可直接阅读MySQL官方文档。 数据库基础了解SQL数据库(database)：保存有组织的数据的容器(通常是一个文件 或者一组文件)。 表(table)：某种特定数据类型的结构化清单。存储的是一种类型(one  type， not a kind of t">
+<meta name="description" content="联结 表–JOINSQL最强大的功能之一就是能在数据检索查询的执行中联结（join）表。 关系表：将所有数据放在一个表中，绝对不是个好主意！关系表的设计就是要保证把信息分解成多个表，一类数据一个表。各表通过某些常用的值（即关系设计中的关系（relational））相关联。 外键(foreign key)：外键为某个表中的一列，它包含另一个表的主键值，定义了两个表之间的关系。(实质就是 另一个表的主">
 <meta name="keywords" content="MySQL必知必会学习-复习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="了解MySQL">
-<meta property="og:url" content="http://xuren.tech/2019/07/20/了解MySQL/index.html">
+<meta property="og:title" content="MySQL关联查询">
+<meta property="og:url" content="http://xuren.tech/2019/07/22/MySQL关联查询JOIN/index.html">
 <meta property="og:site_name" content="Xuren&#39;s Blogs">
-<meta property="og:description" content="前言​    东西都忘的差不多了，要捡起来了！该系列作为一个简单的复习回顾，以及本人的总结。如有错误，还请留言指出！共同交流进步。 英语好的同学可直接阅读MySQL官方文档。 数据库基础了解SQL数据库(database)：保存有组织的数据的容器(通常是一个文件 或者一组文件)。 表(table)：某种特定数据类型的结构化清单。存储的是一种类型(one  type， not a kind of t">
+<meta property="og:description" content="联结 表–JOINSQL最强大的功能之一就是能在数据检索查询的执行中联结（join）表。 关系表：将所有数据放在一个表中，绝对不是个好主意！关系表的设计就是要保证把信息分解成多个表，一类数据一个表。各表通过某些常用的值（即关系设计中的关系（relational））相关联。 外键(foreign key)：外键为某个表中的一列，它包含另一个表的主键值，定义了两个表之间的关系。(实质就是 另一个表的主">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-24T09:46:34.887Z">
+<meta property="og:updated_time" content="2019-07-27T09:37:26.209Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="了解MySQL">
-<meta name="twitter:description" content="前言​    东西都忘的差不多了，要捡起来了！该系列作为一个简单的复习回顾，以及本人的总结。如有错误，还请留言指出！共同交流进步。 英语好的同学可直接阅读MySQL官方文档。 数据库基础了解SQL数据库(database)：保存有组织的数据的容器(通常是一个文件 或者一组文件)。 表(table)：某种特定数据类型的结构化清单。存储的是一种类型(one  type， not a kind of t">
+<meta name="twitter:title" content="MySQL关联查询">
+<meta name="twitter:description" content="联结 表–JOINSQL最强大的功能之一就是能在数据检索查询的执行中联结（join）表。 关系表：将所有数据放在一个表中，绝对不是个好主意！关系表的设计就是要保证把信息分解成多个表，一类数据一个表。各表通过某些常用的值（即关系设计中的关系（relational））相关联。 外键(foreign key)：外键为某个表中的一列，它包含另一个表的主键值，定义了两个表之间的关系。(实质就是 另一个表的主">
 
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://xuren.tech/2019/07/20/了解MySQL/">
+  <link rel="canonical" href="http://xuren.tech/2019/07/22/MySQL关联查询JOIN/">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title>了解MySQL | Xuren's Blogs</title>
+  <title>MySQL关联查询 | Xuren's Blogs</title>
   
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xuren.tech/2019/07/20/了解MySQL/">
+    <link itemprop="mainEntityOfPage" href="http://xuren.tech/2019/07/22/MySQL关联查询JOIN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xuren">
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">了解MySQL</h1>
+          <h1 class="post-title" itemprop="name headline">MySQL关联查询</h1>
         
 
         <div class="post-meta">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-20T18:13:05+08:00">
-                2019-07-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T15:41:21+08:00">
+                2019-07-22
               </time>
             
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  878
+                  1.9k
                 </span>
               
 
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  6
                 </span>
               
             </div>
@@ -434,37 +434,45 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​    东西都忘的差不多了，要捡起来了！该系列作为一个简单的复习回顾，以及本人的总结。如有错误，还请留言指出！共同交流进步。 英语好的同学可直接阅读<a href="https://dev.mysql.com/doc/refman/" target="_blank" rel="noopener">MySQL官方文档</a>。</p>
-<h1 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h1><h2 id="了解SQL"><a href="#了解SQL" class="headerlink" title="了解SQL"></a>了解SQL</h2><p><strong>数据库(database)</strong>：保存有组织的数据的容器(通常是一个文件 或者一组文件)。</p>
-<p><strong>表(table)：</strong>某种特定数据<strong>类型</strong>的结构化清单。存储的是<strong>一种类型(one  type， not a kind of type)</strong>的数据。每个表，表名唯一，用于标识自己。</p>
-<p><strong>模式(schema)：</strong>关于数据库和表的布局 及特性的信息。</p>
-<p><strong>列(column)</strong>: 表中的<strong>一个字段</strong>。所有的表都是由一个或多个列组成！正确的将数据分为多列是很重要的。</p>
-<p><strong>数据类型(dataType):</strong> 所容许的数据的类型。每个列都有相应的数据类型，它限制(仅允许)该类中存储的数据的类型。</p>
-<p><strong>行(row):</strong> 表中的一个记录。(表中的数据是按行存储的)。</p>
-<p><strong>主键(primary key):</strong> 一列(或一组列)，其<strong>值</strong>能够<strong>唯一区分</strong>表中的<strong>每个行</strong>。</p>
-<p>(题外： InnoDB 默认每个表都必须要有一个主键。自顶主键&gt;第一个非空索引&gt;InnoDB内部生成主键.相对而言，指定自增主键是最划算的做法，这样在插入数据时 索引建立最快！)</p>
-<p><strong>SQL:Structured Query Language</strong> 。结构化查询语言</p>
-<h2 id="MySQL简介"><a href="#MySQL简介" class="headerlink" title="MySQL简介"></a>MySQL简介</h2><p>数据的所有存储、检索、管理和处理实际上是由数据库软件——<strong>DBMS</strong>（<strong>数据库管理系统</strong>）完成的。<strong>MySQL是一种DBMS</strong>，即它是一种数据库软件。</p>
-<p><strong>DBMS</strong>可分为<strong>两类</strong>：一类为<strong>基于共享文件系统的DBMS</strong>，另一类为基于<strong>客户机—服务器的DBMS</strong>。MySQL即属于后者。</p>
-<h2 id="MySQL命令行使用"><a href="#MySQL命令行使用" class="headerlink" title="MySQL命令行使用"></a>MySQL命令行使用</h2><ul>
-<li>命令输入在mysql&gt;之后；</li>
-<li>命令用  <strong>;</strong> 或 <strong>\g</strong> 结束，换句话说，仅按Enter不执行命令；</li>
-<li>输入<strong>help或\h</strong>获得帮助，也可以输入更多的文本获得特定命令的</li>
-<li>帮助（如，输入help select获得使用SELECT语句的帮助）；</li>
-<li>输入<strong>quit或exit</strong>退出命令行实用程序。</li>
-</ul>
-<h2 id="使用MySQL"><a href="#使用MySQL" class="headerlink" title="使用MySQL"></a>使用MySQL</h2><p><strong>连接</strong>:主机名(本机为localhost，ip也行)，端口，合法用户名，密码</p>
-<p><strong>选择数据库</strong>:命令： <strong>use 数据库名;</strong>必须要先选择一个数据库，才能对其中的数据进行操作 以及对该数据库进行其他操作。</p>
-<p><strong>了解数据库与表</strong>： 命令：<strong>SHOW DATABASES;</strong> 显示MySQL服务器上所有可用数据库。 <strong>SHOW TABLES;</strong>返回当前选择的数据库中可用的表。</p>
-<p><strong>SHOW COLUMS  FROM  table_name;</strong>显示表中的列及其相关信息。</p>
-<p><strong>DESCRIBE table_name</strong>;是SHOW COLUMNS FROM table）name; 的一种快捷方式。</p>
-<p><strong>自动增量:</strong>在每个行添加到表中时，MySQL可以自动地为每个行分配下一个可用编号，不用在添加一行时手动分配唯一值（这样做必须记住最后一次使用的值）。这个功能就是所谓的自动增量</p>
-<p><strong>其他SHOW语句</strong>：</p>
-<p><strong>SHOW STATUS</strong>，用于显示广泛的<strong>服务器状态信息</strong>；
-<strong>SHOW CREATE DATABASE</strong>和<strong>SHOW CREATE TABLE</strong>，分别用来<strong>显示创建</strong>特定<strong>数据库或表的MySQL语句</strong>；
-<strong>SHOW GRANTS</strong>，用来显示授予用户（所有用户或特定用户）的<strong>安</strong><br><strong>全权限**</strong>；
-<strong>SHOW ERRORS</strong>和<strong>SHOW WARNINGS</strong>，用来显示<strong>服务器错误或警告消息</strong>。</p>
-<p>更多SHOW命令 可用 <strong>HELP SHOW</strong> 命令查看。</p>
+        <h1 id="联结-表–JOIN"><a href="#联结-表–JOIN" class="headerlink" title="联结 表–JOIN"></a>联结 表–JOIN</h1><p>SQL最强大的功能之一就是能在数据检索查询的执行中联结（join）表。</p>
+<p><strong>关系表</strong>：将所有数据放在一个表中，绝对不是个好主意！关系表的设计就是要保证把信息分解成多个表，<strong>一类数据一个表</strong>。各表通过某些常用的值（即关系设计中的关系（relational））相关联。</p>
+<p><strong>外键(foreign key)：</strong>外键为某个表中的一列，它包含另一个表的主键值，定义了两个表之间的关系。(实质就是 另一个表的主键值！ 也是联系两个表的关键所在！)</p>
+<p><strong>外键(foreign key)的好处</strong>: 减少数据的重复。减少数据的改动。提供了更强的伸缩性.</p>
+<p><strong>可伸缩性（scale）</strong>： 能够适应不断增加的工作量而不失败。设计良好的数据库或应用程序称之为可伸缩性好（scale well）。</p>
+<h2 id="为什么使用联结？"><a href="#为什么使用联结？" class="headerlink" title="为什么使用联结？"></a>为什么使用联结？</h2><p>分解数据为多个表能更有效地存储，更方便地处理，并且具有更大的可伸缩性。但这些好处是有代价的。<br>如果数据存储在多个表中，怎样用单条SELECT语句检索出数据？</p>
+<p>答案是使用联结。简单地说，联结是一种机制，用来在一条SELECT语句中关联表，因此称之为联结。使用特殊的语法，可以联结多个表返回一组输出，联结在运行时关联表中正确的行。</p>
+<p><strong>维护引用完整性</strong>:通过在表的定义中指定<strong>主键</strong>和<strong>外键</strong>来实现.联结的两边，值一定要是相同的，这种强一致性关系，可由主键与外键来保证.</p>
+<p>创建联结语法:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name,...... <span class="keyword">FROM</span> table_a,table_b <span class="keyword">WHERE</span>  table_a.column_name = table_b.column; </span><br><span class="line"><span class="comment">#直接使用WHERE相等条件即可  通过 WHERE后的条件联结了 a,b两个表</span></span><br><span class="line"><span class="comment"># 即 内联结，结果为两个表的交集</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>完全限定列名</strong>: 在引用的列可能出现二义性时（两个表中有同名的列，企且者两个列同时在一个SQL语句中使用），必须使用完全限定列名（用一个点分隔的表名和列名）。如果引用一个没有用表名限制的具有<strong>二义性</strong>的列名，MySQL将返回错误。</p>
+<p><strong>WHERE子句存在的必要性:</strong>在数据库表的定义中不存在能指示MySQL如何对表进行联结的东西。你必须自己做这件事情。<strong>在联结两个表时，你实际上做的是将第一个表中的每一行与第二个表中的每一行配对</strong>。WHERE子句作为过滤条件，它只包含那些匹配给定条件（这里是联结条件）的行。<strong>没有WHERE子句，第一个表中的每个行将与第二个表中的每个行配对</strong>，而不管它们逻辑上是否可以配在一起。应该保证所有联结都有WHERE子句，否则MySQL将返回比想要的数据多得多的数据。同理，应该保证WHERE子句的正确性。不正确的过滤条件将导致MySQL返回不正确的数据。</p>
+<p><strong>笛卡尔积(cartesian product)</strong>:由没有联结条件的表关系返回的结果为笛卡儿积。<strong>检索出的行的数目</strong>将是<strong>第一个表中的行数</strong>  <strong>乘以</strong> <strong>第二个表中的行数</strong>(m *  n)</p>
+<h2 id="JOIN-ON："><a href="#JOIN-ON：" class="headerlink" title="JOIN ON："></a>JOIN ON：</h2><p>上面的联结称为<strong>等值联结</strong>（equijoin），它基于两个表之间的相等测试。这种联结也称为<strong>内部联结</strong>。对于这种联结可以使用稍微<strong>不同的语法</strong>来明确指定联结的类型。即 <strong>INNER JOIN</strong>。在使用这种语法时，联结条件用特定的ON子句而不是WHERE子句给出。传递给ON的实际条件与传递WHERE的相同。</p>
+<p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name,... <span class="keyword">FROM</span> table1 <span class="keyword">JOIN</span> table2 <span class="keyword">ON</span> table1.column_name = table2.column_name</span><br><span class="line"><span class="comment">#FROM table1 JOIN table2 ON condition_exp;</span></span><br><span class="line"><span class="comment"># 只有一个JION出现时，默认为 INNER JOIN</span></span><br></pre></td></tr></table></figure>
+
+<p>使用哪种语法?</p>
+<p>ANSI SQL规范<strong>首选INNER JOIN语法</strong>。此外，尽管使用WHERE子句定义联结的确比较简单，但是使用明确的联结语法能够确保不会忘记联结条件</p>
+<h2 id="联结多个表"><a href="#联结多个表" class="headerlink" title="联结多个表"></a>联结多个表</h2><p>SQL对一条SELECT语句中可以联结的表的数目没有限制。创建联结的基本规则也相同。首先列出所有表，然后定义表之间的关系（WHERE后的条件增多而已）</p>
+<p>性能考虑 :MySQL在运行时关联指定的每个表以处理联结。这种处理可能是非常耗费资源的，因此应该仔细，<strong>不要联结不必要的表。联结的表越多，性能下降越厉害</strong>。</p>
+<p>部分子查询可以使用联结来替代！</p>
+<h2 id="使用表别名"><a href="#使用表别名" class="headerlink" title="使用表别名"></a>使用表别名</h2><p>别名除了用于列名和计算字段外，SQL还允许给表名起别名。这样做有两个主要理由：<br> <strong>缩短SQL语句</strong>；
+ <strong>允许在单条SELECT语句中多次使用相同的表</strong>。(一个表要使用多次时，可以起别名，起一个别名就可以将其看作一个全新的表，解决二义性)</p>
+<h2 id="外联结–LEFT-RIGTH-OUTER-JOIN"><a href="#外联结–LEFT-RIGTH-OUTER-JOIN" class="headerlink" title="外联结–LEFT/RIGTH [OUTER] JOIN"></a>外联结–LEFT/RIGTH [OUTER] JOIN</h2><p>在使用OUTER JOIN语法时，必须使用RIGHT或LEFT关键字指定包括其所有行的表（RIGHT指出的是OUTER JOIN右边的表，而LEFT指出的是OUTER JOIN左边的表）.</p>
+<p>简单点说就是:<strong>左外联结，左边表的数据记录全部存在于结果之中， 右边表的满足联结条件的才存在(右联结与 左联结刚好相反)</strong>。左联结可以通过颠倒FROM或WHERE子句中表的顺序转换为右外部联结。两种类型的外部联结可互换使用，而究竟使用哪一种纯粹是<strong>根据方便而定</strong>。</p>
+<h2 id="全联结–FULL-JOIN"><a href="#全联结–FULL-JOIN" class="headerlink" title="全联结–FULL JOIN"></a>全联结–FULL JOIN</h2><p>两边的所有记录都在！ <strong>能通过条件联结的 则结果以联结的形式存在</strong>， 不能通过连接的也存在，只是记录会 <strong>左/右 表的值全部为空</strong>。</p>
+<h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM table_a (INNER[默认] | LEFT | RIGHT | FULL) JOIN table_b ON table_a.column = table_b.column;</span><br><span class="line"><span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>只有单独一个JOIN存在时，默认为<strong>INNER(内联结)</strong>，<strong>等同于</strong>直接使用<strong>WHERE</strong>来联结。结果为两个表的 <strong>交集</strong>。</li>
+<li><strong>LEFT/RIGHT JOIN</strong> 也叫<strong>外联结</strong>。 <strong>LEFT JOIN结果集 以左边 的为准</strong>，左表的所有记录都存在，右边表符合联结条件的记录存在。RIGHT则刚好相反。 可用通过交换 FROM子句和ON子句两边的表名 而使 左，右联结互换。</li>
+<li><strong>FULL JOIN 全联结</strong>： 两边的记录都完全存在结果集中。 能满足联结条件的以一种形式存在，不能满足的则单独存在！</li>
+</ol>
+<p>##　使用带聚集函数的联结</p>
+<p>可以将联结后的结果集完全看做一张新表。就像对待一张普通表一样使用聚集函数即可</p>
+<h2 id="使用联结和联结条件"><a href="#使用联结和联结条件" class="headerlink" title="使用联结和联结条件"></a>使用联结和联结条件</h2><p>某些要点:<br> 注意所使用的联结类型。一般我们使用内部联结，但使用外部联结也是有效的。<br> 保证使用正确的联结条件，否则将返回不正确的数据。<br> <strong>应该总是提供联结条件</strong>，否则会得出笛卡儿积。<br> 在一个联结中可以包含多个表，甚至对于每个联结可以采用不同的联结类型。虽然这样做是合法的，一般也很有用，但应该<strong>在一起测试它们前，分别测试每个联结</strong>。这将使故障排除更为简单。</p>
 
       
     </div>
@@ -477,13 +485,13 @@
 	<br>
 	作者：Xuren
 	<br>
-	<span>发布时间:</span>2019年07月20日 - 18:13:05
+	<span>发布时间:</span>2019年07月22日 - 15:41:21
 	<br>
-	<span>最后更新:</span>2019年07月24日 - 17:46:34
+	<span>最后更新:</span>2019年07月27日 - 17:37:26
 	<br>
-	本文链接：<a href="/2019/07/20/了解MySQL/" title="了解MySQL">http://xuren.tech/2019/07/20/了解MySQL/</a>
+	本文链接：<a href="/2019/07/22/MySQL关联查询JOIN/" title="MySQL关联查询">http://xuren.tech/2019/07/22/MySQL关联查询JOIN/</a>
     <br>
-	<!--<span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/07/20/了解MySQL/"  aria-label="复制成功！"></i></span>
+	<!--<span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/07/22/MySQL关联查询JOIN/"  aria-label="复制成功！"></i></span>
     -->
 	版权声明：本文为博主原创文章，转载请附上博文链接！
 	</div>
@@ -540,8 +548,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/20/MyBatis官网学习-介绍/" rel="next" title="MyBatis官网学习-介绍">
-                <i class="fa fa-chevron-left"></i> MyBatis官网学习-介绍
+              <a href="/2019/07/22/MySQL数据分组-GROUP BY/" rel="next" title="MySQL数据分组">
+                <i class="fa fa-chevron-left"></i> MySQL数据分组
               </a>
             
           </div>
@@ -550,8 +558,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/20/MySQL查询数据/" rel="prev" title="MySQL查询数据">
-                MySQL查询数据 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/22/MySQL联合查询--UNION/" rel="prev" title="MySQL联合查询——UNION">
+                MySQL联合查询——UNION <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -735,7 +743,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库基础"><span class="nav-number">2.</span> <span class="nav-text">数据库基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#了解SQL"><span class="nav-number">2.1.</span> <span class="nav-text">了解SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL简介"><span class="nav-number">2.2.</span> <span class="nav-text">MySQL简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL命令行使用"><span class="nav-number">2.3.</span> <span class="nav-text">MySQL命令行使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用MySQL"><span class="nav-number">2.4.</span> <span class="nav-text">使用MySQL</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#联结-表–JOIN"><span class="nav-number">1.</span> <span class="nav-text">联结 表–JOIN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么使用联结？"><span class="nav-number">1.1.</span> <span class="nav-text">为什么使用联结？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JOIN-ON："><span class="nav-number">1.2.</span> <span class="nav-text">JOIN ON：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联结多个表"><span class="nav-number">1.3.</span> <span class="nav-text">联结多个表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用表别名"><span class="nav-number">1.4.</span> <span class="nav-text">使用表别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外联结–LEFT-RIGTH-OUTER-JOIN"><span class="nav-number">1.5.</span> <span class="nav-text">外联结–LEFT/RIGTH [OUTER] JOIN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全联结–FULL-JOIN"><span class="nav-number">1.6.</span> <span class="nav-text">全联结–FULL JOIN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结："><span class="nav-number">1.7.</span> <span class="nav-text">小结：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用联结和联结条件"><span class="nav-number">1.8.</span> <span class="nav-text">使用联结和联结条件</span></a></li></ol></li></ol></div>
             
 
           </div>
