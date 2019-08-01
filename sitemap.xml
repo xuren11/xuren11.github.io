@@ -2,16 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://xuren.tech/2019/07/27/MySQL%E6%B8%B8%E6%A0%87%E4%B8%8E%E8%A7%A6%E5%8F%91%E5%99%A8/</loc>
+    <loc>http://xuren.tech/2019/08/01/%E9%9D%A2%E8%AF%95%E5%87%BA%E9%94%99%E6%95%B4%E7%90%86/</loc>
     
-    <lastmod>2019-07-27T10:14:27.282Z</lastmod>
+    <lastmod>2019-08-01T13:24:03.143Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xuren.tech/2019/07/31/Java%E4%B8%ADString%E7%B1%BB%E8%AF%A6%E8%A7%A3/</loc>
+    
+    <lastmod>2019-08-01T12:54:41.524Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xuren.tech/2019/07/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%8B%B1%E8%AF%AD%E5%8D%95%E8%AF%8D%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2019-07-31T14:20:24.460Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://xuren.tech/2019/07/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%8B%B1%E6%96%87%E5%AD%A6%E4%B9%A0/</loc>
     
-    <lastmod>2019-07-27T10:13:49.749Z</lastmod>
+    <lastmod>2019-07-31T14:20:20.237Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xuren.tech/2019/07/23/MySQL%E6%95%B0%E6%93%8D%E4%BD%9C%E8%A1%A8-table/</loc>
+    
+    <lastmod>2019-07-27T10:19:14.613Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xuren.tech/2019/07/27/MySQL%E6%B8%B8%E6%A0%87%E4%B8%8E%E8%A7%A6%E5%8F%91%E5%99%A8/</loc>
+    
+    <lastmod>2019-07-27T10:14:27.282Z</lastmod>
     
   </url>
   
