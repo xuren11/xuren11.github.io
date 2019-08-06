@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/freedom.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/freedom.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+  <meta name="keywords" content="Nginx CookBook,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="介绍今天的互联网用户体验需要性能与即时。为此，同一系统的多个副本将同时运行，并且整个系统的负荷被分布在它们上面。随着负载的增加，另一个该系统的副本可能会被下线。这种架构技术称为水平缩放。基于软件的基础设施由于它的灵活性越来越受欢迎，开辟了世界的各种各样的可能性。无论是小到只有两个系统的集合，或是有分布在全球的成千上万个系统的集合，为了达到高可用的目标都需要一个动态的负载平衡解决方案的基础设施。NG">
+<meta name="keywords" content="Nginx CookBook">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NginxCookBook学习—-高性能负载均衡">
+<meta property="og:url" content="http://xuren.tech/2019/08/03/NginxCookBook学习—-高性能负载均衡/index.html">
+<meta property="og:site_name" content="Xuren&#39;s Blogs">
+<meta property="og:description" content="介绍今天的互联网用户体验需要性能与即时。为此，同一系统的多个副本将同时运行，并且整个系统的负荷被分布在它们上面。随着负载的增加，另一个该系统的副本可能会被下线。这种架构技术称为水平缩放。基于软件的基础设施由于它的灵活性越来越受欢迎，开辟了世界的各种各样的可能性。无论是小到只有两个系统的集合，或是有分布在全球的成千上万个系统的集合，为了达到高可用的目标都需要一个动态的负载平衡解决方案的基础设施。NG">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-04T16:07:03.982Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NginxCookBook学习—-高性能负载均衡">
+<meta name="twitter:description" content="介绍今天的互联网用户体验需要性能与即时。为此，同一系统的多个副本将同时运行，并且整个系统的负荷被分布在它们上面。随着负载的增加，另一个该系统的副本可能会被下线。这种架构技术称为水平缩放。基于软件的基础设施由于它的灵活性越来越受欢迎，开辟了世界的各种各样的可能性。无论是小到只有两个系统的集合，或是有分布在全球的成千上万个系统的集合，为了达到高可用的目标都需要一个动态的负载平衡解决方案的基础设施。NG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xuren.tech/2019/08/03/NginxCookBook学习—-高性能负载均衡/">
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/099563b3.js","daovoice")
+  daovoice('init', {
+      app_id: "099563b3"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+  <title>NginxCookBook学习—-高性能负载均衡 | Xuren's Blogs</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xuren's Blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xuren.tech/2019/08/03/NginxCookBook学习—-高性能负载均衡/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuren">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/freedom.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xuren's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NginxCookBook学习—-高性能负载均衡</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T23:31:56+08:00">
+                2019-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  19
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>今天的互联网用户体验需要性能与即时。为此，同一系统的多个副本将同时运行，并且整个系统的负荷被分布在它们上面。随着负载的增加，另一个该系统的副本可能会被下线。这种架构技术称为<strong>水平缩放</strong>。基于软件的基础设施由于它的灵活性越来越受欢迎，开辟了世界的各种各样的可能性。无论是小到只有两个系统的集合，或是有分布在全球的成千上万个系统的集合，为了达到高可用的目标都需要一个动态的负载平衡解决方案的基础设施。NGINX在很多方面满足了这一需求，例如HTTP、TCP和UDP负载平衡，我们将在本章中进行介绍。</p>
+<p>在提到负载均衡时，对客户机的影响只有积极的一面是很重要的。许多现代web体系结构使用无状态的应用程序层，将状态存储在共享内存或数据库中。然而，这并不是适用所有情况。会话状态是非常有价值的,在交互应用领域也有广泛的应用。此状态应该被存储到应用服务器本地的原因有很多;例如,在正在处理的数据非常大的应用程序中，网络过载的影响是巨大的。当状态存储在本地的应用服务器上时，对用户体验来说，后续请求能够继续被发送到同一个服务器上是 非常重要的。这种情况的另一个方面是在会话完成之前，服务不应该被释放。对于大规模的有状态的应用程序的正常工作，一个智能负载平衡器是被需要的。NGINX Plus提供了多种方法解决这个问题 通过追踪cookies 或者路由。</p>
+<p>确保Nginx正在提供服务的应用是健康的也同样重要。由于各种各样的原因，服务可能会无法提供服务。例如网路连接问题，服务器宕机，应用出错等。代理和负载平衡器必须足够智能，以检测上游服务器的故障并停止传递流量给它们;否则，客户端将等待，并且只能收到一个超时的结果。当服务器发生故障时，减缓 服务降级的方法是让代理检查上游服务器的健康状况。NGINX提供两种不同类型的健康检查:<strong>被动的</strong>，在开源版本中可用;<strong>主动的</strong>，只能在NGINX Plus中使用。<strong>定期的主动健康检查</strong>将连接或请求上游服务器，并验证响应是否正确。在客户机发出请求或连接时，<strong>被动的健康检查监视上游服务器的连接或响应</strong>。你可以使用被动健康检查来减少上游服务器的负载。你也可以使用主动健康检查来确定上游服务器的故障，在客户端收到失败的回应之前。本章的结尾处将介绍如何监视要进行负载平衡的上游应用程序服务器的健康状况。</p>
+<h1 id="HTTP-负载均衡"><a href="#HTTP-负载均衡" class="headerlink" title="HTTP 负载均衡"></a>HTTP 负载均衡</h1><p>问题:在两个或者多个 HTP服务器之间分配荷载</p>
+<p>解决办法: 使用NGINX的HTTP模块 来在服务器之间进行负载均衡，通过配置 <strong><em>upstream</em></strong>块：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;  # backend 为服务器集合的名字</span><br><span class="line">	server 10.10.12.45:80 weight=1;</span><br><span class="line">	server app.example.com:80 weight=2;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">	location / &#123;</span><br><span class="line">	proxy_pass http://backend;  # 请求到 该服务器集合</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该配置说明了 在两个HTTP服务器的80端口经进行了负载均衡。<strong><em>weight</em></strong>参数的值为2，表明是将 两倍的连接分配给第二个服务器(即 三个连接 给两个 到 app.example.com )<strong>weight 默认值为1。</strong></p>
+<p><strong><em>HTTP upstream</em></strong> 模块控制<strong>HTTP请求的负载均衡</strong>。该模块定义了一个目标池–池中包含了任意Unix套接字、IP地址和DNS记录，或者它们的混合。该模块还定义了如何将任意单个请求分配给任意一个上游服务器。<strong>每个目标服务器地址由server指令在上游池中定义</strong>。服务器指令提供Unix套接字、IP地址或FQDN，以及一些可选参数。这些参数进一步控制了各个请求的路由。这些<strong>参数</strong>包含：<strong>均衡算法中的服务器权重</strong>;<strong>该服务器是否是 备用模式</strong>，<strong>可用或者不可用</strong>;<strong>如何决定这个服务器是不可用的</strong>。NGINX Plus还提供了许多其他方便的参数，比如对服务器的连接限制、高级DNS解析控制，以及在服务器启动后缓慢增加到服务器的连接数的能力。</p>
+<h1 id="TCP负载均衡"><a href="#TCP负载均衡" class="headerlink" title="TCP负载均衡"></a>TCP负载均衡</h1><p>通过配置 <strong>upstream块</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">stream &#123;</span><br><span class="line">	upstream mysql_read &#123;</span><br><span class="line">		server read1.example.com:3306 weight=5;  # 监听6603端口</span><br><span class="line">		server read2.example.com:3306;</span><br><span class="line">		server 10.10.12.34:3306 backup; #backup 表示该服务器作为备份</span><br><span class="line">	&#125;</span><br><span class="line">	server &#123;</span><br><span class="line">		listen 3306;</span><br><span class="line">		proxy_pass mysql_read;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此配置不应添加到conf.d文件夹中，因为conf.d文件夹包含在http块中。相反，你应该创建另一个名为stream.conf.d的文件夹。打开nginx.conf文件中的stream块，并将该新文件夹包含进去，作为为流 的配置。</p>
+<p>TCP负载均衡 有NGINX stream块定义。Stream模块，类似于HTTP模块，允许你定义上游服务器池并配置一个监听服务器。当配置一个服务器监听 给定的端口时，你必须要定义要监听的端口，或者给定地址与端口。目的地址必须要配置，无论是指向另一个地址的直接反向代理还是上游资源池。</p>
+<p>用于TCP负载均衡的upstream块很像HTTP 的upstream块，在块中，定义了上游资源 作为服务器，使用Unix套接字、IP或 完全限定域名(<strong>FQDN</strong>)同时也有权重，最大连接数，DNS解析器，和连接过度 周期，服务器是 可用，关闭或者处于备份模式  进行配置。</p>
+<h1 id="UDP负载均衡"><a href="#UDP负载均衡" class="headerlink" title="UDP负载均衡"></a>UDP负载均衡</h1><p>同样使用stream模块进行UDP服务器的负载均衡，使用 upstream块来定义udp:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">stream &#123;</span><br><span class="line">	upstream ntp &#123;</span><br><span class="line">		server ntp1.example.com:123 weight=2;</span><br><span class="line">		server ntp2.example.com:123;</span><br><span class="line">	&#125;</span><br><span class="line">	server &#123;</span><br><span class="line">		listen 123 udp;</span><br><span class="line">		proxy_pass ntp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这部分配置使用UDP协议平衡两个上游 网络时间协议(NTP)服务器之间的负载。指定UDP负载平衡与在listen指令上使用UDP参数一样简单。</p>
+<p>如果你要对其进行负载均衡的服务需要在客户机和服务器之间来回发送多个包，那么你可以指定<strong><em>reuseport</em></strong>参数。这些类型的服务包括OpenVPN、VoIP、虚拟桌面解决方案、以及 数据报传输层安全性(DTLS)。下面是一个使用NGINX处理OpenVPN连接并将其代理到本地运行的OpenVPN服务的例子:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stream &#123;</span><br><span class="line">	server &#123;</span><br><span class="line">		listen 1195 udp reuseport;</span><br><span class="line">		proxy_pass 127.0.0.1:1194;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你可能会问，“当一个DNS a或SRV记录中可以有多个主机时，为什么需要负载平衡器?”“答案是，我们不仅可以使用其他平衡算法进行平衡，还可以通过DNS服务器本身实现负载平衡。UDP服务构成了我们在网络系统中所依赖的许多服务，比如DNS、NTP和VoIP。UDP负载平衡对一些人来说可能不太常见，但在规模方面同样有用。您可以在<strong>stream</strong>模块中找到UDP负载平衡，就像TCP一样，并以相同的方式配置它。主要的区别在于，<strong>listen</strong>指令指定打开的套接字用于处理数据报。当使用数据报时，还有一些其他的指令。这些指令在TCP中不使用，比如<strong><em>proxy_response</em></strong>指令，它<strong>指定NGINX可以从上游服务器发送多少个预期的响应</strong>。默认情况下，这是无限制的，直到超出<strong>proxy_time out</strong>的限制为止。<strong><em>reuseport</em></strong>参数指示NGINX为<strong>每个工作进程创建一个单独的监听套接字</strong>。这允许内核在工作进程之间分配正在传入的连接，以处理客户机和服务器之间发送的多个包。重用端口特性只适用于Linux内核3.9或更高版本、DragonFly BSD和FreeBSD 12或更高版本。</p>
+<h1 id="负载均衡的方法"><a href="#负载均衡的方法" class="headerlink" title="负载均衡的方法"></a>负载均衡的方法</h1><p>轮询式的负载均衡可能并不适用你的需求。因为你有各种不同种类的需求或者服务器池。</p>
+<p>解决办法：使用 NGINX 如下负载均衡方法中的一个即可： 最少连接(least connection)，最近连接(least time)，泛型hash，IP哈希，或者随机</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">	least_conn; # 均衡方法配置</span><br><span class="line">	server backend.example.com;</span><br><span class="line">	server backend1.example.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(所有的 负载均衡算法中，除了 通用hash，随机以及 最近时间之外，都是单条指令就可以了的， 如上例所示。)这些指令的意思将在 下一部分解释。</p>
+<p>并不是所有的请求或者数据包 都有相同的权重。鉴于此，轮询，前面示例中使用的加权轮询，并不适合所有应用程序或流量分发的需要。NGINX提供了多种 负载均衡算法来满足你的各种需求。使用这些负载均衡算法或方法，你只需要配置它们即可。接下展示的 放在均衡算法 适用于HTTP，TCP，UDP上游池。</p>
+<p>##　Round robin(轮询)</p>
+<p><strong>默认的</strong>负载均衡算法，其<strong>按顺序将请求分发</strong>到上游池(upstream pool)中服务器列表中的服务器上。你也可以考虑加权重使其成为带权重的轮询算法来满足你业务的需要。权重的数字越大，对应的服务器越重要(越被 宠幸！)权重背后的算法只是加权平均的统计概率。(权重数/权重数和)。</p>
+<h2 id="Least-Connections-（最少连接）"><a href="#Least-Connections-（最少连接）" class="headerlink" title="Least Connections （最少连接）"></a>Least Connections （最少连接）</h2><p>该方法通过将当前请求代理到具有最少打开连接数的上游服务器上来平衡负载。最少连接(比如轮询)在决定将连接发送到哪个服务器时也要考虑权重。指令名是<strong><em>least_conn</em></strong>。</p>
+<h2 id="Least-time-最近连接"><a href="#Least-time-最近连接" class="headerlink" title="Least time(最近连接)"></a>Least time(最近连接)</h2><p>只在NGINX Plus中可用，最短时间 类似于 最少连接。它也是将请求代理到 当前连接数最少的 上游服务器上，但是<strong>更偏向于 平均响应时间最低的服务器</strong>。(多了一个 响应时间筛选，相较于 least connection)。这种方法是最复杂的负载平衡算法之一，适合高性能web应用程序的需要。这个算法是对最少连接的增强，因为少量连接并不一定意味着最快的响应。必须为该指令指定<strong>header</strong>或<strong>last_byte</strong>参数。当指定<strong>header</strong>时，接收响应报头的时间将被使用。当指定<strong>last_byte</strong>时，接收完整响应的时间将被使用。指令名是least_time。</p>
+<p>##　Generic hash(泛型hash)</p>
+<p>管理员使用给定的文本、请求或运行时的变量或两者结合，定义一个散列值(hash)。NGINX通过为当前请求生成散列并将其放在上游服务器上，从而在服务器之间分配负载。当你需要更好地控制请求被发送的位置或确定哪个上游服务器最有可能缓存数据时，此方法非常有用。注意，当从池中添加或删除服务器时，散列请求将被重新分发。该算法有一个可选的参数-<strong><em>consistent</em></strong>以最小化再分配的影响。指令名是<strong><em>hash</em></strong>。</p>
+<h2 id="Random-随机"><a href="#Random-随机" class="headerlink" title="Random 随机"></a>Random 随机</h2><p>该指令告诉NGINX从服务器组里面随机选一个服务器，当然，服务器权重也要考虑。其可选参数 <strong><em>two [method]</em></strong> 告诉NGINX随机选择两台服务器，然后使用提供的负载平衡方法在这两台服务器之间进行平衡。默认情况下，如果传递两个而没有传递方法，则默认使用<strong><em>least_conn</em></strong>方法 。用于随机负载平衡的指令名是<strong><em>random</em></strong>。(好像只是随机选 两台服务器，其他的就和它没删什么关系了)</p>
+<h2 id="IP-hash"><a href="#IP-hash" class="headerlink" title="IP hash"></a>IP hash</h2><p>这种方法只适用于HTTP。IP散列使用客户机IP地址作为散列。与在泛型哈希中使用远程变量略有不同，该算法使用IPv4地址或整个IPv6地址的前三个八位元。此方法确保只要该服务器可用，客户端就被代理到相同的上游服务器上，这在关注会话(session)状态的应用非常游泳，而不用再由应用程序的共享内存来处理类似需求。该方法在分布散列时也考虑了<strong><em>weight</em></strong>参数。指令名是<strong><em>ip_hash</em></strong>。</p>
+<h1 id="Sticky-Cookie-粘性Cookie"><a href="#Sticky-Cookie-粘性Cookie" class="headerlink" title="Sticky Cookie(粘性Cookie)"></a>Sticky Cookie(粘性Cookie)</h1><p>问题：将<strong>下游客户机绑定到上游服务端</strong></p>
+<p>解决：使用 sticky cookie 指令 告诉 NGINX创建并追踪一个 cookie</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">	server backend1.example.com;</span><br><span class="line">	server backend2.example.com;</span><br><span class="line">	sticky cookie</span><br><span class="line">		affinity   #cookie名字</span><br><span class="line">		expires=1h # 有效期1小时</span><br><span class="line">		domain=.example.com # 为.example.com而 设置</span><br><span class="line">		httponly # 只用于http</span><br><span class="line">		secure</span><br><span class="line">		path=/; # 所有路径有效</span><br><span class="line"><span class="meta">		#</span><span class="bash"> 不能在客户端被使用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<strong><em>sticky</em></strong>指令上使用<strong><em>cookie</em></strong>参数将在第一个请求上创建一个包含上游服务器信息的cookie。NGINX Plus跟踪此cookie，使其能够继续将后续请求指向相同的服务器。cookie的第一个位置参数的参数是要创建和跟踪的cookie的名称。其他参数提供额外的控制，通知浏览器如何正确的使用该cookie，比如过期时间、域、路径，以及cookie是否可以被客户端使用，或者是否可以通过不安全的协议传递。</p>
+<h1 id="Sticky-Learn"><a href="#Sticky-Learn" class="headerlink" title="Sticky Learn"></a>Sticky Learn</h1><p>使用NGINX Plus通过已经存在的cookie 来将下游客户机绑定到 一个上游服务器上。</p>
+<p>使用<strong><em>sticky learn</em></strong>指令来<strong>发现和跟踪由上游应用程序创建的cookie</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">	server backend1.example.com:8080;</span><br><span class="line">	server backend2.example.com:8081;</span><br><span class="line">	sticky learn</span><br><span class="line">		create=$upstream_cookie_cookiename # 查找服务器响应回来的cookie</span><br><span class="line">		lookup=$cookie_cookiename # 查找之前已经注册过的cookie</span><br><span class="line">		zone=client_sessions:2m; # 指定共享内存区域的名字以及大小</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个示例指示NGINX通过在响应头中查找名为<strong>COOKIENAME</strong>的cookie来查找和跟踪会话，并通过在请求头中查找同一个cookie来查找现有会话。这个会话-affinity 存储在一个2 MB的共享内存区域中，该内存可以跟踪大约16,000个session。cookie的名称总是特定于应用程序的。常用的cookie名称，如jsessionid或phpsessionid，通常是应用程序或应用服务器配置中设置的默认值。</p>
+<p>当应用程序创建自己的会话状态cookie时，NGINX Plus可以在请求响应中发现它们并跟踪它们。当提供了<strong><em>learn</em></strong>参数给<strong><em>sticky</em></strong>指令时，将执行这种类型的cookie跟踪。用于跟踪cookie的共享内存使用<strong><em>zone</em></strong>参数指定，该参数具有名称和大小。NGINX Plus通过指定<strong><em>create</em></strong>参数在上游服务器的响应中查找cookie，并使用<strong><em>lookup</em></strong>的参数搜索先前已经注册在服务器上的cookie。这些参数的值就是 http模块中公开的变量。</p>
+<h1 id="Sticky-Routing"><a href="#Sticky-Routing" class="headerlink" title="Sticky Routing"></a>Sticky Routing</h1><h1 id="Connection-Draining"><a href="#Connection-Draining" class="headerlink" title="Connection Draining"></a>Connection Draining</h1><h1 id="被动健康检查"><a href="#被动健康检查" class="headerlink" title="被动健康检查"></a>被动健康检查</h1><p>被动的检查上游服务器的健康状况</p>
+<p>利用负载平衡来使用NGINX进行健康检查，以确保只有健康的上游服务器能够被使用:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">	server backend1.example.com:1234 max_fails=3 fail_timeout=3s;</span><br><span class="line">	server backend2.example.com:1234 max_fails=3 fail_timeout=3s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该配置被动地监视上游运行状况，将max_fail指令设置为3，将fail_timeout设置为3秒。这些指令参数在流和HTTP服务器中以相同的方式工作。</p>
+<p>被动健康检查在开源版的NGINX中是可用的。在客户端通过NGINX进行请求时，被动的监视 失败的和超时的连接。被动健康检查默认开启。上述出现的参数允许你轻微的调整监视行为。在各种类型的负载均衡中，监视健康状况都是很重要的，不仅仅是从用户的角度来看，从业务连续性的角度来看也是如此。NGINX被动监视上游HTTP，TCP和UDP服务器，确保他们是健康的可用的。</p>
+<h1 id="主动-健康检查"><a href="#主动-健康检查" class="headerlink" title="主动 健康检查"></a>主动 健康检查</h1><p>使用NGINX Plus。</p>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p>对于HTTP，使用 health_check指令在块中合适的位置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">	server &#123;</span><br><span class="line">		...</span><br><span class="line">		location / &#123;</span><br><span class="line">			proxy_pass http://backend;</span><br><span class="line">			health_check interval=2s   # 时间间隔2s</span><br><span class="line">				fails=2  # 不健康：2次</span><br><span class="line">				passes=5  # 健康：5次</span><br><span class="line">				uri=/ # 检查时的请求路径</span><br><span class="line">				match=welcome; # 要匹配哪个块</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="meta">	#</span><span class="bash"> status is 200, content <span class="built_in">type</span> is <span class="string">"text/html"</span>,</span></span><br><span class="line"><span class="meta">	#</span><span class="bash"> and body contains <span class="string">"Welcome to nginx!"</span></span></span><br><span class="line">	match welcome &#123;  # 匹配块</span><br><span class="line">		status 200;</span><br><span class="line">		header Content-Type = text/html;</span><br><span class="line">		body ~ "Welcome to nginx!";</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原理：每两秒钟主动向上游服务器的 URI”/“发起HTTP请求。上游服务器必须连续通过5个健康检查才被认为是健康的。如果连续两次健康检查失败，则认为服务器是不健康的。上游服务器的响应必须匹配定义好的匹配块(match welcome)，其中定义了状态码为200，响应头的Content-Type的值为‘text/html’，响应体中的字符串为 “Welcome to  nginx”。HTTP匹配块有三个指令:<strong><em>status</em></strong>, <strong><em>header</em></strong>, 和<strong><em>body</em></strong>.这三个指令都有比较标志。</p>
+<h2 id="TCP-UDP"><a href="#TCP-UDP" class="headerlink" title="TCP/UDP"></a>TCP/UDP</h2><p>TCP/UDP的健康检查与上面的类似：(除了没有uri)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">stream &#123;</span><br><span class="line">	...</span><br><span class="line">	server &#123;</span><br><span class="line">		listen 1234; # 指定端口 1234</span><br><span class="line">		proxy_pass stream_backend;</span><br><span class="line">		health_check interval=10s</span><br><span class="line">		passes=2</span><br><span class="line">		fails=3;</span><br><span class="line">		health_check_timeout 5s;</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在本例中，TCP服务器被配置为监听端口1234，并代理到上游的一组服务器(stream_backend)，它会主动检查这些服务器的健康状况。stream块中<strong><em>health_check</em></strong>指令接受与HTTP中相同的所有参数(uri除外)，stream有一个参数可以将检查协议切换到udp。在本例中，间隔设置为10秒，需要有两次传递才能被认为是健康的，三次则不能被认为是不健康的。主动stream块的健康检查也能够验证来自上游服务器的响应。然而，该stream服务器的匹配块只有两个指令:<strong><em>send</em></strong>和<strong><em>expect</em></strong>。<strong><em>send</em></strong>指令是要发送的原始数据，<strong><em>expect</em></strong>是要匹配的确切响应或正则表达式。</p>
+<p>NGINX Plus中的主动健康检查就是 不断地向源服务器发出请求，以检查它们的健康状况。这些健康检查不仅仅可以测量响应代码。在NGINX Plus中，主动HTTP健康检查监视基于来自上游服务器的响应的许多接受标准。你可以配置主动健康检查监视，以确定检查上游服务器的频率、服务器必须通过该检查多少次才能被认为是健康的、失败多少次才被认为是不健康的，以及预期的结果应该是什么。match参数指向一个match块，该块定义响应的接受条件。match块还定义了在TCP/UPD的stream环境中使用时要发送到上游服务器的数据。这些特性使NGINX能够确保上游服务器始终处于健康状态。</p>
+<h1 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h1><p>问题:在承担全部生产负载之前，你的应用程序需要升级。</p>
+<p>解决：使用<strong><em>server</em></strong>指令上的<strong><em>slow_start</em></strong>参数，在指定的时间内逐步增加连接数量，当一台服务器被重新引入上游负载均衡池时</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream &#123;</span><br><span class="line">	zone backend 64k;</span><br><span class="line">	server server1.example.com slow_start=20s;</span><br><span class="line">	server server2.example.com slow_start=15s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>server</em></strong>指令配置将在上游服务器被重新引入池之后缓慢地给他们增加流量(增加连接)。server1将在20秒内缓慢增加它的连接数，server2将在15秒内增加它的连接数。</p>
+<p>慢启动(Slow start)是指在一段时间内缓慢增加代理到服务器的请求数量。慢启动允许应用程序通过填充缓存进行预热，初始化数据库连接，使其不会被应用启动时的其他连接淹没。此功能在服务器挂掉 健康检查再次启动并重新进入负载平衡池 时生效。</p>
+<h1 id="TCP健康检查"><a href="#TCP健康检查" class="headerlink" title="TCP健康检查"></a>TCP健康检查</h1><p>问题：检查上游TCP服务器并移除不健康的服务器</p>
+<p>解决方法：在<strong><em>server</em></strong>块中 使用<strong><em>health_check</em></strong>指令 进行主动健康检查</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">stream &#123;</span><br><span class="line">	server &#123;</span><br><span class="line">		listen 3306;</span><br><span class="line">		proxy_pass read_backend;</span><br><span class="line">		health_check interval=10 passes=2 fails=3;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TCP健康状况可以由NGINX Plus被动或主动地进行验证。通过记录客户机和上游服务器之间的通信来实现被动健康状态监视。如果上游服务器超时或拒绝连接，被动健康检查将认为该服务器不健康。主动健康检查将启动自己的配置项去检查以确定健康状况。主动健康检查不仅测试到上游服务器的连接，而且可以预估给定的响应(即自己可配置 服务器的响应内容)。</p>
+
+      
+    </div>
+	<div><div>
+
+    <br>
+    <br>
+    <div style="text-align:left;color: #ccc;font-size:14px;">
+	---本文结束<i class="fa fa-paw"></i>感谢您的阅读---
+	<br>
+	作者：Xuren
+	<br>
+	<span>发布时间:</span>2019年08月03日 - 23:31:56
+	<br>
+	<span>最后更新:</span>2019年08月05日 - 00:07:03
+	<br>
+	本文链接：<a href="/2019/08/03/NginxCookBook学习—-高性能负载均衡/" title="NginxCookBook学习—-高性能负载均衡">http://xuren.tech/2019/08/03/NginxCookBook学习—-高性能负载均衡/</a>
+    <br>
+	<!--<span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/08/03/NginxCookBook学习—-高性能负载均衡/"  aria-label="复制成功！"></i></span>
+    -->
+	版权声明：本文为博主原创文章，转载请附上博文链接！
+	</div>
+	
+	<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+    </script>
+
+</div>
+</div>
+
+    
+    
+    
+	<!-- 新加代码 -->
+	<div>
+    
+        
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Nginx-CookBook/" rel="tag"><i class="fa fa-tag"></i> Nginx CookBook</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/03/Nginx-CookBook学习——基础/" rel="next" title="Nginx_CookBook学习——基础">
+                <i class="fa fa-chevron-left"></i> Nginx_CookBook学习——基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/04/NginxCookBook学习—-流量管理/" rel="prev" title="NginxCookBook学习—-流量管理">
+                NginxCookBook学习—-流量管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<!--//bdimg.share.baidu.com-->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NDQ3MS8yMTAwMw"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/freedom.png" alt="Xuren">
+            
+              <p class="site-author-name" itemprop="name">Xuren</p>
+              <p class="site-description motion-element" itemprop="description">做一条最咸的咸鱼!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xuren11" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:296685262@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-负载均衡"><span class="nav-number">2.</span> <span class="nav-text">HTTP 负载均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP负载均衡"><span class="nav-number">3.</span> <span class="nav-text">TCP负载均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP负载均衡"><span class="nav-number">4.</span> <span class="nav-text">UDP负载均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#负载均衡的方法"><span class="nav-number">5.</span> <span class="nav-text">负载均衡的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Least-Connections-（最少连接）"><span class="nav-number">5.1.</span> <span class="nav-text">Least Connections （最少连接）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Least-time-最近连接"><span class="nav-number">5.2.</span> <span class="nav-text">Least time(最近连接)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Random-随机"><span class="nav-number">5.3.</span> <span class="nav-text">Random 随机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-hash"><span class="nav-number">5.4.</span> <span class="nav-text">IP hash</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sticky-Cookie-粘性Cookie"><span class="nav-number">6.</span> <span class="nav-text">Sticky Cookie(粘性Cookie)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sticky-Learn"><span class="nav-number">7.</span> <span class="nav-text">Sticky Learn</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sticky-Routing"><span class="nav-number">8.</span> <span class="nav-text">Sticky Routing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Connection-Draining"><span class="nav-number">9.</span> <span class="nav-text">Connection Draining</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#被动健康检查"><span class="nav-number">10.</span> <span class="nav-text">被动健康检查</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主动-健康检查"><span class="nav-number">11.</span> <span class="nav-text">主动 健康检查</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP"><span class="nav-number">11.1.</span> <span class="nav-text">HTTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-UDP"><span class="nav-number">11.2.</span> <span class="nav-text">TCP/UDP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#慢启动"><span class="nav-number">12.</span> <span class="nav-text">慢启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP健康检查"><span class="nav-number">13.</span> <span class="nav-text">TCP健康检查</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xuren</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">57.9k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+<!--  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+-->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+

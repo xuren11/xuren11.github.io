@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://xuren.tech/2019/08/01/面试常见问题整理/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
 <meta property="og:image" content="http://xuren.tech/2019/08/01/面试常见问题整理/String%E5%AF%B9%E8%B1%A1.png">
 <meta property="og:image" content="http://xuren.tech/2019/08/01/面试常见问题整理/MySQL_JOIN.png">
-<meta property="og:updated_time" content="2019-08-03T05:46:41.968Z">
+<meta property="og:updated_time" content="2019-08-05T09:05:48.390Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试常见问题整理">
 <meta name="twitter:description" content="Java中的异常Error也是继承自 Throwable!!!* 抛出Error时，(其实与 exception一样)只要有Catch能接住,程序就不会崩！(当然此时catch只能 *用 *catch(Throwable t | Error e)才能catch住！  没catch住当然会崩！)，有finnal语句 final语句一样会执行！ 执行完后程序才会再崩。 异常的体系结构如下：  只要进入">
@@ -402,7 +402,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.9k
+                  4.1k
                 </span>
               
 
@@ -418,7 +418,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  15
+                  16
                 </span>
               
             </div>
@@ -537,12 +537,19 @@
 <h1 id="读取文件并将其输入到控制台"><a href="#读取文件并将其输入到控制台" class="headerlink" title="读取文件并将其输入到控制台"></a>读取文件并将其输入到控制台</h1><p><strong>面试时要是写这种，千万 千万 千万 不要</strong>去想什么编码格式， 按普通的写就行了！！！</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> FileNotFoundException,IOException </span>&#123;</span><br><span class="line">    FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(<span class="string">"1.txt"</span>);</span><br><span class="line">    <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">while</span> ((i = fileInputStream.read(bytes)) != -<span class="number">1</span>)&#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> String(bytes,<span class="number">0</span>,i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//文件放在与src平级的位置即可</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="MySQL的各种JOIN"><a href="#MySQL的各种JOIN" class="headerlink" title="MySQL的各种JOIN"></a>MySQL的各种JOIN</h1><p><strong>inner join</strong>：也就是 默认的join， 查出的是<strong>两边共有</strong>的</p>
-<p><strong>left join</strong>：以<strong>左边为主</strong>，右边的有些记录可能没有</p>
-<p><strong>right join</strong>： 以<strong>右边为主</strong>，左边 的有些记录可能没有</p>
-<p><strong>full join</strong>：<strong>两边全有</strong>！(MySQ不支持， 但是可以通过  <strong>left join+ union+right join</strong>实现.    Oracle支持FUll JOIN)</p>
+<h1 id="MySQL的各种JOIN"><a href="#MySQL的各种JOIN" class="headerlink" title="MySQL的各种JOIN"></a>MySQL的各种JOIN</h1><p><strong>inner join    on</strong> ：也就是 默认的join， 查出的是<strong>两边共有</strong>的</p>
+<p><strong>left join   on</strong>：以<strong>左边为主</strong>，右边的有些记录可能没有</p>
+<p><strong>right join  on</strong>： 以<strong>右边为主</strong>，左边 的有些记录可能没有</p>
+<p><strong>full join  on</strong>：<strong>两边全有</strong>！(MySQ不支持， 但是可以通过  <strong>left join+ union+right join</strong>实现.    Oracle支持FUll JOIN)</p>
 <p>(不要 把inner  jion 和 full join 记反了)</p>
 <p><img src="/2019/08/01/面试常见问题整理/MySQL_JOIN.png" alt="MySQL_JOIN"></p>
+<p>##　MySQL求笛卡尔积</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name,...... FROM  tableA  JOIN  tableB;  -- 直接join,不做任何条件 on</span><br><span class="line">-- 等同于 如下</span><br><span class="line">SELECT column_name,.... FROM tableA,tableB [Condition]; - MySQL或默认用第一个同名的字段关联</span><br></pre></td></tr></table></figure>
+
+<p><strong>面试题</strong>:一句sql求 球队的比赛组合.  （很显然，要先得到 笛卡尔积，然后再删选笛卡尔积）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT A.name,B.name FROM table1 A,table2 B  WHERE A.name &gt; B.name;</span><br><span class="line">--  A.name &gt; B.name  筛掉 A.name 和 B.name 一样的组合，同时&gt; 也确定顺序(不能一种组合 出现两次)</span><br></pre></td></tr></table></figure>
+
+<h1 id="MySQL语句的执行顺序"><a href="#MySQL语句的执行顺序" class="headerlink" title="MySQL语句的执行顺序"></a>MySQL语句的执行顺序</h1><p>（From   ON   JOIN）[先确定数据集]  –&gt;  WHERE [筛选符合条件的记录] —&gt; GROUP BY[对记录进行分组] –&gt; SELECT[选出数据] –&gt;  HAVING [筛选GRUOP BY后的结果] –&gt; ORDER BY –&gt;LIMIT</p>
 <h1 id="Java中的main函数"><a href="#Java中的main函数" class="headerlink" title="Java中的main函数"></a>Java中的main函数</h1><p><strong>main函数格式固定！</strong> <strong>哪儿都不能改！</strong> 否则程序无法正常启动！！！(要是问你原因，就是jvm就是这么设计的,然后你可以告诉他 可以从盘古开天辟地开始问的 )</p>
 <p>main 函数<strong>可以重载</strong>！！！ 可以<strong>自己在里面调用自己</strong>(当然这样会爆栈)！！！</p>
 <p>(被个啥奇奇怪怪的面试的问到过这种奇葩问题，真蛋疼………..还有啥 对象和实例 有什么区别？整懵逼了…….阿三和印度的人的区别！)</p>
@@ -571,7 +578,7 @@
 	<br>
 	<span>发布时间:</span>2019年08月01日 - 13:22:03
 	<br>
-	<span>最后更新:</span>2019年08月03日 - 13:46:41
+	<span>最后更新:</span>2019年08月05日 - 17:05:48
 	<br>
 	本文链接：<a href="/2019/08/01/面试常见问题整理/" title="面试常见问题整理">http://xuren.tech/2019/08/01/面试常见问题整理/</a>
     <br>
@@ -641,6 +648,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/03/Nginx-CookBook学习——基础/" rel="prev" title="Nginx_CookBook学习——基础">
+                Nginx_CookBook学习——基础 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -752,7 +763,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -763,7 +774,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -774,7 +785,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -823,7 +834,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的异常"><span class="nav-number">1.</span> <span class="nav-text">Java中的异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP三次握手"><span class="nav-number">2.</span> <span class="nav-text">TCP三次握手</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Http请求常见状态码"><span class="nav-number">3.</span> <span class="nav-text">Http请求常见状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Http请求种类"><span class="nav-number">4.</span> <span class="nav-text">Http请求种类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TOP-K问题"><span class="nav-number">5.</span> <span class="nav-text">TOP K问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#堆排序：n-logn"><span class="nav-number">5.1.</span> <span class="nav-text">堆排序：n logn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#希尔排序"><span class="nav-number">5.2.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#桶排序"><span class="nav-number">5.3.</span> <span class="nav-text">桶排序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组中找出两数之和：O-n"><span class="nav-number">6.</span> <span class="nav-text">数组中找出两数之和：O(n)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String-对象"><span class="nav-number">7.</span> <span class="nav-text">String 对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#int-与-Integer"><span class="nav-number">8.</span> <span class="nav-text">int 与 Integer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ConcurrentHahMap与-HashMap"><span class="nav-number">9.</span> <span class="nav-text">ConcurrentHahMap与 HashMap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读取文件并将其输入到控制台"><span class="nav-number">10.</span> <span class="nav-text">读取文件并将其输入到控制台</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL的各种JOIN"><span class="nav-number">11.</span> <span class="nav-text">MySQL的各种JOIN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的main函数"><span class="nav-number">12.</span> <span class="nav-text">Java中的main函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-中传值-OR-传址？"><span class="nav-number">13.</span> <span class="nav-text">Java 中传值 OR 传址？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何通过-函数交换-两个int数据的值"><span class="nav-number">13.1.</span> <span class="nav-text">如何通过 函数交换 两个int数据的值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#POST-与-GET-区别"><span class="nav-number">14.</span> <span class="nav-text">POST 与 GET 区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的-父子类继承"><span class="nav-number">15.</span> <span class="nav-text">Java中的 父子类继承</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的异常"><span class="nav-number">1.</span> <span class="nav-text">Java中的异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP三次握手"><span class="nav-number">2.</span> <span class="nav-text">TCP三次握手</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Http请求常见状态码"><span class="nav-number">3.</span> <span class="nav-text">Http请求常见状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Http请求种类"><span class="nav-number">4.</span> <span class="nav-text">Http请求种类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TOP-K问题"><span class="nav-number">5.</span> <span class="nav-text">TOP K问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#堆排序：n-logn"><span class="nav-number">5.1.</span> <span class="nav-text">堆排序：n logn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#希尔排序"><span class="nav-number">5.2.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#桶排序"><span class="nav-number">5.3.</span> <span class="nav-text">桶排序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组中找出两数之和：O-n"><span class="nav-number">6.</span> <span class="nav-text">数组中找出两数之和：O(n)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String-对象"><span class="nav-number">7.</span> <span class="nav-text">String 对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#int-与-Integer"><span class="nav-number">8.</span> <span class="nav-text">int 与 Integer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ConcurrentHahMap与-HashMap"><span class="nav-number">9.</span> <span class="nav-text">ConcurrentHahMap与 HashMap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读取文件并将其输入到控制台"><span class="nav-number">10.</span> <span class="nav-text">读取文件并将其输入到控制台</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL的各种JOIN"><span class="nav-number">11.</span> <span class="nav-text">MySQL的各种JOIN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL语句的执行顺序"><span class="nav-number">12.</span> <span class="nav-text">MySQL语句的执行顺序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的main函数"><span class="nav-number">13.</span> <span class="nav-text">Java中的main函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-中传值-OR-传址？"><span class="nav-number">14.</span> <span class="nav-text">Java 中传值 OR 传址？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何通过-函数交换-两个int数据的值"><span class="nav-number">14.1.</span> <span class="nav-text">如何通过 函数交换 两个int数据的值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#POST-与-GET-区别"><span class="nav-number">15.</span> <span class="nav-text">POST 与 GET 区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的-父子类继承"><span class="nav-number">16.</span> <span class="nav-text">Java中的 父子类继承</span></a></li></ol></div>
             
 
           </div>
@@ -864,7 +875,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">50.2k</span>
+    <span title="Site words total count">57.9k</span>
   
 </div>
 
