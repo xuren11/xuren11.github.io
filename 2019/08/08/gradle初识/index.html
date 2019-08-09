@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/freedom.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/freedom.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+  <meta name="keywords" content="Gradle基础,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="项目自动化的发展石器时代依赖管理:手动添加jar包！(例使用Eclipse开发，build path加入其他依赖的jar包等操作即属于此类，完全手工)。jar包过则会很难处理其依赖关系 测试: 简单main方法测试。 打包:打成jar包或者war包用于发布以及其他用途 上传: 上传到服务器解压运行。(例如 把Java web打成war包放入 Tomcat目录下) 构建工具的作用依赖管理:例如Mav">
+<meta name="keywords" content="Gradle基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gradle初识">
+<meta property="og:url" content="http://xuren.tech/2019/08/08/gradle初识/index.html">
+<meta property="og:site_name" content="Xuren&#39;s Blogs">
+<meta property="og:description" content="项目自动化的发展石器时代依赖管理:手动添加jar包！(例使用Eclipse开发，build path加入其他依赖的jar包等操作即属于此类，完全手工)。jar包过则会很难处理其依赖关系 测试: 简单main方法测试。 打包:打成jar包或者war包用于发布以及其他用途 上传: 上传到服务器解压运行。(例如 把Java web打成war包放入 Tomcat目录下) 构建工具的作用依赖管理:例如Mav">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://xuren.tech/2019/08/08/gradle初识/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7.png">
+<meta property="og:image" content="http://xuren.tech/2019/08/08/gradle初识/Task%E6%B5%8B%E8%AF%95.png">
+<meta property="og:image" content="http://xuren.tech/2019/08/08/gradle初识/%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BE%9D%E8%B5%96.png">
+<meta property="og:image" content="http://xuren.tech/2019/08/08/gradle初识/%E4%BE%9D%E8%B5%96%E9%98%B6%E6%AE%B5%E5%85%B3%E7%B3%BB.png">
+<meta property="og:image" content="http://xuren.tech/2019/08/08/gradle初识/%E9%A1%B9%E7%9B%AE%E8%8C%83%E5%9B%B4.png">
+<meta property="og:image" content="http://xuren.tech/2019/08/08/gradle初识/%E6%B5%8B%E8%AF%95%E9%A1%B9%E7%9B%AE%E5%B8%83%E5%B1%80.png">
+<meta property="og:image" content="http://xuren.tech/2019/08/08/gradle初识/%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1.png">
+<meta property="og:image" content="http://xuren.tech/2019/08/08/gradle初识/%E9%A1%B9%E7%9B%AE%E5%8F%91%E5%B8%83.png">
+<meta property="og:updated_time" content="2019-08-09T02:44:44.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gradle初识">
+<meta name="twitter:description" content="项目自动化的发展石器时代依赖管理:手动添加jar包！(例使用Eclipse开发，build path加入其他依赖的jar包等操作即属于此类，完全手工)。jar包过则会很难处理其依赖关系 测试: 简单main方法测试。 打包:打成jar包或者war包用于发布以及其他用途 上传: 上传到服务器解压运行。(例如 把Java web打成war包放入 Tomcat目录下) 构建工具的作用依赖管理:例如Mav">
+<meta name="twitter:image" content="http://xuren.tech/2019/08/08/gradle初识/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xuren.tech/2019/08/08/gradle初识/">
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/099563b3.js","daovoice")
+  daovoice('init', {
+      app_id: "099563b3"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+  <title>Gradle初识 | Xuren's Blogs</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xuren's Blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xuren.tech/2019/08/08/gradle初识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuren">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/freedom.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xuren's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Gradle初识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-08T15:03:09+08:00">
+                2019-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Gradle/" itemprop="url" rel="index">
+                    <span itemprop="name">Gradle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="项目自动化的发展"><a href="#项目自动化的发展" class="headerlink" title="项目自动化的发展"></a>项目自动化的发展</h1><h2 id="石器时代"><a href="#石器时代" class="headerlink" title="石器时代"></a>石器时代</h2><p><strong>依赖管理:</strong>手动添加jar包！(例使用Eclipse开发，build path加入其他依赖的jar包等操作即属于此类，完全手工)。jar包过则会很难处理其依赖关系</p>
+<p><strong>测试:</strong> 简单main方法测试。</p>
+<p><strong>打包:</strong>打成jar包或者war包用于发布以及其他用途</p>
+<p><strong>上传:</strong> 上传到服务器解压运行。(例如 把Java web打成war包放入 Tomcat目录下)</p>
+<h2 id="构建工具的作用"><a href="#构建工具的作用" class="headerlink" title="构建工具的作用"></a>构建工具的作用</h2><p><strong>依赖管理</strong>:例如Maven，只需要在pom.xml文件中添加 坐标(GAV)即可自动帮你引入jar包。甚至可以自动解决依赖冲突</p>
+<p><strong>测试，打包，发布</strong>: Maven的对应指令</p>
+<p>机器能干的活，绝不自己动手。</p>
+<h2 id="主流构建工具"><a href="#主流构建工具" class="headerlink" title="主流构建工具"></a>主流构建工具</h2><p><strong>Ant</strong>:编译，测试，打包<br><strong>Maven</strong>：在Ant的基础上，多了依赖管理以及发布功能<br><strong>Gradle</strong>:使用Groovy语言来进行构建管理，而非Maven的xml语言格式</p>
+<p><img src="/2019/08/08/gradle初识/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7.png" alt="构建工具"></p>
+<p><strong>Gradle是什么</strong>:
+    一个开源的 <strong>项目自动化构建工具</strong>， 建立在Apach Ant 和 Apach Maven概念的基础之上，并引入了基于Groovy的特定领域语言(DSL),而不再使用xml形式管理构建脚本。</p>
+<h1 id="Gradle的使用"><a href="#Gradle的使用" class="headerlink" title="Gradle的使用"></a>Gradle的使用</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>1.确保已经安装JDK</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version  # 检查本机是否安装jdk。(没有自行百度安装)</span><br></pre></td></tr></table></figure>
+
+<p>2.从Cradle<a href="https://gradle.org" target="_blank" rel="noopener">官网</a>下载Gradle,并解压(建议下载 Complete)</p>
+<p>3.配置环境变量 <strong><em>GRADLE_HOME</em></strong>(即 你的gralde的解压目录，和jdk一样)</p>
+<p>4.添加到path，<strong><em>%GRADLE_HOME%\bin;</em></strong></p>
+<p>5.验证: gradle -v (记得用新开的命令行窗口，如果依然失败请检查安装步骤)</p>
+<p>Linux/MacOS参考<a href="https://gradle.org/install/" target="_blank" rel="noopener">官网</a>Installing manually部分</p>
+<h2 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h2><h3 id="Groovy"><a href="#Groovy" class="headerlink" title="Groovy"></a>Groovy</h3><p>​    Groovy是用于Java虚拟机的一种敏捷动态语言，它是一种成熟的面向对象编程语言，即可以用于面向对象编程，又可以用作纯粹的脚本语言。使用该语言不必编写过多的代码，同时又具有闭包和动态语言中的其他特性</p>
+<h4 id="与Java比较"><a href="#与Java比较" class="headerlink" title="与Java比较:"></a><strong>与Java比较:</strong></h4><p>1.语法完全兼容Java 语法,最终也是编译成Java字节码；<br>2.分号可选，表达式后的分号 可要可不要<br>3.类，方法默认是public<br>4.编译器给属性自动添加getter/setter方法<br>5.属性可以直接用 <strong>.</strong> 号获取<br>6.最后一个表达式的值 会被作为返回值(若方法有返回值)<br>7.== 完全等同于equals(),不会有NullPointerExceptions</p>
+<h4 id="Groovy高效特性"><a href="#Groovy高效特性" class="headerlink" title="Groovy高效特性:"></a>Groovy高效特性:</h4><p>1.自带assert语句，可在任何地方进行断言操做<br>2.弱类型 语言(不需要指定类型，类似Javascript)<br>3.可选括号 (不一定要用括号 括住表达式，例如 print 后不一定需要括号，调用方法也不需要将  参数放在括号里)<br>4.字符串(单引号:仅仅是一个字符串  双引号:其中可以有表达式(${其他变量})    三个单引号：可换行)<br>5.集合API(list:对应Arrayist ，格式有点像 定义数组    map:对应LinkedHashMap)<br>6.<strong>闭包</strong>:可看做一个代码块，该代码块可作为 函数参数</p>
+<h4 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h4><p>构建的脚本中 都默认有一个Project实例！其中含有一些默认方法.</p>
+<h2 id="构建脚本"><a href="#构建脚本" class="headerlink" title="构建脚本"></a>构建脚本</h2><p>​    Gradle构建中的两个基本概念是  <strong>项目(Project)</strong> 和 <strong>任务(Task)</strong>,每个构建至少包含<strong>一个项目</strong>，<strong>项目中包含一个或者多个任务</strong>。在多项目构建中，一个项目可以依赖于其它项目;类似的，任务可以形成一个依赖关系图来保证他们的执行顺序。</p>
+<h3 id="项目-Project"><a href="#项目-Project" class="headerlink" title="项目(Project)"></a>项目(Project)</h3><p>​    一个项目代表一个正在构建的组件(比如一个jar文件)，当构建启动后，Gradle会基于build.gradle实例化一个 <strong>org.gradle.api.Project</strong>类，并且能够通过project变量使其隐式可用</p>
+<p><strong>group</strong>  <strong>name(artifact id)</strong>   <strong>version</strong></p>
+<p><strong>apply</strong>   <strong>dependencies</strong>，<strong>repositories</strong>，<strong>task</strong></p>
+<p>属性的其他配置方式:ext  gradle.properties</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// build.gradle文件</span><br><span class="line">group &apos;group id&apos;</span><br><span class="line">version &apos;1.0-SNAPSHOT&apos; </span><br><span class="line"></span><br><span class="line">apply plugin: &apos;java&apos;  // java插件， 打成jar包</span><br><span class="line">apply plugin: &apos;war&apos;  // web应用打成war包</span><br><span class="line"></span><br><span class="line">sourceCompatibility=1.8  //jdk1.8</span><br><span class="line"></span><br><span class="line">repositories&#123;  mavenCentral() &#125;</span><br><span class="line"></span><br><span class="line">dependencies&#123; testCompile  group:&apos;junit&apos;, name:&apos;junit&apos;, version:&apos;4.11&apos;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="任务-task-–非必须"><a href="#任务-task-–非必须" class="headerlink" title="任务(task)–非必须"></a>任务(task)–非必须</h3><p>一般只要使用插件即可， 没有插件或觉得插件达不到自己想要的目标，可以自定义任务。</p>
+<p>dependsOn  声明任务依赖</p>
+<p>doFirst，doLast &lt;&lt; </p>
+<h4 id="自定义任务"><a href="#自定义任务" class="headerlink" title="自定义任务"></a>自定义任务</h4><p>例如: 由于 gradle创建项目时，不会自动给你创建出 src java main 等目录，此时就可以利用 自定义任务  来创建目录:(idea新版可以自动创建)</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> createDir = &#123;</span><br><span class="line">    path -&gt;</span><br><span class="line">        File dir = <span class="keyword">new</span> File(path)</span><br><span class="line">        <span class="keyword">if</span> (!dir.exists()) &#123;</span><br><span class="line">            dir.mkdirs()</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">task mkJavaDir() &#123;</span><br><span class="line">    <span class="keyword">def</span> paths = [<span class="string">'src/main'</span>,<span class="string">'src/test'</span>,<span class="string">'src/main/java'</span>, <span class="string">'src/main/resources'</span>,<span class="string">'src/test/java'</span>, <span class="string">'src/test/resources'</span>]</span><br><span class="line">    doFirst &#123;</span><br><span class="line">        paths.forEach(createDir)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">task mkWebDir() &#123;</span><br><span class="line">    </span><br><span class="line">    dependsOn <span class="string">'makeJavDir'</span>   <span class="comment">//dependsOn的使用</span></span><br><span class="line">    <span class="keyword">def</span> paths = [<span class="string">'src/main/webapp'</span>,<span class="string">'src/test/webapp'</span>]</span><br><span class="line">    doFirst &#123;</span><br><span class="line">        paths.forEach(createDir)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/08/08/gradle初识/Task%E6%B5%8B%E8%AF%95.png" alt="Task测试"></p>
+<h2 id="构建的生命周期"><a href="#构建的生命周期" class="headerlink" title="构建的生命周期"></a>构建的生命周期</h2><p><strong>初始化</strong>：设置构建环境，并确定哪些项目将参与其中。</p>
+<p><strong>配置</strong>：生成<strong>Task的依赖关系</strong> 与 执行(顺序)图 </p>
+<p><strong>执行</strong>：<strong>执行task的动作</strong>  运行配置选择的任务。</p>
+<h2 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h2><p>​    几乎所有的基于JVM的软件项目 都需要依赖外部类库来重用现有的功能。自动化的依赖管理可以<strong>明确依赖的版本</strong>，可以<strong>解决因传递依赖带来的版本冲突</strong></p>
+<h3 id="工件坐标"><a href="#工件坐标" class="headerlink" title="工件坐标"></a>工件坐标</h3><p>​    group  name  version  （唯一确定一个jar包）</p>
+<h3 id="常用仓库"><a href="#常用仓库" class="headerlink" title="常用仓库"></a>常用仓库</h3><p>mavenLocal/mavenCentral/jcenter(中央仓库)</p>
+<p>自定义maven仓库(maven私服)</p>
+<p>文件仓库(最少使用)</p>
+<h3 id="依赖的传递性"><a href="#依赖的传递性" class="headerlink" title="依赖的传递性"></a>依赖的传递性</h3><p>​    B依赖A,如果C依赖B，则C依赖A (版本冲突的原因)</p>
+<h3 id="自动化依赖管理"><a href="#自动化依赖管理" class="headerlink" title="自动化依赖管理"></a>自动化依赖管理</h3><p><img src="/2019/08/08/gradle初识/%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BE%9D%E8%B5%96.png" alt="自动化依赖"></p>
+<h3 id="依赖阶段配置"><a href="#依赖阶段配置" class="headerlink" title="依赖阶段配置"></a>依赖阶段配置</h3><p><strong>源代码</strong>: compile  runtime</p>
+<p><strong>测试代码</strong>: testCompile   testRuntime</p>
+<p><img src="/2019/08/08/gradle初识/%E4%BE%9D%E8%B5%96%E9%98%B6%E6%AE%B5%E5%85%B3%E7%B3%BB.png" alt="依赖阶段关系"></p>
+<p>在编译时依赖的jar包，在运行时都会依赖(反之则不一定)</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    maven&#123;</span><br><span class="line">        url  <span class="string">'maven私服地址'</span></span><br><span class="line">    &#125;</span><br><span class="line">    mavenLocal()  <span class="comment">//本地仓库</span></span><br><span class="line">    mavenCentral()    <span class="comment">//中央仓库</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    testCompile <span class="string">group:</span> <span class="string">'junit'</span>, <span class="string">name:</span> <span class="string">'junit'</span>, <span class="string">version:</span> <span class="string">'4.12'</span></span><br><span class="line">&#125;   <span class="comment">//testCompile  测试依赖</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//找 jar包 和 maven一样的，直接搜  mvn jar包名  即可</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="解决版本冲突"><a href="#解决版本冲突" class="headerlink" title="解决版本冲突"></a>解决版本冲突</h3><p>查看依赖报告</p>
+<p>排除传递性依赖</p>
+<p>强制一个版本(默认解决方式，留下最新的版本)</p>
+<p>修改默认版本冲突 策略:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">configuration.all&#123;</span><br><span class="line">    resolutionStrategy&#123;</span><br><span class="line">        failOnVersionConfilict()  <span class="comment">//直接报错</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决方法:</p>
+<p>1，排除传递性依赖</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">compile(<span class="string">'G:A:V'</span>)&#123;</span><br><span class="line">    exclue <span class="string">group:</span><span class="string">' group name'</span> , <span class="string">module:</span><span class="string">'artifact_id'</span></span><br><span class="line">    <span class="comment">//transitive = false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.强制指定一个版本</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">configuration.all&#123;</span><br><span class="line">    resolutionStrategy&#123;</span><br><span class="line">       force <span class="string">'group:module:version'</span><span class="comment">// 自己强制指定</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="多项目构建"><a href="#多项目构建" class="headerlink" title="多项目构建"></a>多项目构建</h1><p>项目模块化:<br>    在企业项目中，包层次和类关系比较复杂，把代码拆分模块通常 是最佳实践，这需要你清晰的划分功能的边界，比如把业务逻辑和数据持久层拆分开来。项目符合 高内聚低耦合时，模块化就变得很容易，这是一条非常好的开发实践。</p>
+<p><img src="/2019/08/08/gradle初识/%E9%A1%B9%E7%9B%AE%E8%8C%83%E5%9B%B4.png" alt="项目范围"></p>
+<p>父模块下的 setting.gradle,   包含内容</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rootProject.name = <span class="string">'test'</span>  <span class="comment">//父模块名</span></span><br><span class="line">include <span class="string">'model'</span>  <span class="comment">//包含的子模块名</span></span><br><span class="line">include <span class="string">'web'</span>  <span class="comment">//包含的子模块名</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//子模块创建与 maven 一致，(在 idea中)</span></span><br></pre></td></tr></table></figure>
+
+<p>子模块依赖另一个子模块:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies&#123;</span><br><span class="line">    compile project(<span class="string">":module_name"</span>)  <span class="comment">//module_name 要依赖的模块名</span></span><br><span class="line">    ......</span><br><span class="line">    testCompile ............</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h2><p>将一些 所有模块都需要用到的配置(包括  依赖) 统一 放在父模块中 统一配置</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父模块 build.gradle文件中</span></span><br><span class="line">allprojects &#123;</span><br><span class="line">    sourceCompatibility = <span class="number">1.8</span>  <span class="comment">//统一使用jdk1.8</span></span><br><span class="line">    apply <span class="string">plugin:</span> <span class="string">'java'</span></span><br><span class="line">    ..........</span><br><span class="line">        dependencies&#123;</span><br><span class="line">           ................<span class="comment">//所有 模块都要用的</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//同样可以配置在 如下块中</span></span><br><span class="line">subprojects&#123;</span><br><span class="line">    <span class="comment">//依赖等........</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//子模块 build.gradle文件 可以配置 个性化需求  例如web模块需要打成war包  web模块单独配置</span></span><br><span class="line">apply <span class="string">plugin:</span> <span class="string">'java'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//官方文档也有 下面的配置方法在本机上测试是总是报错，目前暂不清楚原因</span></span><br><span class="line">plugins &#123;</span><br><span class="line">    id <span class="string">'war'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="统一配置version"><a href="#统一配置version" class="headerlink" title="统一配置version"></a>统一配置version</h3><p>方法之一：使用<strong>gradle.properties</strong>文件(放在父模块 build.gradle文件同级 的位置)</p>
+<p>将<strong>属性值</strong>都放在  该文件中 即可！(例如 整个项目的版本号 等属性，只需要修改一处即可)</p>
+<h1 id="Gradle测试"><a href="#Gradle测试" class="headerlink" title="Gradle测试"></a>Gradle测试</h1><p>自动化测试</p>
+<p>​    一些开源的框架比如Junit,TestNG 能够帮助你编写可复用的结构化测试，为了运行这些测试，你需要先编译它们，就像编译源代码一样。测试代码的作用仅仅用于测试的情况，不应高被发布到生产环境中，需要把源代码 和 测试代码分开来。</p>
+<p><img src="/2019/08/08/gradle初识/%E6%B5%8B%E8%AF%95%E9%A1%B9%E7%9B%AE%E5%B8%83%E5%B1%80.png" alt="测试项目布局"></p>
+<h2 id="测试配置"><a href="#测试配置" class="headerlink" title="测试配置:"></a>测试配置:</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies&#123;</span><br><span class="line">     testCompile  <span class="string">'junit:junit:4.11'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试任务："><a href="#测试任务：" class="headerlink" title="测试任务："></a>测试任务：</h2><p><img src="/2019/08/08/gradle初识/%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1.png" alt="测试任务"></p>
+<p>环节中任何一步出现错误，后续步骤都无法继续执行！</p>
+<p>执行对应插件，test目录中的测试代码机会自动执行并生成测试报告</p>
+<h2 id="测试发现："><a href="#测试发现：" class="headerlink" title="测试发现："></a>测试发现：</h2><p>1.任何继承自 junit.framework.TestCase或groovy.util.GroovyTestCase的类。</p>
+<p>2.任何被@Runwith注解的类(Spring中常用)</p>
+<p>3.任何至少包含一个被@Test注解的方法的类</p>
+<h1 id="项目发布"><a href="#项目发布" class="headerlink" title="项目发布"></a>项目发布</h1><p>一般为发布到本地与远程仓库(私服)， gradle没有自己的仓库，所以就是与maven共用仓库。</p>
+<p><img src="/2019/08/08/gradle初识/%E9%A1%B9%E7%9B%AE%E5%8F%91%E5%B8%83.png" alt="项目发布"></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">apply <span class="string">plugin:</span><span class="string">'maven-publish'</span>  <span class="comment">//先要使用该插件，然后才能使用下面的</span></span><br><span class="line"></span><br><span class="line">publishing &#123;</span><br><span class="line">	publications &#123;</span><br><span class="line">		myLibrary(MavenPublication) &#123;</span><br><span class="line">			from components.java</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	repositories &#123;</span><br><span class="line">		maven &#123;</span><br><span class="line">			name = <span class="string">'myRepo'</span>  <span class="comment">//随便自定义</span></span><br><span class="line">			url = <span class="string">"file://$&#123;buildDir&#125;/repo"</span> <span class="comment">//仓库地址(一版是私服地址)  若不填任何内容，则默认为 本地仓库</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+	<div><div>
+
+    <br>
+    <br>
+    <div style="text-align:left;color: #ccc;font-size:14px;">
+	---本文结束<i class="fa fa-paw"></i>感谢您的阅读---
+	<br>
+	作者：Xuren
+	<br>
+	<span>发布时间:</span>2019年08月08日 - 15:03:09
+	<br>
+	<span>最后更新:</span>2019年08月09日 - 10:44:44
+	<br>
+	本文链接：<a href="/2019/08/08/gradle初识/" title="Gradle初识">http://xuren.tech/2019/08/08/gradle初识/</a>
+    <br>
+	<!--<span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/08/08/gradle初识/"  aria-label="复制成功！"></i></span>
+    -->
+	版权声明：本文为博主原创文章，转载请附上博文链接！
+	</div>
+	
+	<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+    </script>
+
+</div>
+</div>
+
+    
+    
+    
+	<!-- 新加代码 -->
+	<div>
+    
+        
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Gradle基础/" rel="tag"><i class="fa fa-tag"></i> Gradle基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/04/NginxCookBook学习—-流量管理/" rel="next" title="NginxCookBook学习—-流量管理">
+                <i class="fa fa-chevron-left"></i> NginxCookBook学习—-流量管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<!--//bdimg.share.baidu.com-->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NDQ3MS8yMTAwMw"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/freedom.png" alt="Xuren">
+            
+              <p class="site-author-name" itemprop="name">Xuren</p>
+              <p class="site-description motion-element" itemprop="description">做一条最咸的咸鱼!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xuren11" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:296685262@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#项目自动化的发展"><span class="nav-number">1.</span> <span class="nav-text">项目自动化的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#石器时代"><span class="nav-number">1.1.</span> <span class="nav-text">石器时代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建工具的作用"><span class="nav-number">1.2.</span> <span class="nav-text">构建工具的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主流构建工具"><span class="nav-number">1.3.</span> <span class="nav-text">主流构建工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradle的使用"><span class="nav-number">2.</span> <span class="nav-text">Gradle的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理论知识"><span class="nav-number">2.2.</span> <span class="nav-text">理论知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Groovy"><span class="nav-number">2.2.1.</span> <span class="nav-text">Groovy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与Java比较"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">与Java比较:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Groovy高效特性"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">Groovy高效特性:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重点"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">重点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建脚本"><span class="nav-number">2.3.</span> <span class="nav-text">构建脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目-Project"><span class="nav-number">2.3.1.</span> <span class="nav-text">项目(Project)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任务-task-–非必须"><span class="nav-number">2.3.2.</span> <span class="nav-text">任务(task)–非必须</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义任务"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">自定义任务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建的生命周期"><span class="nav-number">2.4.</span> <span class="nav-text">构建的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖管理"><span class="nav-number">2.5.</span> <span class="nav-text">依赖管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工件坐标"><span class="nav-number">2.5.1.</span> <span class="nav-text">工件坐标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用仓库"><span class="nav-number">2.5.2.</span> <span class="nav-text">常用仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖的传递性"><span class="nav-number">2.5.3.</span> <span class="nav-text">依赖的传递性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动化依赖管理"><span class="nav-number">2.5.4.</span> <span class="nav-text">自动化依赖管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖阶段配置"><span class="nav-number">2.5.5.</span> <span class="nav-text">依赖阶段配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决版本冲突"><span class="nav-number">2.5.6.</span> <span class="nav-text">解决版本冲突</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多项目构建"><span class="nav-number">3.</span> <span class="nav-text">多项目构建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#全局配置"><span class="nav-number">3.1.</span> <span class="nav-text">全局配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#统一配置version"><span class="nav-number">3.1.1.</span> <span class="nav-text">统一配置version</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradle测试"><span class="nav-number">4.</span> <span class="nav-text">Gradle测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试配置"><span class="nav-number">4.1.</span> <span class="nav-text">测试配置:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试任务："><span class="nav-number">4.2.</span> <span class="nav-text">测试任务：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试发现："><span class="nav-number">4.3.</span> <span class="nav-text">测试发现：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目发布"><span class="nav-number">5.</span> <span class="nav-text">项目发布</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xuren</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">60.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+<!--  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+-->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
