@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://xuren.tech/2019/08/14/MySQL%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/</loc>
+    <lastmod>2019-08-14</lastmod>
+  </url>  <url>
+    <loc>http://xuren.tech/2019/07/22/MySQL--INSERT,UPDATE,DELETE/</loc>
+    <lastmod>2019-08-14</lastmod>
+  </url>  <url>
+    <loc>http://xuren.tech/2019/07/23/MySQL%E6%93%8D%E4%BD%9C%E8%A1%A8-table/</loc>
+    <lastmod>2019-08-14</lastmod>
+  </url>  <url>
+    <loc>http://xuren.tech/2019/08/11/Swagger2%E6%9E%81%E7%AE%80%E4%BD%BF%E7%94%A8%E6%B3%95/</loc>
+    <lastmod>2019-08-11</lastmod>
+  </url>  <url>
+    <loc>http://xuren.tech/2019/08/10/SpringDataJPA%E5%88%9D%E8%AF%86/</loc>
+    <lastmod>2019-08-10</lastmod>
+  </url>  <url>
     <loc>http://xuren.tech/2019/08/08/gradle%E5%88%9D%E8%AF%86/</loc>
     <lastmod>2019-08-09</lastmod>
   </url>  <url>
@@ -34,9 +49,6 @@
     <loc>http://xuren.tech/2019/07/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%8B%B1%E6%96%87%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2019-07-31</lastmod>
   </url>  <url>
-    <loc>http://xuren.tech/2019/07/23/MySQL%E6%95%B0%E6%93%8D%E4%BD%9C%E8%A1%A8-table/</loc>
-    <lastmod>2019-07-27</lastmod>
-  </url>  <url>
     <loc>http://xuren.tech/2019/07/27/MySQL%E6%B8%B8%E6%A0%87%E4%B8%8E%E8%A7%A6%E5%8F%91%E5%99%A8/</loc>
     <lastmod>2019-07-27</lastmod>
   </url>  <url>
@@ -50,12 +62,6 @@
     <lastmod>2019-07-27</lastmod>
   </url>  <url>
     <loc>http://xuren.tech/2019/07/23/MySQL%E8%A7%86%E5%9B%BE%E4%B8%8E%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/</loc>
-    <lastmod>2019-07-27</lastmod>
-  </url>  <url>
-    <loc>http://xuren.tech/2019/07/23/MySQL%E6%93%8D%E4%BD%9C%E8%A1%A8-table/</loc>
-    <lastmod>2019-07-27</lastmod>
-  </url>  <url>
-    <loc>http://xuren.tech/2019/07/22/MySQL--INSERT,UPDATE,DELETE/</loc>
     <lastmod>2019-07-27</lastmod>
   </url>  <url>
     <loc>http://xuren.tech/2019/07/22/MySQL%E5%85%A8%E6%96%87%E6%9C%AC%E6%90%9C%E7%B4%A2/</loc>

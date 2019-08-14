@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Xuren&#39;s Blogs">
 <meta property="og:description" content="INSERT插入数据INSERT是用来插入（或添加）行到数据库表的。插入可以用几种方式使用： 插入完整的行； 插入行的一部分； 插入多行； 插入某些查询的结果 插入完整的列直接使用表名， 表中的每一列都必须提供一个值(NULL 或者 具体值)。 缺点:高度依赖表中列的定义次序 1234INSETR INTO table_name VALUES （NULL,value1,value2,val">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-27T10:02:16.571Z">
+<meta property="og:updated_time" content="2019-08-14T04:49:27.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据插入——INSERT">
 <meta name="twitter:description" content="INSERT插入数据INSERT是用来插入（或添加）行到数据库表的。插入可以用几种方式使用： 插入完整的行； 插入行的一部分； 插入多行； 插入某些查询的结果 插入完整的列直接使用表名， 表中的每一列都必须提供一个值(NULL 或者 具体值)。 缺点:高度依赖表中列的定义次序 1234INSETR INTO table_name VALUES （NULL,value1,value2,val">
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.5k
+                  1.6k
                 </span>
               
 
@@ -469,7 +469,7 @@
 <p>谨慎使用!</p>
 <h1 id="DELETE删除数据"><a href="#DELETE删除数据" class="headerlink" title="DELETE删除数据"></a>DELETE删除数据</h1><p>使用DELETE语句 可以从表中删除（去掉）数据。</p>
 <p><strong>不要省略WHERE子句:</strong>在使用DELETE时一定要注意细心。不指定条件，就会错误地删除表中所有行。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name  <span class="keyword">WHERE</span> conditon;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name  WHERE conditon;</span><br><span class="line">-- 注意， 上述语句千万不能在 table_name后跟 别名！！！千万不能</span><br><span class="line"># 如果一定要使用别名，请参照官方用法</span><br><span class="line">DELETE a1, a2 FROM t1 [AS] a1 INNER JOIN t2 [AS] a2  WHERE a1.id=a2.id;</span><br><span class="line"># 在 DELETE 与 FROM 之间也要加上别名！</span><br></pre></td></tr></table></figure>
 
 <p><strong>DELETE</strong>是　<strong>数据操作</strong>，而不是表操作，删除的是表中的数据　而不是　表！</p>
 <h2 id="TRUNCATE关键字"><a href="#TRUNCATE关键字" class="headerlink" title="TRUNCATE关键字"></a>TRUNCATE关键字</h2><p><strong>TRUNCATE</strong>可以让你<strong>更快</strong>的<strong>删除一个表中的所有数据</strong>(但执行完这条命令之后，表还在哦).</p>
@@ -492,7 +492,7 @@
 	<br>
 	<span>发布时间:</span>2019年07月22日 - 22:08:12
 	<br>
-	<span>最后更新:</span>2019年07月27日 - 18:02:16
+	<span>最后更新:</span>2019年08月14日 - 12:49:27
 	<br>
 	本文链接：<a href="/2019/07/22/MySQL--INSERT,UPDATE,DELETE/" title="MySQL数据插入——INSERT">http://xuren.tech/2019/07/22/MySQL--INSERT,UPDATE,DELETE/</a>
     <br>
@@ -563,8 +563,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/23/MySQL操作表-table/" rel="prev" title="MySQL数操作表-table">
-                MySQL数操作表-table <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/23/MySQL操作表-table/" rel="prev" title="MySQL操作表-table">
+                MySQL操作表-table <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -677,7 +677,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -688,7 +688,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -699,7 +699,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -789,7 +789,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">60.2k</span>
+    <span title="Site words total count">59.7k</span>
   
 </div>
 

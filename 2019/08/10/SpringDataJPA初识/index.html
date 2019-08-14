@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/freedom.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/freedom.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+  <meta name="keywords" content="SpringDataJPA,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文将从 使用传统方式访问数据库(JDBC，Spring JdbcTemplate) 过渡到  SpringData。 个人观点:万丈高楼平地起。任何技术的发展都是从 最基础最简单也是最繁琐的 方式做起。了解最基础的技术，也就能了解到 该基础技术的优缺点，同时也就能知道为什么会出现新技术，新技术的出现有解决了基础技术的哪些痛点，相信这样我们才能更好的理解新技术学习方技术。 传统–JDBC步骤(概念">
+<meta name="keywords" content="SpringDataJPA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringDataJPA初识">
+<meta property="og:url" content="http://xuren.tech/2019/08/10/SpringDataJPA初识/index.html">
+<meta property="og:site_name" content="Xuren&#39;s Blogs">
+<meta property="og:description" content="本文将从 使用传统方式访问数据库(JDBC，Spring JdbcTemplate) 过渡到  SpringData。 个人观点:万丈高楼平地起。任何技术的发展都是从 最基础最简单也是最繁琐的 方式做起。了解最基础的技术，也就能了解到 该基础技术的优缺点，同时也就能知道为什么会出现新技术，新技术的出现有解决了基础技术的哪些痛点，相信这样我们才能更好的理解新技术学习方技术。 传统–JDBC步骤(概念">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://xuren.tech/2019/08/10/SpringDataJPA初识/Repository%E6%96%B9%E6%B3%95%E8%A7%84%E5%88%991.png">
+<meta property="og:image" content="http://xuren.tech/2019/08/10/SpringDataJPA初识/Repository%E6%96%B9%E6%B3%95%E8%A7%84%E5%88%992.png">
+<meta property="og:image" content="http://xuren.tech/2019/08/10/SpringDataJPA初识/CrudRepository%E4%BD%BF%E7%94%A8.png">
+<meta property="og:updated_time" content="2019-08-10T11:24:52.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringDataJPA初识">
+<meta name="twitter:description" content="本文将从 使用传统方式访问数据库(JDBC，Spring JdbcTemplate) 过渡到  SpringData。 个人观点:万丈高楼平地起。任何技术的发展都是从 最基础最简单也是最繁琐的 方式做起。了解最基础的技术，也就能了解到 该基础技术的优缺点，同时也就能知道为什么会出现新技术，新技术的出现有解决了基础技术的哪些痛点，相信这样我们才能更好的理解新技术学习方技术。 传统–JDBC步骤(概念">
+<meta name="twitter:image" content="http://xuren.tech/2019/08/10/SpringDataJPA初识/Repository%E6%96%B9%E6%B3%95%E8%A7%84%E5%88%991.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xuren.tech/2019/08/10/SpringDataJPA初识/">
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/099563b3.js","daovoice")
+  daovoice('init', {
+      app_id: "099563b3"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+  <title>SpringDataJPA初识 | Xuren's Blogs</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xuren's Blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xuren.tech/2019/08/10/SpringDataJPA初识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuren">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/freedom.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xuren's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SpringDataJPA初识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-10T11:02:29+08:00">
+                2019-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringData/" itemprop="url" rel="index">
+                    <span itemprop="name">SpringData</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文将从 使用传统方式访问数据库(JDBC，Spring JdbcTemplate) 过渡到  SpringData。</p>
+<p><strong>个人观点</strong>:万丈高楼平地起。任何技术的发展都是从 最基础最简单也是最繁琐的 方式做起。了解最基础的技术，也就能了解到 该基础技术的优缺点，同时也就能知道为什么会出现新技术，新技术的出现有解决了基础技术的哪些痛点，相信这样我们才能更好的理解新技术学习方技术。</p>
+<h1 id="传统–JDBC"><a href="#传统–JDBC" class="headerlink" title="传统–JDBC"></a>传统–JDBC</h1><p><strong>步骤(概念)</strong>：DriverManager  –&gt;  Connection  –&gt;  Statement  –&gt;  ResultSet</p>
+<p><strong>依赖</strong>: mysql-connector-java</p>
+<p>一般将前两步(DriverManager[驱动类加载]  Connection[连接获取/释放] 封装为一个 JDBCUtils类，使用配置文件的形式配置 数据库地址/用户/密码等信息，这样更利于修改维护)</p>
+<p><strong>Dao层开发</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//主要步骤</span></span><br><span class="line">Connection connection =  Utils.getConnection();</span><br><span class="line">PreparedStatement statement = connection.preparedStatement(<span class="string">"sql String"</span>);</span><br><span class="line">ResultSet resultSet = statement.xxxxxx();</span><br><span class="line"></span><br><span class="line">close()<span class="comment">//关闭各种对象</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>缺点</strong>：重复代码过多，过于繁琐。</p>
+<h1 id="进化–Spring-JdbcTemplate"><a href="#进化–Spring-JdbcTemplate" class="headerlink" title="进化–Spring JdbcTemplate"></a>进化–Spring JdbcTemplate</h1><p>1.添加对应Maven依赖。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring-jdbc</span><br><span class="line">spring-text   <span class="comment">&lt;!-- 有这两个即可 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.DataSource &amp; JdbcTemplate注入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.jdbc.datasource.DriverManagerDatasource</span><br><span class="line"></span><br><span class="line">org.springframework.jdbc.core.JdbcTemplate</span><br><span class="line"><span class="comment">&lt;!-- 主要配置上述两个类即可 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 在Dao类中使用 JdbcTemplte类对象 调用其方法 进行sql操作 即可--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>弊端</strong>：需要自己进行各种各样的操作</p>
+<h1 id="SpringData-JPA快速入门"><a href="#SpringData-JPA快速入门" class="headerlink" title="SpringData JPA快速入门"></a>SpringData JPA快速入门</h1><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p><strong>依赖：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring-data-jpa</span><br><span class="line">hibernate-entitymanager <span class="comment">&lt;!--springdata jpa底层是封装的 Hibernate --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>配置:</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">&lt;!--1 配置数据源--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"数据库连接地址"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--2 配置EntityManagerFactory--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"entityManagerFactory"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jpaVendorAdapter"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"packagesToScan"</span> <span class="attr">value</span>=<span class="string">"com.imooc"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jpaProperties"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"hibernate.ejb.naming_strategy"</span>&gt;</span>org.hibernate.cfg.ImprovedNamingStrategy<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"hibernate.dialect"</span>&gt;</span>org.hibernate.dialect.MySQL5InnoDBDialect<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"hibernate.show_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"hibernate.format_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"hibernate.hbm2ddl.auto"</span>&gt;</span>update<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--没有该实体表时，可根据实体自动创建该表 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--3 配置事务管理器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.jpa.JpaTransactionManager"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"entityManagerFactory"</span> <span class="attr">ref</span>=<span class="string">"entityManagerFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--4 配置支持注解的事务--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--5 配置spring data--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">jpa:repositories</span> <span class="attr">base-package</span>=<span class="string">"com.example"</span> <span class="attr">entity-manager-factory-ref</span>=<span class="string">"entityManagerFactory"</span>/&gt;</span>  <span class="comment">&lt;!--要扫描的包 --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.example"</span>/&gt;</span> <span class="comment">&lt;!--要扫描的包  Spring基础--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>实际依赖 Hibernate知识较多。</p>
+<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><p>形同Hibernate。自己的Dao接口 继承  Repository&lt;T,D&gt;接口即可！</p>
+<h2 id="Repository-详解"><a href="#Repository-详解" class="headerlink" title="Repository 详解"></a>Repository 详解</h2><h3 id="Repository-Hierarchy"><a href="#Repository-Hierarchy" class="headerlink" title="Repository Hierarchy:"></a>Repository Hierarchy:</h3><p>1.CrudRepository (内置 crud操作)<br>2.PagingAndSortingRepository (分页与排序)<br>3.JpaRepository</p>
+<p>其他类：JpaSpecifictonExcutor</p>
+<p> Repository接口 是 Spring Data的核心接口，不提供任何方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Repository</span>&lt;<span class="title">T</span>,<span class="title">ID</span> <span class="keyword">extends</span> <span class="title">Serializable</span>&gt;</span>&#123; &#125;   <span class="comment">//空接口，只是一个 标记</span></span><br><span class="line"><span class="comment">//T 通常为你要操作的对象</span></span><br><span class="line"><span class="comment">// ID  一般即为 主键类型</span></span><br><span class="line"></span><br><span class="line">直接使用 如下注解(同 实现上述接口一样的功能)</span><br><span class="line"><span class="meta">@RepositoryDefinition</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Repository的子接口:</strong></p>
+<p><strong>CrudRepository</strong> ：继承Repository，实现CRUD相关的方法</p>
+<p><strong>PagingAndSortingRepository</strong>： 继承C入度Repository，实现了分页排序 相关的方法</p>
+<p><strong>JpaRepository</strong>：继承PagingAndSortingRepository，实现JPA规范相关的方法</p>
+<h3 id="Repository中-方法定制规则"><a href="#Repository中-方法定制规则" class="headerlink" title="Repository中 方法定制规则"></a>Repository中 方法定制规则</h3><table>
+<thead>
+<tr>
+<th align="left">Logical keyword</th>
+<th align="left">Keyword expressions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>AND</code></td>
+<td align="left"><code>And</code></td>
+</tr>
+<tr>
+<td align="left"><code>OR</code></td>
+<td align="left"><code>Or</code></td>
+</tr>
+<tr>
+<td align="left"><code>AFTER</code></td>
+<td align="left"><code>After</code>, <code>IsAfter</code></td>
+</tr>
+<tr>
+<td align="left"><code>BEFORE</code></td>
+<td align="left"><code>Before</code>, <code>IsBefore</code></td>
+</tr>
+<tr>
+<td align="left"><code>CONTAINING</code></td>
+<td align="left"><code>Containing</code>, <code>IsContaining</code>, <code>Contains</code></td>
+</tr>
+<tr>
+<td align="left"><code>BETWEEN</code></td>
+<td align="left"><code>Between</code>, <code>IsBetween</code></td>
+</tr>
+<tr>
+<td align="left"><code>ENDING_WITH</code></td>
+<td align="left"><code>EndingWith</code>, <code>IsEndingWith</code>, <code>EndsWith</code></td>
+</tr>
+<tr>
+<td align="left"><code>EXISTS</code></td>
+<td align="left"><code>Exists</code></td>
+</tr>
+<tr>
+<td align="left"><code>FALSE</code></td>
+<td align="left"><code>False</code>, <code>IsFalse</code></td>
+</tr>
+<tr>
+<td align="left"><code>GREATER_THAN</code></td>
+<td align="left"><code>GreaterThan</code>, <code>IsGreaterThan</code></td>
+</tr>
+<tr>
+<td align="left"><code>GREATER_THAN_EQUALS</code></td>
+<td align="left"><code>GreaterThanEqual</code>, <code>IsGreaterThanEqual</code></td>
+</tr>
+<tr>
+<td align="left"><code>IN</code></td>
+<td align="left"><code>In</code>, <code>IsIn</code></td>
+</tr>
+<tr>
+<td align="left"><code>IS</code></td>
+<td align="left"><code>Is</code>, <code>Equals</code>, (or no keyword)</td>
+</tr>
+<tr>
+<td align="left"><code>IS_EMPTY</code></td>
+<td align="left"><code>IsEmpty</code>, <code>Empty</code></td>
+</tr>
+<tr>
+<td align="left"><code>IS_NOT_EMPTY</code></td>
+<td align="left"><code>IsNotEmpty</code>, <code>NotEmpty</code></td>
+</tr>
+<tr>
+<td align="left"><code>IS_NOT_NULL</code></td>
+<td align="left"><code>NotNull</code>, <code>IsNotNull</code></td>
+</tr>
+<tr>
+<td align="left"><code>IS_NULL</code></td>
+<td align="left"><code>Null</code>, <code>IsNull</code></td>
+</tr>
+<tr>
+<td align="left"><code>LESS_THAN</code></td>
+<td align="left"><code>LessThan</code>, <code>IsLessThan</code></td>
+</tr>
+<tr>
+<td align="left"><code>LESS_THAN_EQUAL</code></td>
+<td align="left"><code>LessThanEqual</code>, <code>IsLessThanEqual</code></td>
+</tr>
+<tr>
+<td align="left"><code>LIKE</code></td>
+<td align="left"><code>Like</code>, <code>IsLike</code></td>
+</tr>
+<tr>
+<td align="left"><code>NEAR</code></td>
+<td align="left"><code>Near</code>, <code>IsNear</code></td>
+</tr>
+<tr>
+<td align="left"><code>NOT</code></td>
+<td align="left"><code>Not</code>, <code>IsNot</code></td>
+</tr>
+<tr>
+<td align="left"><code>NOT_IN</code></td>
+<td align="left"><code>NotIn</code>, <code>IsNotIn</code></td>
+</tr>
+<tr>
+<td align="left"><code>NOT_LIKE</code></td>
+<td align="left"><code>NotLike</code>, <code>IsNotLike</code></td>
+</tr>
+<tr>
+<td align="left"><code>REGEX</code></td>
+<td align="left"><code>Regex</code>, <code>MatchesRegex</code>, <code>Matches</code></td>
+</tr>
+<tr>
+<td align="left"><code>STARTING_WITH</code></td>
+<td align="left"><code>StartingWith</code>, <code>IsStartingWith</code>, <code>StartsWith</code></td>
+</tr>
+<tr>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><code>True</code>, <code>IsTrue</code></td>
+</tr>
+<tr>
+<td align="left"><code>WITHIN</code></td>
+<td align="left"><code>Within</code>, <code>IsWithin</code></td>
+</tr>
+</tbody></table>
+<p><strong>示例：</strong></p>
+<p><img src="/2019/08/10/SpringDataJPA初识/Repository%E6%96%B9%E6%B3%95%E8%A7%84%E5%88%991.png" alt="Repository方法规则1"></p>
+<p><img src="/2019/08/10/SpringDataJPA初识/Repository%E6%96%B9%E6%B3%95%E8%A7%84%E5%88%992.png" alt="Repository方法规则2"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">findByNameStartingWithAndAgeLessThan(name,age);</span><br><span class="line"><span class="comment">//where name like ?% and  age &lt; ?</span></span><br><span class="line"></span><br><span class="line">findBuNameInOrAgeLessThan(List&lt;name&gt;，age)</span><br><span class="line"><span class="comment">// where name in (?,?,?....) or age &lt; ?</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>弊端：</strong> 方法名长， 复杂查询难</p>
+<h2 id="Query注解使用"><a href="#Query注解使用" class="headerlink" title="@Query注解使用"></a>@Query注解使用</h2><p>在<strong>Repository方法中使用</strong>，不需要遵循查询方法命名规则</p>
+<p>只需要将<strong>@Query定义在Repository中之上的方法</strong>即可</p>
+<p>支持 <strong>命名参数</strong>(@Param指定参数的名称) 及 <strong>索引参数</strong>(从前往后，参数顺序为 1 2 3 …….)的</p>
+<p>支持本地查询</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Query</span>(sql String)</span><br><span class="line"><span class="comment">//方法标签</span></span><br><span class="line"><span class="comment">//示例：</span></span><br><span class="line"><span class="meta">@Query</span>(nativeQuery = <span class="keyword">true</span>,value = <span class="string">"select column_name from table_name t set where t.name = :name...."</span>) <span class="comment">//注意 name前的：</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(@Param(<span class="string">"name"</span>)</span> String name)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="使用事务"><a href="#使用事务" class="headerlink" title="使用事务"></a>使用事务</h2><p><strong>@Modifying</strong>注解   结合 <strong>@Query</strong>注解执行 更新操作</p>
+<p><strong>@Transactional</strong></p>
+<p>在SpringData JPA中，对于 <strong>update操作</strong>，是<strong>必须要事务</strong>的！(读的时候，不需要事务)</p>
+<p>事务在 SpringData中的使用：</p>
+<p>1.事务一般在Service层</p>
+<p>2.<strong>@Query</strong>  <strong>@Modifying</strong>(两者共同使用在 dao层的方法上)        <strong>@Transactional</strong>(使用在Service层的方法上) 要综合使用。</p>
+<h2 id="CrudRepository接口的使用"><a href="#CrudRepository接口的使用" class="headerlink" title="CrudRepository接口的使用"></a>CrudRepository接口的使用</h2><p><img src="/2019/08/10/SpringDataJPA初识/CrudRepository%E4%BD%BF%E7%94%A8.png" alt="CrudRepository使用"></p>
+<p>使用与Repository接口的使用一致！自己 实现类继承它即可！</p>
+<h2 id="PagingAndSortingRepository接口"><a href="#PagingAndSortingRepository接口" class="headerlink" title="PagingAndSortingRepository接口"></a>PagingAndSortingRepository接口</h2><p>该接口 包含排序和分页功能</p>
+<p>带排序的查询：findAll(Sort sort)</p>
+<p>带排序的分页查询：findAll(Pageable pageable)</p>
+<p>常用Pageable实现类：*<em>PageRequest *</em>(就相当于 分页插件)【其中具体内容查看API即可】</p>
+<h2 id="JpaRepository接口"><a href="#JpaRepository接口" class="headerlink" title="JpaRepository接口"></a>JpaRepository接口</h2><p>findAll()    findAll(Sort sort)    save(entities)   flush   deleteInbatch(entities)</p>
+<h2 id="JpaSpecificationExcutor接口"><a href="#JpaSpecificationExcutor接口" class="headerlink" title="JpaSpecificationExcutor接口"></a>JpaSpecificationExcutor接口</h2><p>Specification封装了JPA Criteria查询条件，可以进行更复杂的查询</p>
+<p>(可灵活构建条件，使用灵活)</p>
+
+      
+    </div>
+	<div><div>
+
+    <br>
+    <br>
+    <div style="text-align:left;color: #ccc;font-size:14px;">
+	---本文结束<i class="fa fa-paw"></i>感谢您的阅读---
+	<br>
+	作者：Xuren
+	<br>
+	<span>发布时间:</span>2019年08月10日 - 11:02:29
+	<br>
+	<span>最后更新:</span>2019年08月10日 - 19:24:52
+	<br>
+	本文链接：<a href="/2019/08/10/SpringDataJPA初识/" title="SpringDataJPA初识">http://xuren.tech/2019/08/10/SpringDataJPA初识/</a>
+    <br>
+	<!--<span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xuren.tech/2019/08/10/SpringDataJPA初识/"  aria-label="复制成功！"></i></span>
+    -->
+	版权声明：本文为博主原创文章，转载请附上博文链接！
+	</div>
+	
+	<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+    </script>
+
+</div>
+</div>
+
+    
+    
+    
+	<!-- 新加代码 -->
+	<div>
+    
+        
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SpringDataJPA/" rel="tag"><i class="fa fa-tag"></i> SpringDataJPA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/08/gradle初识/" rel="next" title="Gradle初识">
+                <i class="fa fa-chevron-left"></i> Gradle初识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/11/Swagger2极简使用法/" rel="prev" title="Swagger2极简使用法">
+                Swagger2极简使用法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<!--//bdimg.share.baidu.com-->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NDQ3MS8yMTAwMw"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/freedom.png" alt="Xuren">
+            
+              <p class="site-author-name" itemprop="name">Xuren</p>
+              <p class="site-description motion-element" itemprop="description">做一条最咸的咸鱼!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xuren11" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:296685262@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#传统–JDBC"><span class="nav-number">1.</span> <span class="nav-text">传统–JDBC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进化–Spring-JdbcTemplate"><span class="nav-number">2.</span> <span class="nav-text">进化–Spring JdbcTemplate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringData-JPA快速入门"><span class="nav-number">3.</span> <span class="nav-text">SpringData JPA快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境搭建"><span class="nav-number">3.1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发"><span class="nav-number">3.2.</span> <span class="nav-text">开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repository-详解"><span class="nav-number">3.3.</span> <span class="nav-text">Repository 详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Repository-Hierarchy"><span class="nav-number">3.3.1.</span> <span class="nav-text">Repository Hierarchy:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repository中-方法定制规则"><span class="nav-number">3.3.2.</span> <span class="nav-text">Repository中 方法定制规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Query注解使用"><span class="nav-number">3.4.</span> <span class="nav-text">@Query注解使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用事务"><span class="nav-number">3.5.</span> <span class="nav-text">使用事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CrudRepository接口的使用"><span class="nav-number">3.6.</span> <span class="nav-text">CrudRepository接口的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PagingAndSortingRepository接口"><span class="nav-number">3.7.</span> <span class="nav-text">PagingAndSortingRepository接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JpaRepository接口"><span class="nav-number">3.8.</span> <span class="nav-text">JpaRepository接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JpaSpecificationExcutor接口"><span class="nav-number">3.9.</span> <span class="nav-text">JpaSpecificationExcutor接口</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xuren</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">59.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+<!--  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+-->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
